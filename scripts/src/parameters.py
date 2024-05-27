@@ -1,0 +1,149 @@
+# File: parameters.py
+# Author: Shanglin Yang
+# Contact: syang662@wisc.edu
+
+import os
+import torch as th
+
+# --------------------modify below------------------------
+# --------------------------------------------------------
+IS_TEST_RUN = True
+DATASET_NAME = "xnli"
+FINE_TUNE=False
+
+MODEL_ABBR = "FLAN_UL2"
+MODEL = "google/flan-ul2"
+
+BATCH_SIZE = 1 # Preferably, set this to 1 if using Mistral. Idk why it's so slow on batches
+MAX_OUTPUT_TOKENS = 200 # for mistral since it fancies adding the prompt as prefix before its completion
+
+# flan-ul2 = 40GB, so run 2 instances
+# mistral = 20GB, so run 4 instances
+# llama3 = 20GB, so run 4 instances
+MAX_CONCURRENT_API_CALLS = 1
+
+DATE = "04_29"
+
+# --------------------modify above------------------------
+# --------------------------------------------------------
+
+COMPLETE_RESULTS_FILENAME = f"all_results_{DATE}.csv"
+TEST_RESULTS_FILENAME = f"test_results_{DATE}.csv"
+COMPLETE_WARNINGS_FILENAME = f"all_warnings_{DATE}.csv"
+TEST_WARNINGS_FILENAME = f"test_warnings_{DATE}.csv"
+
+CHECKPOINT_RESULTS_FILENAME = f"cp_results_{DATE}.csv"
+CHECKPOINT_WARNINGS_FILENAME = f"cp_warnings_{DATE}.csv"
+
+EXECUTION_REPORT_FILENAME = f"execution_report_{DATE}.json"
+FORMAT_WARNINGS_FILENAME = f"format_warnings_{DATE}.csv"
+ANNOTATED_RESULTS_FILENAME = f"annotated_results_{DATE}.csv"
+
+CM_PARENT_PATH = f"cm_{DATE}" # folder for classification matrices
+CR_PARENT_PATH = f"cr_{DATE}" # folder for classification reports
+
+RESULTS_PARENT_PATH = "results"
+METRICS_PARENT_PATH = "metrics"
+
+COMPLETE_RESULTS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, COMPLETE_RESULTS_FILENAME
+)
+TEST_RESULTS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, TEST_RESULTS_FILENAME
+)
+
+COMPLETE_WARNINGS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, COMPLETE_WARNINGS_FILENAME
+)
+TEST_WARNINGS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, TEST_WARNINGS_FILENAME
+)
+
+CHECKPOINT_RESULTS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, CHECKPOINT_RESULTS_FILENAME
+)
+CHECKPOINT_WARNINGS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, CHECKPOINT_WARNINGS_FILENAME
+)
+
+EXECUTION_REPORT_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, EXECUTION_REPORT_FILENAME
+)
+
+FORMAT_WARNINGS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, FORMAT_WARNINGS_FILENAME
+)
+
+ANNOTATED_RESULTS_FILE = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, ANNOTATED_RESULTS_FILENAME
+)
+
+CM_FOLDER = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, METRICS_PARENT_PATH, CM_PARENT_PATH
+)
+
+CR_FOLDER = os.path.join(
+    RESULTS_PARENT_PATH, MODEL_ABBR, METRICS_PARENT_PATH, CR_PARENT_PATH
+)
+
+FINETUNED_MODELS = "fine_tuned_models"
+
+FINETUNED_MODEL_DIR = os.path.join(FINETUNED_MODELS, MODEL_ABBR)
+
+LOGGING_DIR = os.join("logs", MODEL_ABBR)
+
+class Config:
+    is_test_run = IS_TEST_RUN
+    dataset_name = DATASET_NAME
+    fine_tune = FINE_TUNE
+    results_file = TEST_RESULTS_FILE if is_test_run else COMPLETE_RESULTS_FILE
+    warnings_file = TEST_WARNINGS_FILE if is_test_run else COMPLETE_WARNINGS_FILE
+    checkpoint_results_file = CHECKPOINT_RESULTS_FILE
+    checkpoint_warnings_file = CHECKPOINT_WARNINGS_FILE
+    execution_report_file = EXECUTION_REPORT_FILE
+    format_warnings_file = FORMAT_WARNINGS_FILE
+    annotated_results_file = ANNOTATED_RESULTS_FILE
+    cm_folder = CM_FOLDER
+    cr_folder = CR_FOLDER
+    model = MODEL
+    model_abbr = MODEL_ABBR
+    finetuned_model_dir = FINETUNED_MODEL_DIR
+    logging_dir = LOGGING_DIR
+    
+    batch_size = BATCH_SIZE
+    learning_rate = 2e-5
+    temperature = 1e-5
+    top_p = 1
+    num_train_epochs = 3
+    weight_decay = 0.01
+    logging_steps = 10
+    save_steps = 500
+    save_total_limit = 2
+    evaluation_strategy = "epoch"
+    
+    pattern = ("in favor", "against", "neutral or unclear", "unclear or neutral", "not inferenced")
+    # re_pattern = r"\b(in favor|against|neutral or unclear|unclear or neutral|not inferenced)\b"
+    re_pattern = r"\b(" + "|".join(pattern) + r")\b"
+    max_output_tokens = MAX_OUTPUT_TOKENS
+    test_size = 10
+    max_concurrent_api_calls = MAX_CONCURRENT_API_CALLS
+    # this is for gpt4 turbo (gpt-4-0125-preview). Modify if otherwise.
+    cost_per_token = 1e-5 # https://openai.com/pricing
+    total_cost = 0
+    device = th.device("cuda" if th.cuda.is_available() else "cpu")
+
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python parameters.py <config_attribute>")
+        sys.exit(1)
+    
+    attribute = sys.argv[1]
+    config = Config()
+    
+    if hasattr(config, attribute):
+        print(getattr(config, attribute))
+    else:
+        print(f"Unknown attribute: {attribute}")
+        sys.exit(1)

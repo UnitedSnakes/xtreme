@@ -1,0 +1,43 @@
+# inference.sub
+
+# Files for the below lines MUST all be somewhere within /home/username,
+# and not within /staging/username
+
+executable = scripts/Shanglin/Varsha/chtc/inference.sh
+#log = scripts/Shanglin/Varsha/inference.log
+#output = scripts/Shanglin/Varsha/inference.out
+#error = scripts/Shanglin/Varsha/inference.err
+
+# Specify the name of the log, standard error, and standard output (or "screen output") files. Wherever you see $(Cluster), HTCondor will insert the 
+#  queue number assigned to this set of jobs at the time of submission.
+log = inference_$(Cluster)_$(Process).log
+error = inference_$(Cluster)_$(Process).err
+output = inference_$(Cluster)_$(Process).out
+
+## Do NOT list the large data files here
+# transfer_input_files = myprogram
+
+#should_transfer_files = YES
+#when_to_transfer_output = ON_EXIT
+
+# IMPORTANT! Require execute servers that can access /staging
+Requirements = (Target.HasCHTCStaging == true)
+
+# Make sure to still include lines like "request_memory", "request_disk", "request_cpus", etc. 
+
+# Tell HTCondor requirements (e.g., operating system) your job needs, 
+# what amount of compute resources each job will need on the computer where it runs.
+
++WantGPULab = true
++GPUJobLength = "short"
++is_resumable = true
+
+request_cpus = 1
+request_gpus = 1
+#require_gpus = Capability >= 8.0
+request_memory = 45GB
+request_disk = 25GB
+
+# Submit 1 job
+queue 1
+### END
