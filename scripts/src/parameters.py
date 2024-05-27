@@ -9,20 +9,23 @@ import torch as th
 # --------------------------------------------------------
 IS_TEST_RUN = True
 DATASET_NAME = "xnli"
-FINE_TUNE=False
+FINE_TUNE = False
+SAVE_LOGITS = False
 
-MODEL_ABBR = "FLAN_UL2"
-MODEL = "google/flan-ul2"
+# MODEL_ABBR = "FLAN_UL2"
+# MODEL = "google/flan-ul2"
 
-BATCH_SIZE = 1 # Preferably, set this to 1 if using Mistral. Idk why it's so slow on batches
-MAX_OUTPUT_TOKENS = 200 # for mistral since it fancies adding the prompt as prefix before its completion
+MODEL_ABBR = "MBERT"
+MODEL = "bert-base-multilingual-cased"
+
+BATCH_SIZE = 1
+MAX_OUTPUT_TOKENS = 200
 
 # flan-ul2 = 40GB, so run 2 instances
-# mistral = 20GB, so run 4 instances
-# llama3 = 20GB, so run 4 instances
-MAX_CONCURRENT_API_CALLS = 1
+INFERENCE_THREADS = 1
+TRAIN_THREADS = 1
 
-DATE = "04_29"
+DATE = ""
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
@@ -109,6 +112,7 @@ class Config:
     model_abbr = MODEL_ABBR
     finetuned_model_dir = FINETUNED_MODEL_DIR
     logging_dir = LOGGING_DIR
+    save_logits = SAVE_LOGITS
     
     batch_size = BATCH_SIZE
     learning_rate = 2e-5
@@ -120,17 +124,15 @@ class Config:
     save_steps = 500
     save_total_limit = 2
     evaluation_strategy = "epoch"
-    
-    pattern = ("in favor", "against", "neutral or unclear", "unclear or neutral", "not inferenced")
-    # re_pattern = r"\b(in favor|against|neutral or unclear|unclear or neutral|not inferenced)\b"
-    re_pattern = r"\b(" + "|".join(pattern) + r")\b"
+    inference_threads = INFERENCE_THREADS
     max_output_tokens = MAX_OUTPUT_TOKENS
     test_size = 10
-    max_concurrent_api_calls = MAX_CONCURRENT_API_CALLS
-    # this is for gpt4 turbo (gpt-4-0125-preview). Modify if otherwise.
-    cost_per_token = 1e-5 # https://openai.com/pricing
-    total_cost = 0
     device = th.device("cuda" if th.cuda.is_available() else "cpu")
+    distributed_strategy = "ddp"
+    train_threads = TRAIN_THREADS
+    
+    pattern_xnli = ("entailment", "contradiction", "neutral", "not inferenced")
+    re_pattern_xnli = r"\b(" + "|".join(pattern_xnli) + r")\b"
 
 
 if __name__ == "__main__":

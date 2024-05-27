@@ -4,10 +4,10 @@
 
 import os
 import time
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, List
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from transformers import (
     T5ForConditionalGeneration,
-    AutoModelForCausalLM,
     BertForSequenceClassification,
     AutoTokenizer,
     Trainer,
@@ -15,13 +15,14 @@ from transformers import (
 )
 import numpy as np
 import pandas as pd
-from datasets import load_dataset, DatasetDict, Dataset
+from datasets import load_dataset
 import argparse
 import torch as th
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+import matplotlib.pyplot as plt
 
 from parameters import Config
-from utils import Color, request_user_confirmation
+from utils import Color, request_user_confirmation, ensure_directory_exists_for_file
 
 class ModelLoader:
     _model = None
@@ -39,9 +40,7 @@ class ModelLoader:
                     model_name, device_map="auto"
                 )
             else:
-                cls._model = AutoModelForCausalLM.from_pretrained(
-                    model_name, device_map="auto", torch_dtype=th.bfloat16
-                )
+                raise NotImplementedError(f"Model {model_name} not supported.")
             if inference_only:
                 cls._model.eval()
         return cls._model
@@ -67,39 +66,50 @@ class ModelLoader:
             elif "mbert" in model_name:
                 cls._model = BertForSequenceClassification.from_pretrained(output_dir)
             else:
-                cls._model = AutoModelForCausalLM.from_pretrained(output_dir)
+                raise NotImplementedError(f"Model {model_name} not supported.")
             cls._tokenizer = AutoTokenizer.from_pretrained(output_dir)
         return cls._model, cls._tokenizer
 
+
+def generate_prompt(example: Dict[str, Any], dataset_name: str) -> str:
+    if dataset_name == "xnli":
+        return (f"Sentence1: {example['premise']}\n\n"
+                f"Sentence2: {example['hypothesis']}\n\n"
+                f"What is the relationship between Sentence1 and Sentence2? "
+                "Please answer with an exact label from the following: "
+                "'entailment', 'contradiction', 'neutral'.")
+    # Add more conditions for different datasets
+    else:
+        raise ValueError(f"Unsupported dataset: {dataset_name}")
 
 def load_dataset_and_preprocess(task_name, train=False):
     dataset = load_dataset(task_name)
     tokenizer = ModelLoader.get_tokenizer(Config.model)
 
     def preprocess_function(examples):
-        inputs = tokenizer(
-            examples["premise"], examples["hypothesis"], padding=True, truncation=False, max_length=tokenizer.model_max_length
-        )
-        # Check if input length exceeds the model's max length and log a warning
+        prompts = [generate_prompt(ex, task_name) for ex in examples]
+        inputs = tokenizer(prompts, padding=True, truncation=False, max_length=tokenizer.model_max_length)
+        
         too_long = []
         for i, input_ids in enumerate(inputs['input_ids']):
             if len(input_ids) > tokenizer.model_max_length:
+                inputs["input_ids"][i] = input_ids[:tokenizer.model_max_length]
+                inputs["attention_mask"][i] = inputs["attention_mask"][i][:tokenizer.model_max_length]
                 too_long.append(True)
             else:
                 too_long.append(False)
         inputs["too_long"] = too_long
+        inputs["prompt"] = prompts
         return inputs
 
-    # Initialize the "too_long" column with False
-    dataset = dataset.map(lambda examples: {"too_long": [False] * len(examples["premise"])}, batched=True)
-    encoded_dataset = dataset.map(preprocess_function, batched=True)
+    dataset = dataset.map(preprocess_function, batched=True)
 
     if Config.is_test_run:
-        encoded_dataset["test"] = encoded_dataset["test"].select(range(Config.test_size))
+        dataset["test"] = dataset["test"].select(range(Config.test_size))
         if train:
-            encoded_dataset["train"] = encoded_dataset["train"].select(range(Config.test_size))
+            dataset["train"] = dataset["train"].select(range(Config.test_size))
 
-    return encoded_dataset
+    return dataset
 
 
 def compute_metrics(eval_pred: Tuple[np.ndarray, np.ndarray]) -> Dict[str, float]:
@@ -114,18 +124,40 @@ def compute_metrics(eval_pred: Tuple[np.ndarray, np.ndarray]) -> Dict[str, float
         'recall': recall
     }
 
+def run_inference_batch(model, tokenizer, inputs):
+    try:
+        outputs = model.generate(**inputs)
+        return outputs, None
+    except Exception as e:
+        return None, str(e)
+
 def run_model_inference(model_name, dataset):
     # Filter out examples that are too long
-    test_dataset = dataset["test"].filter(lambda example: not example["too_long"])
+    valid_indices = [i for i, example in enumerate(dataset["test"]) if not example["too_long"]]
+    test_dataset = dataset["test"].select(valid_indices)
     
-    trainer = Trainer(
-        model=ModelLoader.get_model(model_name, inference_only=True),
-        args=TrainingArguments(per_device_eval_batch_size=Config.batch_size),
-        tokenizer=ModelLoader.get_tokenizer(model_name),
-        compute_metrics=compute_metrics
-    )
-    predictions = trainer.predict(test_dataset)
-    return predictions.predictions, predictions.metrics, test_dataset
+    model = ModelLoader.get_model(model_name, inference_only=True)
+    tokenizer = ModelLoader.get_tokenizer(model_name)
+    
+    results = []
+    errors = []
+
+    with ThreadPoolExecutor(max_workers=Config.inference_threads) as executor:
+        futures = [executor.submit(run_inference_batch, model, tokenizer, {"input_ids": th.tensor(test_dataset[i]['input_ids']).unsqueeze(0).to(Config.device), "attention_mask": th.tensor(test_dataset[i]['attention_mask']).unsqueeze(0).to(Config.device)}) for i in range(len(test_dataset))]
+        
+        for future in as_completed(futures):
+            output, error = future.result()
+            if error:
+                results.append("not inferenced: error: " + error)
+                errors.append(error)
+            else:
+                prediction = tokenizer.decode(output[0], skip_special_tokens=True)
+                results.append(prediction)
+                errors.append(None)
+
+    metrics = {}  # Replace with appropriate metrics calculation if needed
+
+    return results, metrics, valid_indices, errors
 
 
 def finetune_model(model_name, train_dataset):
@@ -144,10 +176,16 @@ def finetune_model(model_name, train_dataset):
         logging_steps=Config.logging_steps,
         save_steps=Config.save_steps,
         save_total_limit=Config.save_total_limit,
+        # Distributed training arguments
+        dataloader_num_workers=Config.train_threads,
+        ddp_find_unused_parameters=False,
+        # Distributed strategy
+        distributed_strategy=Config.distributed_strategy
     )
 
     # Filter out examples that are too long
-    filtered_train_dataset = train_dataset.filter(lambda example: not example["too_long"])
+    valid_indices = [i for i, example in enumerate(train_dataset) if not example["too_long"]]
+    filtered_train_dataset = train_dataset.select(valid_indices)
 
     trainer = Trainer(
         model=ModelLoader.get_model(model_name, inference_only=False),
@@ -159,6 +197,33 @@ def finetune_model(model_name, train_dataset):
 
     trainer.train()
     ModelLoader.save_model(Config.finetuned_model_dir)
+    
+    # Save training loss plot
+    plot_and_save_loss(trainer, Config.logging_dir)
+
+
+def plot_and_save_loss(trainer, output_dir):
+    # Get training log history
+    history = trainer.state.log_history
+
+    # Extract loss values
+    train_loss = [entry['loss'] for entry in history if 'loss' in entry]
+    eval_loss = [entry['eval_loss'] for entry in history if 'eval_loss' in entry]
+
+    # Plot training and evaluation loss
+    plt.figure(figsize=(10, 5))
+    plt.plot(train_loss, label='Training Loss')
+    plt.plot(eval_loss, label='Evaluation Loss')
+    plt.xlabel('Steps')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.title('Training and Evaluation Loss over Time')
+    
+    # Save the plot
+    plt_path = os.path.join(output_dir, 'training_loss.png')
+    plt.savefig(plt_path)
+    print(f"Training loss plot saved at {plt_path}")
+
 
 def main(task_name, start_from_cp_file, overwrite):
     model_name = Config.model
@@ -186,20 +251,26 @@ def main(task_name, start_from_cp_file, overwrite):
             auto_confirm="y" if overwrite else None,
         ):
             exit(0)
-            
-    # TODO: start from cp file
+
+    results, metrics, valid_indices, errors = run_model_inference(model_name, dataset)
     
-    predictions, metrics, test_dataset = run_model_inference(model_name, dataset)
-    
-    # Create a DataFrame for predictions and add the 'too_long' column
-    df = pd.DataFrame(predictions)
-    df["too_long"] = test_dataset["too_long"]
+    # Create a DataFrame for predictions
+    data = {
+        'prompt': [example["prompt"] for example in dataset["test"]],
+        'prediction': ['not inferenced: exceeding model input tokens limit' if i not in valid_indices else results[valid_indices.index(i)] for i in range(len(dataset["test"]))],
+        'label': [example["label"] for example in dataset["test"]],
+        'id': [example["id"] for example in dataset["test"]],
+        'language': [example["language"] for example in dataset["test"]],
+        'error': ['' if error is None else f"not inferenced: error: {error}" for error in errors]
+    }
+
+    df = pd.DataFrame(data)
     
     df.to_csv(Config.results_file, index=False)
     print(f"Results stored in {Config.results_file}.")
     
     # Print metrics
-    print("Metrics:", metrics)
+    # print("Metrics:", metrics)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run prediction model.")
