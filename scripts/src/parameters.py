@@ -9,7 +9,7 @@ import torch as th
 # --------------------------------------------------------
 IS_TEST_RUN = True
 DATASET_NAME = "xnli"
-FINE_TUNE = False
+IS_FINE_TUNE = False
 SAVE_LOGITS = False
 
 # MODEL_ABBR = "FLAN_UL2"
@@ -24,6 +24,10 @@ MAX_OUTPUT_TOKENS = 200
 # flan-ul2 = 40GB, so run 2 instances
 INFERENCE_THREADS = 1
 TRAIN_THREADS = 1
+PREPROCESS_THREADS = 32
+
+FINETUNE_LANGUAGE = "en"
+EVALUATE_LANGUAGE = "en"
 
 DATE = ""
 
@@ -93,12 +97,12 @@ FINETUNED_MODELS = "fine_tuned_models"
 
 FINETUNED_MODEL_DIR = os.path.join(FINETUNED_MODELS, MODEL_ABBR)
 
-LOGGING_DIR = os.join("logs", MODEL_ABBR)
+LOGGING_DIR = os.path.join("logs", MODEL_ABBR)
 
 class Config:
     is_test_run = IS_TEST_RUN
     dataset_name = DATASET_NAME
-    fine_tune = FINE_TUNE
+    is_fine_tune = IS_FINE_TUNE
     results_file = TEST_RESULTS_FILE if is_test_run else COMPLETE_RESULTS_FILE
     warnings_file = TEST_WARNINGS_FILE if is_test_run else COMPLETE_WARNINGS_FILE
     checkpoint_results_file = CHECKPOINT_RESULTS_FILE
@@ -113,6 +117,7 @@ class Config:
     finetuned_model_dir = FINETUNED_MODEL_DIR
     logging_dir = LOGGING_DIR
     save_logits = SAVE_LOGITS
+    random_seed_path = os.path.join("random_seed.txt")
     
     batch_size = BATCH_SIZE
     learning_rate = 2e-5
@@ -130,7 +135,10 @@ class Config:
     device = th.device("cuda" if th.cuda.is_available() else "cpu")
     distributed_strategy = "ddp"
     train_threads = TRAIN_THREADS
-    
+    finetune_language = FINETUNE_LANGUAGE
+    evaluate_language = EVALUATE_LANGUAGE
+    preprocess_threads = PREPROCESS_THREADS
+
     pattern_xnli = ("entailment", "contradiction", "neutral", "not inferenced")
     re_pattern_xnli = r"\b(" + "|".join(pattern_xnli) + r")\b"
 

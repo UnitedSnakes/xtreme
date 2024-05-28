@@ -11,11 +11,13 @@ from datasets import load_dataset
 from parameters import Config
 from utils import Color, request_user_confirmation, ensure_directory_exists_for_file
 
-def load_dataset_for_evaluation(task_name):
-    dataset = load_dataset(task_name)
+def load_dataset_for_evaluation(task_name, language):
+    dataset = load_dataset(task_name, language)
+    if Config.is_test_run:
+        dataset["test"] = dataset["test"].select(range(Config.test_size))
     return dataset["test"]
 
-def evaluate_predictions(task_name):
+def evaluate_predictions(task_name, language):
     if not os.path.isfile(Config.annotated_results_file):
         confirmation_message = f"Annotated file {Config.annotated_results_file} does not exist. Are you sure to continue on raw results? Ill-formatted problems may occur. {Color.YELLOW}Continue?{Color.END} [Y/n]: "
 
@@ -35,7 +37,7 @@ def evaluate_predictions(task_name):
     df = pd.read_csv(file_)
     print(f"Reading from {file_}\n")
 
-    test_dataset = load_dataset_for_evaluation(task_name)
+    test_dataset = load_dataset_for_evaluation(task_name, language)
     
     # Ensure that the dataset and the CSV file have the same order and size
     assert df.shape[0] == len(test_dataset), "Row numbers mismatch"
@@ -83,8 +85,8 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Evaluate prediction results.")
-    parser.add_argument("task_name", type=str, help="Task name for the dataset")
+    # parser.add_argument("task_name", type=str, help="Task name for the dataset")
 
     args = parser.parse_args()
 
-    evaluate_predictions(args.task_name)
+    evaluate_predictions(Config.dataset_name, Config.evaluate_language)

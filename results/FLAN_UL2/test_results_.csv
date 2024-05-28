@@ -1,0 +1,101 @@
+id,prompt,prediction,label,language,error
+0,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+
+Sentence2: I havent spoken to him again.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['contradiction'],2,en,
+1,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+
+Sentence2: I was so upset that I just started talking to him again.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['entailment'],0,en,
+2,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+
+Sentence2: We had a great talk.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['neutral'],1,en,
+3,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+
+Sentence2: I was not aware that I was not the only person to be at the field that day.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['neutral'],1,en,
+4,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+
+Sentence2: I was under the impression that I was the only one with that number at the AFFC Air Force Career field.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['entailment'],0,en,
+5,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+
+Sentence2: We all were given the same exact number no matter what privileges we were promised to be granted, it was all a lie.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['neutral'],2,en,
+6,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+
+Sentence2: I was never told anything about meeting anyone.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['contradiction'],2,en,
+7,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+
+Sentence2: I was told a guy would be called in for me to meet.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['entailment'],0,en,
+8,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+
+Sentence2: The guy showed up a bit late.
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['neutral'],1,en,
+9,"- 'Entailment' means that Sentence2 logically follows from Sentence1.
+- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.
+- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.
+What is the relationship between Sentence1 and Sentence2? Sentence1: There's so much you could talk about on that I'll just skip that.
+
+Sentence2: I want to tell you everything I know about that!
+
+Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.
+
+",['contradiction'],2,en,

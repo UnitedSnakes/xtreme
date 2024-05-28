@@ -1,0 +1,51 @@
+id,prompt,prediction,label,language,error
+0,"Sentence1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+
+Sentence2: I havent spoken to him again.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,2,en,
+1,"Sentence1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+
+Sentence2: I was so upset that I just started talking to him again.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,0,en,
+2,"Sentence1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+
+Sentence2: We had a great talk.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,1,en,
+3,"Sentence1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+
+Sentence2: I was not aware that I was not the only person to be at the field that day.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,1,en,
+4,"Sentence1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+
+Sentence2: I was under the impression that I was the only one with that number at the AFFC Air Force Career field.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,0,en,
+5,"Sentence1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+
+Sentence2: We all were given the same exact number no matter what privileges we were promised to be granted, it was all a lie.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,2,en,
+6,"Sentence1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+
+Sentence2: I was never told anything about meeting anyone.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,2,en,
+7,"Sentence1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+
+Sentence2: I was told a guy would be called in for me to meet.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,0,en,
+8,"Sentence1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+
+Sentence2: The guy showed up a bit late.
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,1,en,
+9,"Sentence1: There's so much you could talk about on that I'll just skip that.
+
+Sentence2: I want to tell you everything I know about that!
+
+What is the relationship between Sentence1 and Sentence2? Please answer with an exact label from the following: 'entailment', 'contradiction', 'neutral'.",1,2,en,
