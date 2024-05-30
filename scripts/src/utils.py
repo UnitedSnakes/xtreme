@@ -23,12 +23,14 @@ class Color:
     END = "\033[0m"
 
 
-def request_user_confirmation(question_prompt, yes_prompt, no_prompt, auto_confirm=None):
+def request_user_confirmation(
+    question_prompt, yes_prompt, no_prompt, auto_confirm=None
+):
     if auto_confirm is not None:
-        if auto_confirm.lower() == 'y':
+        if auto_confirm.lower() == "y":
             print(yes_prompt)
             return True
-        elif auto_confirm.lower() == 'n':
+        elif auto_confirm.lower() == "n":
             print(no_prompt)
             return False
 
@@ -44,26 +46,28 @@ def request_user_confirmation(question_prompt, yes_prompt, no_prompt, auto_confi
             print("Invalid input. Please try again.")
 
 
-def find_first_keyword(completion, keywords, require_immediate_label=True):
-    completion_lower = completion.lower().strip()
-    
+def find_first_keyword(prediction, keywords, require_immediate_label=True):
+    # if prediction.startswith("1."):
+    #     print("here")
+    prediction_lower = prediction.lower().strip()
+
     if require_immediate_label:
-        if completion_lower.startswith("\""):
-            completion_lower = completion_lower[1:]
-            
-        if completion_lower.startswith("**"):
-            completion_lower = completion_lower[2:]
-            
-        if completion_lower.startswith(("a: ", "1. ")):
-            completion_lower = completion_lower[3:]
-            
-        for pattern in Config.pattern:
-            if completion_lower.startswith(pattern):
-                return pattern
+        if prediction_lower.startswith(('"', "(")):
+            prediction_lower = prediction_lower[1:]
+
+        if prediction_lower.startswith("**"):
+            prediction_lower = prediction_lower[2:]
+
+        if prediction_lower.startswith(("a: ")):
+            prediction_lower = prediction_lower[3:]
+
+        for pattern in Config.patterns:
+            if prediction_lower.startswith(pattern):
+                return pattern[0]
         return None
-    
+
     keyword_positions = [
-        (keyword, completion_lower.find(keyword)) for keyword in keywords
+        (keyword, prediction_lower.find(keyword)) for keyword in keywords
     ]
     keyword_positions = [
         (kw, pos) for kw, pos in keyword_positions if pos != -1
@@ -75,77 +79,92 @@ def find_first_keyword(completion, keywords, require_immediate_label=True):
     return None
 
 
-def check_completion_format(df, extract=False):
-    # check if completions match expected formats: in favor|against|neutral or unclear|unclear or neutral|not inferenced
-    df_warnings = pd.DataFrame(columns=["id", "tweet_id", "inference_results", "level"])
+def check_prediction_format(df, extract=False, verbose=True):
+    # check if predicitons match expected formats: 0|1|2|not inferenced
+    df_warnings = pd.DataFrame(columns=["id", "prediction", "level"])
 
-    for index, (id, tweet_id, completion) in enumerate(
-        zip(df["id"], df["tweet_id"], df["inference_results"])
-    ):
+    for index, (id, prediction) in enumerate(zip(df["id"], df["prediction"])):
+        # if index == 57:
+        #     print("hereeee")
+        if prediction == "N":
+            print("hey")
         try:
-            matches = re.findall(Config.re_pattern, completion.lower())
-            if len(matches) != 1:
+            # if type(prediction) != float: # not nan
+            #     # print("hey")
+            matches = [
+                re.findall(r"\b(" + "|".join(pattern) + r")\b", prediction.lower())
+                for pattern in Config.patterns
+            ]
+            if sum(len(match) for match in matches) != 1:
                 print(
-                    f"WARNING: Completion does not contain exactly one of {Config.pattern}.\nCompletion: {completion}"
+                    f"WARNING: Prediction does not contain exactly one of {Config.patterns}.\nPrediction: {prediction}"
                 )
                 # level = 1
                 new_row = pd.DataFrame(
                     [
                         {
                             "id": id,
-                            "tweet_id": tweet_id,
-                            "inference_results": completion,
+                            "prediction": prediction,
                             "level": 1,
                         }
                     ]
                 )
                 df_warnings = pd.concat([df_warnings, new_row], ignore_index=True)
-                
-                # automatically extract the label/pattern using the keyword that appeared first
-                if extract:
-                    # determine if completion starts with a keyword
-                    first_keyword = find_first_keyword(completion, Config.pattern)
-                    # modify df in place
-                    if first_keyword:
-                        df.loc[index, "inference_results"] = first_keyword
+
+            # automatically extract the label/pattern using the keyword that appeared first
+            if extract:
+                # determine if prediction starts with a keyword
+                # if df.loc[index, "prediction"] == "(1).":
+                #     print("hey")
+                first_keyword = find_first_keyword(prediction, Config.patterns)
+                # modify df in place
+                if first_keyword:
+                    df.loc[index, "prediction"] = first_keyword
+                    # if type(df.loc[index, "prediction"]) != str:
+                    # if first_keyword == "1.":
+                    # print("hey")
+                else:
+                    df.loc[index, "prediction"] = "unparsable"
 
         except:
-            print(
-                f"WARNING: This tweet obtained erroneous inference: id={id}, tweet_id={tweet_id}, completion={completion}"
-            )
+            if verbose:
+                print(
+                    f"WARNING: This tweet obtained erroneous inference: id={id}, prediction={prediction}"
+                )
             # level = 2
             new_row = pd.DataFrame(
                 [
                     {
                         "id": id,
-                        "tweet_id": tweet_id,
-                        "inference_results": completion,
+                        "prediction": prediction,
                         "level": 2,
                     }
                 ]
             )
             df_warnings = pd.concat([df_warnings, new_row], ignore_index=True)
 
+            if extract:
+                df.loc[index, "prediction"] = "unparsable"
+
     return df_warnings
 
 
 def encode_stance_as_int(series):
-    # check if stances match expected formats: in favor|against|neutral or unclear|unclear or neutral|not inferenced
+    # check if stances match expected formats: 0|1|2|not inferenced
     def map_stance_to_int(stance):
-        if Config.pattern[0] in stance:
-            return 1  # in favor
-        elif Config.pattern[1] in stance:
-            return 2  # against
-        elif Config.pattern[2] in stance or Config.pattern[3] in stance:
-            return 3  # neutral
-        elif Config.pattern[4] in stance:
-            # raise ValueError(f"Ill format: stance={stance}")
-            return 0  # not inferenced
-        else:
-            raise ValueError(f"Ill format: stance={stance}")
-
-    # for i, stance in enumerate(series["inference_results"]):
-    #     inference_matrix[i // Config.test_size, i % Config.test_size] = int_
+        for p in Config.patterns[0]:
+            if p in stance:
+                return 0  # entailment
+        for p in Config.patterns[1]:
+            if p in stance:
+                return 1  # neutral
+        for p in Config.patterns[2]:
+            if p in stance:
+                return 2  # contradiction
+        for p in Config.patterns[3]:
+            if p in stance:
+                return 3  # not inferenced
+        raise ValueError(f"Ill format: stance={stance}")
 
     mapped_results = series.str.lower().apply(map_stance_to_int)
 
