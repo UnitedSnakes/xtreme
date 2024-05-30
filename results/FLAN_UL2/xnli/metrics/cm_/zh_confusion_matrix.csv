@@ -1,4 +1,4 @@
-,0,1,2
-0,894,641,131
-1,850,664,146
-2,838,685,142
+,entailment,neutral,contradiction
+entailment,894,641,131
+neutral,850,664,146
+contradiction,838,685,142

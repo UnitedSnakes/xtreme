@@ -1,7 +1,3 @@
-# File: evaluate.py
-# Author: Shanglin Yang
-# Contact: syang662@wisc.edu
-
 import os
 import pandas as pd
 import numpy as np
@@ -10,6 +6,8 @@ from datasets import load_dataset
 
 from parameters import Config
 from utils import Color, check_prediction_format, request_user_confirmation, ensure_directory_exists_for_file
+
+label_mapping = {0: 'entailment', 1: 'neutral', 2: 'contradiction'}
 
 def load_dataset_for_evaluation(task_name, language):
     dataset = load_dataset(task_name, language)
@@ -37,33 +35,15 @@ def evaluate_predictions(task_name, language):
     df = pd.read_csv(file_, dtype={'prediction': 'str'})
     print(f"Reading from {file_}\n")
 
-    # for i in df["prediction"]:
-    #     if type(i) != str:
-    #         print(i)
-    #         print(type(i))
-    # print(language)
-    # input()
     test_dataset = load_dataset_for_evaluation(task_name, language)
     
-    # Ensure that the dataset and the CSV file have the same order and size
     assert df.shape[0] == len(test_dataset), f"Row numbers mismatch: {df.shape[0]} vs {len(test_dataset)}"
-    # assert all(df["id"] == [example["id"] for example in test_dataset]), "ID columns mismatch"
     assert all(df["label"] == [example["label"] for example in test_dataset]), "Label columns mismatch"
     
-    # all predictions should adhere to desired formats after being annotated
-    # assert check_prediction_format(df).shape[0] == 0
     df_warnings = check_prediction_format(df, verbose=False)
     df = df[~df['id'].isin(df_warnings['id'])]
-        
-    print("For inference results:")
-    # print(df["prediction"])
-    # input()
-    # for i in df["prediction"]:
-    #     if type(i) != str:
-    #         print(i)
-    #         print(type(i))
-    #         input()
 
+    print("For inference results:")
     df_not_inferenced = df[df["prediction"].str.startswith("not inferenced")]
     print("Not inferenced prompts:")
     print(df_not_inferenced["language"].value_counts())
@@ -75,7 +55,6 @@ def evaluate_predictions(task_name, language):
     print("\n")
 
     df_filtered = df[~df["prediction"].str.startswith(("not inferenced", "unparsable"))]
-
     df_filtered["prediction"] = df_filtered["prediction"].astype("int64")
     
     if (df_filtered["language"] != language).any():
@@ -83,11 +62,9 @@ def evaluate_predictions(task_name, language):
 
     y_true = df_filtered["label"]
     y_pred = df_filtered["prediction"]
-    
-    print(y_true)
-    print(type(y_true.values))
-    print(y_pred)
-    print(type(y_pred.values))
+
+    y_true = y_true.map(label_mapping)
+    y_pred = y_pred.map(label_mapping)
 
     report = classification_report(y_true, y_pred, output_dict=True)
     cr_file = os.path.join(Config.cr_dir, f"{language}_classification_report.csv")
@@ -95,8 +72,8 @@ def evaluate_predictions(task_name, language):
     pd.DataFrame(report).transpose().to_csv(cr_file)
     print(f"Classification report for {language} saved to {cr_file}")
 
-    cm = confusion_matrix(y_true, y_pred)
-    df_cm = pd.DataFrame(cm, index=np.unique(y_true), columns=np.unique(y_pred))
+    cm = confusion_matrix(y_true, y_pred, labels=list(label_mapping.values()))
+    df_cm = pd.DataFrame(cm, index=list(label_mapping.values()), columns=list(label_mapping.values()))
     cm_file = os.path.join(Config.cm_dir, f"{language}_confusion_matrix.csv")
     ensure_directory_exists_for_file(cm_file)
     df_cm.to_csv(cm_file)
@@ -121,4 +98,3 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     main()
-
