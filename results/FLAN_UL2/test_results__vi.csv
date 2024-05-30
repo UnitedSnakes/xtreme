@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Vâng, tôi thậm chí không nghĩ về điều đó, nhưng tôi đã rất thất vọng, và, tôi lại nói chuyện với anh ta lần nữa.
+Sentence 2: Tôi đã không nói chuyện với anh ta nữa.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,vi,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Vâng, tôi thậm chí không nghĩ về điều đó, nhưng tôi đã rất thất vọng, và, tôi lại nói chuyện với anh ta lần nữa.
+Sentence 2: Tôi buồn tới mức tôi lại bắt đầu nói chuyện lại với anh ta.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,vi,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Vâng, tôi thậm chí không nghĩ về điều đó, nhưng tôi đã rất thất vọng, và, tôi lại nói chuyện với anh ta lần nữa.
+Sentence 2: Chúng tôi có buổi nói chuyện tuyệt vời.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,vi,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Và tôi nghĩ đó là một đặc ân, và nó vẫn còn, nó vẫn là, tôi là chín hai hai Ex-O là lĩnh vực nghề nghiệp không quân AFFC của tôi.
+Sentence 2: Tôi không nhận ra rằng tôi không phải là người duy nhất ở trong sân ngày hôm đó.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,vi,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Và tôi nghĩ đó là một đặc ân, và nó vẫn còn, nó vẫn là, tôi là chín hai hai Ex-O là lĩnh vực nghề nghiệp không quân AFFC của tôi.
+Sentence 2: Tôi có ấn tượng là tôi là người duy nhất có số đó ở lĩnh vực Không quân AFFC.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,vi,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Và tôi nghĩ đó là một đặc ân, và nó vẫn còn, nó vẫn là, tôi là chín hai hai Ex-O là lĩnh vực nghề nghiệp không quân AFFC của tôi.
+Sentence 2: Tất cả chúng ta đều được cung cấp cùng một con số chính xác bất kể chúng ta được hứa được hưởng những đặc quyền nào, nó là một lời nói dối.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,vi,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Họ nói với tôi rằng, ừ, rằng tôi sẽ được gọi bởi một chàng trai vào cuối cùng để gặp nhau.
+Sentence 2: Tôi chưa bao giờ nói gì về việc gặp ai cả.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,vi,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Họ nói với tôi rằng, ừ, rằng tôi sẽ được gọi bởi một chàng trai vào cuối cùng để gặp nhau.
+Sentence 2: Tôi được báo rằng sẽ có một người được gọi vào để tôi gặp.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,vi,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Họ nói với tôi rằng, ừ, rằng tôi sẽ được gọi bởi một chàng trai vào cuối cùng để gặp nhau.
+Sentence 2: Anh chàng xuất hiện muộn một chút.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,vi,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Có rất nhiều điều bạn có thể nói mà tôi sẽ chỉ bỏ qua điều đó thôi.
+Sentence 2: Tôi muốn nói với bạn tất cả mọi thứ tôi biết về điều đó!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,vi,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Có rất nhiều điều bạn có thể nói mà tôi sẽ chỉ bỏ qua điều đó thôi.
+Sentence 2: Tôi sẽ không nói về điều đó, mặc dù có rất nhiều thứ phảinói.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,vi,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Có rất nhiều điều bạn có thể nói mà tôi sẽ chỉ bỏ qua điều đó thôi.
+Sentence 2: Tôi sẽ không nói về lịch sử của thành phố vì có quá nhiều điều để nói.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,vi,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Đó là thứ đầu tiên chúng tôi muốn giữ lại vì không có cách nào để ném một quả bom nhiệt hạch nặng 20 triệu tấn xuống từ máy bay C124, 30 cả.
+Sentence 2: Chúng tôi không quan tâm đến việc tiết kiệm bất cứ thứ gì.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,vi,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Đó là thứ đầu tiên chúng tôi muốn giữ lại vì không có cách nào để ném một quả bom nhiệt hạch nặng 20 triệu tấn xuống từ máy bay C124, 30 cả.
+Sentence 2: Chúng tôi muốn tiết kiệm một thứ nhiều hơn phần còn lại.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,vi,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Đó là thứ đầu tiên chúng tôi muốn giữ lại vì không có cách nào để ném một quả bom nhiệt hạch nặng 20 triệu tấn xuống từ máy bay C124, 30 cả.
+Sentence 2: Chúng tôi muốn cứu h-bomb vì thật là khó để xử lý nó.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,vi,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Vì vậy tôi không chắc tại sao nữa.
+Sentence 2: Tôi chắc chắn là lý do tại sao.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,vi,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Vì vậy tôi không chắc tại sao nữa.
+Sentence 2: Tôi không biết vì sao anh ấy lại chuyển trường.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,vi,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Vì vậy tôi không chắc tại sao nữa.
+Sentence 2: Tôi không biết vì sao nó xảy ra.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,vi,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Đây là Fannie Flono, và cô ấy đã lớn lên ở Ag - Augusta, GA, và cô ấy sẽ nói về một số câu chuyện từ thời thơ ấu của cô ấy.
+Sentence 2: Fannie Flono đã phải lên lịch lại và không thể kể cho chúng tôi nghe bất kỳ câu chuyện nào ngày hôm nay.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,vi,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Đây là Fannie Flono, và cô ấy đã lớn lên ở Ag - Augusta, GA, và cô ấy sẽ nói về một số câu chuyện từ thời thơ ấu của cô ấy.
+Sentence 2: Fannie Flono ở đây và cô ấy sẽ nói chuyện với chúng tôi về những câu chuyện thời thơ ấu của cô ấy khi lớn lên ở Augusta, GA.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,vi,

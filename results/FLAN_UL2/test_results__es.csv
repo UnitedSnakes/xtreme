@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bien, ni estaba pensando en eso, pero estaba tan frustrada y empecé a hablar con él de nuevo.
+Sentence 2: No he vuelto a hablar con él.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,es,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bien, ni estaba pensando en eso, pero estaba tan frustrada y empecé a hablar con él de nuevo.
+Sentence 2: Estaba tan molesto que empecé a hablar con él de nuevo.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,es,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bien, ni estaba pensando en eso, pero estaba tan frustrada y empecé a hablar con él de nuevo.
+Sentence 2: Tuvimos una gran charla.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,es,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Y pensé que era un privilegio, y todavía es, todavía es, yo era el único 922 Ex-O que estaba en mi campo de carrera AFFC de la Fuerza Aérea.
+Sentence 2: No sabía que no era la única persona en el campo ese día.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,es,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Y pensé que era un privilegio, y todavía es, todavía es, yo era el único 922 Ex-O que estaba en mi campo de carrera AFFC de la Fuerza Aérea.
+Sentence 2: Tenía la impresión de que era el único con ese número en el campo AFFC Air Force Career.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,es,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Y pensé que era un privilegio, y todavía es, todavía es, yo era el único 922 Ex-O que estaba en mi campo de carrera AFFC de la Fuerza Aérea.
+Sentence 2: A todos nos dieron el mismo número exacto, sin importar los privilegios que nos prometieron que se nos concedieran, todo era una mentira.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,es,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Me dijeron que, esto... que un tipo me llamaría al final para vernos.
+Sentence 2: Nunca me dijeron nada sobre conocer a alguien.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,es,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Me dijeron que, esto... que un tipo me llamaría al final para vernos.
+Sentence 2: Me dijeron que llamarían a un tipo para que me conociera.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,es,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Me dijeron que, esto... que un tipo me llamaría al final para vernos.
+Sentence 2: El tipo apareció un poco tarde.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,es,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Hay tanto que se puede decir sobre eso, que sencillamente me voy a saltar eso.
+Sentence 2: ¡Quiero contarte todo lo que sé sobre eso!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,es,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Hay tanto que se puede decir sobre eso, que sencillamente me voy a saltar eso.
+Sentence 2: No hablaré de eso, aunque hay mucho que cubrir.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,es,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Hay tanto que se puede decir sobre eso, que sencillamente me voy a saltar eso.
+Sentence 2: No hablaré sobre la historia de la ciudad porque hay mucho que decir.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,es,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Eso es era lo más importante que queríamos salvar, ya que no había forma de lanzar  una bomba hidrógena desde unos 30, un C124.
+Sentence 2: No nos importó guardar nada.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,es,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Eso es era lo más importante que queríamos salvar, ya que no había forma de lanzar  una bomba hidrógena desde unos 30, un C124.
+Sentence 2: Queríamos salvar una cosa más que el resto.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,es,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Eso es era lo más importante que queríamos salvar, ya que no había forma de lanzar  una bomba hidrógena desde unos 30, un C124.
+Sentence 2: Queríamos salvar la bomba-H porque era muy difícil de manejar.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,es,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Así que no tengo muy claro por qué.
+Sentence 2: Estoy seguro de la razón por la cual.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,es,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Así que no tengo muy claro por qué.
+Sentence 2: No sé por qué él transfirió las escuelas.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,es,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Así que no tengo muy claro por qué.
+Sentence 2: No sé por qué sucedió eso.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,es,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Esta es Fannie Flono. Creció en Ag-- Augusta, GA, y va a hablar sobre algunas historias de su infancia.
+Sentence 2: Fannie Flono tuvo que reprogramar y no puede contarnos ninguna historia hoy.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,es,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Esta es Fannie Flono. Creció en Ag-- Augusta, GA, y va a hablar sobre algunas historias de su infancia.
+Sentence 2: Fannie Flono está aquí y nos hablará sobre sus historias de infancia cuando creció en Augusta, GA.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,es,

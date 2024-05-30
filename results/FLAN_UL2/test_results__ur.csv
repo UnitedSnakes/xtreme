@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: میں اس کے بارے میں نہیں سوچھ رہی تھی ، لیکن میں اتنی مایوس تھی کہ اس سے دوبارہ بات کرنے لگی۔
+Sentence 2: میں نی اسی دوبارا بات نھی کی
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ur,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: میں اس کے بارے میں نہیں سوچھ رہی تھی ، لیکن میں اتنی مایوس تھی کہ اس سے دوبارہ بات کرنے لگی۔
+Sentence 2: میں اتنا زیادہ مضطرب تھا کہ میں نے اس سے دوبارہ بات چیت کرنا شروع کردیا۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ur,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: میں اس کے بارے میں نہیں سوچھ رہی تھی ، لیکن میں اتنی مایوس تھی کہ اس سے دوبارہ بات کرنے لگی۔
+Sentence 2: ہماری بات چیت بہت اچھی رہی۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,ur,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: اور میں نے سوچا کہ یہ ایک امتیاز تھا، اور یہ ابھی بھی ہے، یہ ابھی بھی ہے، میں صرف نو دو دو تھا، جو میرا AFFC ایئر فورس کیریئر فیلڈ تھا.
+Sentence 2: mjhey iss barey mein ilam nahi tha k mein wahid bnda nahi hun jo k us din field mein tha.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,ur,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: اور میں نے سوچا کہ یہ ایک امتیاز تھا، اور یہ ابھی بھی ہے، یہ ابھی بھی ہے، میں صرف نو دو دو تھا، جو میرا AFFC ایئر فورس کیریئر فیلڈ تھا.
+Sentence 2: میں سمجھ رہا تھا کہ اے ایف ایف سی  ائیر فورس کیرئیر فلیڈ میں  یہ نمبر صرف مجھے حاصل تھا۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ur,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: اور میں نے سوچا کہ یہ ایک امتیاز تھا، اور یہ ابھی بھی ہے، یہ ابھی بھی ہے، میں صرف نو دو دو تھا، جو میرا AFFC ایئر فورس کیریئر فیلڈ تھا.
+Sentence 2: ہم سب کو ایک ہی نمبر دیا گیا تھا ہم سے جن جن مراعات کا وعدہ کیا گیا تھا اس کا کوئی لحاظ نہیں کیا گیا تھا، یہ سب کچھ جھوٹ تھا۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,ur,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: انہوں نے مجھے بتایا تھا کے آخر میں مجھ سے ملنے کے لۂے ایک آدمی بلایا جاۂے گا
+Sentence 2: مجھے کسی سے ملاقات کے سلسلہ میں کچھ بھی نہیں بتایا گیا۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ur,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: انہوں نے مجھے بتایا تھا کے آخر میں مجھ سے ملنے کے لۂے ایک آدمی بلایا جاۂے گا
+Sentence 2: مجھ کو کہا گیا تھا کہ مجھ سے ملاقات کرنے کے لیے ایک لڑکے کو بلایا جائے گا۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ur,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: انہوں نے مجھے بتایا تھا کے آخر میں مجھ سے ملنے کے لۂے ایک آدمی بلایا جاۂے گا
+Sentence 2: لڑکے دیر سے اۓ
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,ur,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: بہت اتنا ہے کہ آپ اس کے بارے میں بات کر سکتے ہیں. میں صرف اس کو چھوڑ دونگا.
+Sentence 2: mein tmhain uske barey mein sb kuch btana chahty hun jo kuch mein janty hun!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ur,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: بہت اتنا ہے کہ آپ اس کے بارے میں بات کر سکتے ہیں. میں صرف اس کو چھوڑ دونگا.
+Sentence 2: میں اس کے بارے میں بات نہیں کروں گا‏، اگر چہ چھپانے کے لیے بہت کچھ ہے۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,ur,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: بہت اتنا ہے کہ آپ اس کے بارے میں بات کر سکتے ہیں. میں صرف اس کو چھوڑ دونگا.
+Sentence 2: mein sheher ki tareekh k barey mein kuch nahi kahun g kiun k buht kuch hai uske barey mein btaney ko.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,ur,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ہم اس ہی کو بچانا چاھتے تھے کیونکہ 20 میگا ٹن بم کو پھینکنے کا کوۂی طریکہ نہیں تھا
+Sentence 2: ہم نے کچھ بھی بچانے کی پرواہ نہیں کی
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,ur,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ہم اس ہی کو بچانا چاھتے تھے کیونکہ 20 میگا ٹن بم کو پھینکنے کا کوۂی طریکہ نہیں تھا
+Sentence 2: ہم بقیہ چیزوں سے زیادہ صرف ایک چیز کو محفوظ کرنا چاہتے تھے۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,ur,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ہم اس ہی کو بچانا چاھتے تھے کیونکہ 20 میگا ٹن بم کو پھینکنے کا کوۂی طریکہ نہیں تھا
+Sentence 2: ہم h بم کو بچا کر رکھنا چاہتے تھے کیونکہ اس سے نمٹنا بہت مشکل تھا۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,ur,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: تو میں بالکل پر یقین نہیں ہوں کہ کیوں۔
+Sentence 2: مجھے یقین ہے کہ یہ اس وجہ سے ہے۔
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,ur,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: تو میں بالکل پر یقین نہیں ہوں کہ کیوں۔
+Sentence 2: mjhey nahi maloom k usne school kiun badla.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,ur,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: تو میں بالکل پر یقین نہیں ہوں کہ کیوں۔
+Sentence 2: مجھے پتہ نہیں کیوں ایسا ہوا
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,ur,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: یہ فینی فلونیو ہے,اور وہ  آگ- استانا میں بڑی ہوی،جارجیا,اور وہ اپنے بچپن سے کچھ کہانیوں کے بارے میں بات کرنے جا رہی ہے.
+Sentence 2: فینی فلونو کو دوبار پلان کرنا پڑا اور وہ آج ہمیں کوئی نئی کہانی نہیں سنا سکتی.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ur,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: یہ فینی فلونیو ہے,اور وہ  آگ- استانا میں بڑی ہوی،جارجیا,اور وہ اپنے بچپن سے کچھ کہانیوں کے بارے میں بات کرنے جا رہی ہے.
+Sentence 2: Fannie Flono yahan a gi hain or wo hum se apnay bachpan ki kahaniyan August, GA mein baray honay kay bare mein batain gi
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,ur,

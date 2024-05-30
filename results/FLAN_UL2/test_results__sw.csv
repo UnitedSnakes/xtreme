@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Naam, sikukuwa nafikiri juu ya hilo, lakini nilichanganyikiwa sana, na, hatimaye nikaendelea kuzungumza naye tena.
+Sentence 2: Sijaongea na yeye tena.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,sw,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Naam, sikukuwa nafikiri juu ya hilo, lakini nilichanganyikiwa sana, na, hatimaye nikaendelea kuzungumza naye tena.
+Sentence 2: Nilikasirika sana kwamba nikaanza kuzungumza naye tena.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,sw,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Naam, sikukuwa nafikiri juu ya hilo, lakini nilichanganyikiwa sana, na, hatimaye nikaendelea kuzungumza naye tena.
+Sentence 2: Tulikuwa na majadiliano mazuri.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,sw,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Nami nilifikiri kwamba ilikuwa ni fursa, na bado, bado, nilikuwa pekee wa tisa mbili na mbili Ex-O ambayo ilikuwa uwanja wangu wa AFFC Air Force Career.
+Sentence 2: Sikujua kwamba sikuwa mtu wa pekee kuwa uwanjani leo.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,sw,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Nami nilifikiri kwamba ilikuwa ni fursa, na bado, bado, nilikuwa pekee wa tisa mbili na mbili Ex-O ambayo ilikuwa uwanja wangu wa AFFC Air Force Career.
+Sentence 2: Nilikuwa chini ya hisia kwamba nilikuwa pekee na nambari hiyo katika uwanja wa Kazi ya Air Force ya AFFC.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,sw,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Nami nilifikiri kwamba ilikuwa ni fursa, na bado, bado, nilikuwa pekee wa tisa mbili na mbili Ex-O ambayo ilikuwa uwanja wangu wa AFFC Air Force Career.
+Sentence 2: Sisi sote tumepewa idadi sawa sawa bila kujali marupurupu tuliyoahidi kupewa, ilikuwa ni uongo.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,sw,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Walinieleza ya kwamba mwishowe ningeitiwa jamaa fulani ambaye tungepatana naye.
+Sentence 2: Sikuambiwa chochote kuhusu kukutana na mtu yeyote.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,sw,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Walinieleza ya kwamba mwishowe ningeitiwa jamaa fulani ambaye tungepatana naye.
+Sentence 2: Niliambiwa mtu angeitwa aje ili nikutane naye.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,sw,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Walinieleza ya kwamba mwishowe ningeitiwa jamaa fulani ambaye tungepatana naye.
+Sentence 2: Alikuja akiwa amechelewa.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,sw,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Kuna mengi ambayo unaweza kuzungumzia kuhusu hilo lakini  nitaachana nayo tu.
+Sentence 2: Nataka kukuambia kila kitu ninachokijua kuhusu mambo hayo
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,sw,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Kuna mengi ambayo unaweza kuzungumzia kuhusu hilo lakini  nitaachana nayo tu.
+Sentence 2: Sitaongelea mambo hayo, ingawa kuna mengi ya kuficha.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,sw,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Kuna mengi ambayo unaweza kuzungumzia kuhusu hilo lakini  nitaachana nayo tu.
+Sentence 2: Siwezi ongelea histroria ya mji maana kuna mengi ya kusema.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,sw,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: hicho ndio kilikuwa kitu cha msingi tulichotka kuokoa kwa sababu haingewezakana kutupa bomu la hidrojeni megatoni 20  kwenye C124.
+Sentence 2: Hatukujali kuhusu kuokoa chochote.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,sw,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: hicho ndio kilikuwa kitu cha msingi tulichotka kuokoa kwa sababu haingewezakana kutupa bomu la hidrojeni megatoni 20  kwenye C124.
+Sentence 2: Tulitaka kuokoa kitu kimoja zaidi kuliko vingine.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,sw,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: hicho ndio kilikuwa kitu cha msingi tulichotka kuokoa kwa sababu haingewezakana kutupa bomu la hidrojeni megatoni 20  kwenye C124.
+Sentence 2: Tulitaka kuokoa bomu ya h kwa sababu ilikuwa ngumu sana kukabiliana nayo.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,sw,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Hivyo, sijui kwa kweli nu kwa nini.
+Sentence 2: Nina uhakika wa sababu.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,sw,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Hivyo, sijui kwa kweli nu kwa nini.
+Sentence 2: Sijui kwa nini alihamisha shule.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,sw,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Hivyo, sijui kwa kweli nu kwa nini.
+Sentence 2: Sijui ni kwa nini hilo lilitendeka.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,sw,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Huyu ni Fannie Flono, na yeye alikulia Ag - Augusta, GA, na yeye atakuja kuzungumza kuhusu baadhi ya hadithi kutoka utoto wake.
+Sentence 2: Fannie Flono alirudia ratiba na hawezi kutuambia hadithi zozote leo.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,sw,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Huyu ni Fannie Flono, na yeye alikulia Ag - Augusta, GA, na yeye atakuja kuzungumza kuhusu baadhi ya hadithi kutoka utoto wake.
+Sentence 2: Fannie Flono yuko hapa na atatuzungumzia kuhusu hadithi za utoto wake kutoka kukua huko Augusta, GA.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,sw,

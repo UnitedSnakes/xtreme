@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: حسنا ، لم أكن أفكر حتى حول ذلك ، لكن كنت محبطاً تماما ،وأنهيت الحديث معه مرة ثانية .
+Sentence 2: لم أتحدث معه مرة أخرى.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ar,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: حسنا ، لم أكن أفكر حتى حول ذلك ، لكن كنت محبطاً تماما ،وأنهيت الحديث معه مرة ثانية .
+Sentence 2: كنت مستاء جدا لدرجة أنني بدأت بالحديث معه مرة أخرى.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ar,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: حسنا ، لم أكن أفكر حتى حول ذلك ، لكن كنت محبطاً تماما ،وأنهيت الحديث معه مرة ثانية .
+Sentence 2: دار بيننا حديث رائع.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",3,1,ar,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: واعتقدت أن ذلك شرف لي ، ولا يزال ، ولايزال ، كنت الوحيد برقم تسعة اثنان اثنان إي أكس أو والذي كان مجال مهنتي في سلاح الجو .
+Sentence 2: لم أكن على علم بأنني لم أكن الشخص الوحيد الذي كان في الميدان في ذلك اليوم.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,ar,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: واعتقدت أن ذلك شرف لي ، ولا يزال ، ولايزال ، كنت الوحيد برقم تسعة اثنان اثنان إي أكس أو والذي كان مجال مهنتي في سلاح الجو .
+Sentence 2: كان لدي إنطباع أنني كنت الشخص الوحيد الذي لديه هذا الرقم في مجال مهنة سلاح الجو AFFC.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ar,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: واعتقدت أن ذلك شرف لي ، ولا يزال ، ولايزال ، كنت الوحيد برقم تسعة اثنان اثنان إي أكس أو والذي كان مجال مهنتي في سلاح الجو .
+Sentence 2: حصلنا جميعنا على نفس العدد بالضبط بغض النظر عن الامتيازات التي وعدنا بها، لقد كانت كلها كذبة.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,ar,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: أخبروني ،إيه، أنه سيتم استدعائي من قبل شاب في النهاية سيقابلني .
+Sentence 2: لم يتم إخباري أبداً بأي شيء عن مقابلة أي شخص.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ar,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: أخبروني ،إيه، أنه سيتم استدعائي من قبل شاب في النهاية سيقابلني .
+Sentence 2: لقد أخبروني بأنهم سيقومون بإرسال شاب لأقابله.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ar,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: أخبروني ،إيه، أنه سيتم استدعائي من قبل شاب في النهاية سيقابلني .
+Sentence 2: لقد جاء الشاب متأخراً قليلاً.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,ar,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: هناك الكثير تستطيع التحدث عنه  وأنا سوف أتاجاوز ذلك تماما .
+Sentence 2: أريد أن أخبرك بكل شيء أعرفه عن ذلك!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ar,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: هناك الكثير تستطيع التحدث عنه  وأنا سوف أتاجاوز ذلك تماما .
+Sentence 2: لن أتحدث عن ذلك ، على الرغم من أن هناك الكثير لتغطيته.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ar,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: هناك الكثير تستطيع التحدث عنه  وأنا سوف أتاجاوز ذلك تماما .
+Sentence 2: لن أتحدث عن تاريخ المدينة لأن هناك الكثير مما يمكن قوله حولها.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,ar,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: كان ذلك الشيْ الأساسي الوحيد الذي أردنا أن ننقذه لأنه لم يكن هناك أي طريقة لإلقاء قنبلة هيدروجينية بقوة 20 ميغا 30 C 124 .
+Sentence 2: لم نهتم بحفظ أي شيء.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,ar,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: كان ذلك الشيْ الأساسي الوحيد الذي أردنا أن ننقذه لأنه لم يكن هناك أي طريقة لإلقاء قنبلة هيدروجينية بقوة 20 ميغا 30 C 124 .
+Sentence 2: أردنا إنقاذ شيء واحد أكثر من الباقي.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,ar,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: كان ذلك الشيْ الأساسي الوحيد الذي أردنا أن ننقذه لأنه لم يكن هناك أي طريقة لإلقاء قنبلة هيدروجينية بقوة 20 ميغا 30 C 124 .
+Sentence 2: أردنا إنقاذ قنبلة h-bomb لأنه كان من الصعب التعامل معها.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,ar,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: لذلك أنا فعلا غير متأكد لماذا.
+Sentence 2: أنا متأكد من سبب ذلك.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,ar,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: لذلك أنا فعلا غير متأكد لماذا.
+Sentence 2: لا أعرف لماذا قام بنقل المدارس.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,ar,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: لذلك أنا فعلا غير متأكد لماذا.
+Sentence 2: لا أعرف لماذا حدث هذا.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ar,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: هذه هي فاني فلونو ، هي ترعرعت في أوغستا ، جورجيا ، وهي ستتحدث عن بعض قصص  طفولتها . ،
+Sentence 2: كان على فاني فلونو إعادة تعيين جدول الأعمال وهي غير قادرة على إخبارنا بأية قصص اليوم.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,ar,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: هذه هي فاني فلونو ، هي ترعرعت في أوغستا ، جورجيا ، وهي ستتحدث عن بعض قصص  طفولتها . ،
+Sentence 2: فاني فلونو هنا وستتحدث إلينا عن قصص طفولتها التي نشأت في أوغستا ، جورجيا.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,ar,

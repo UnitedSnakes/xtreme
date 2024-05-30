@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 嗯，我根本没想过，但是我很沮丧，最后我又和他说话了。
+Sentence 2: 我还没有和他再次谈论。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,zh,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 嗯，我根本没想过，但是我很沮丧，最后我又和他说话了。
+Sentence 2: 我非常沮丧，我刚刚开始跟他说话。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,zh,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 嗯，我根本没想过，但是我很沮丧，最后我又和他说话了。
+Sentence 2: 我们谈得很好。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,zh,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 而我当初认为这是一个特权，我现在仍然这样想，我是唯一的922 Ex-O，也是我的AFFC空军职业生涯。
+Sentence 2: 我不知道那天我不是唯一一个在场的人。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,zh,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 而我当初认为这是一个特权，我现在仍然这样想，我是唯一的922 Ex-O，也是我的AFFC空军职业生涯。
+Sentence 2: 我的印象是，我是AFFC空军职业领域唯一拥有这个数字的人。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,zh,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 而我当初认为这是一个特权，我现在仍然这样想，我是唯一的922 Ex-O，也是我的AFFC空军职业生涯。
+Sentence 2: 我们都被赋予了相同的确切数字，无论我们被许诺了何种特权，都是谎言。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,zh,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 他们告诉我，呃，我最后会被叫到一个人那里去见面。
+Sentence 2: 我从来没有被告知任何与任何人会面。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,zh,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 他们告诉我，呃，我最后会被叫到一个人那里去见面。
+Sentence 2: 我被告知将有一个人被叫进来与我见面。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,zh,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 他们告诉我，呃，我最后会被叫到一个人那里去见面。
+Sentence 2: 那个人来得有点晚。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,zh,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 你可以讲的太多了，我就不提了。
+Sentence 2: 我想把我知道的关于那件事一切都告诉你！
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,zh,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 你可以讲的太多了，我就不提了。
+Sentence 2: 即使需要说的很多，但我也不会谈论这个。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,zh,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 你可以讲的太多了，我就不提了。
+Sentence 2: 我不会谈论这座城市的历史，因为有太多的话要说。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,zh,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 这是我们首要需要解救的事情，因为没有任何方法可以将一枚20兆吨重的氢弹从一架30，一架C124上卸下。
+Sentence 2: 我们不在乎拯救什么。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,zh,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 这是我们首要需要解救的事情，因为没有任何方法可以将一枚20兆吨重的氢弹从一架30，一架C124上卸下。
+Sentence 2: 我们想比其他人省得更多。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,zh,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 这是我们首要需要解救的事情，因为没有任何方法可以将一枚20兆吨重的氢弹从一架30，一架C124上卸下。
+Sentence 2: 我们想减少氢弹，因为它太难对付了。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,zh,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 我不知道为什么。
+Sentence 2: 我很确定是为什么。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,zh,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 我不知道为什么。
+Sentence 2: 我不知道他为什么转学。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,zh,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 我不知道为什么。
+Sentence 2: 我不知道为什么它会发生。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,zh,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 这是Fannie Flono，她在佐治亚州奥古斯塔长大，她会讲述她童年时的一些故事。
+Sentence 2: 芬妮.弗洛诺不得不重新安排时间，今天无法告诉我们任何事情。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,zh,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 这是Fannie Flono，她在佐治亚州奥古斯塔长大，她会讲述她童年时的一些故事。
+Sentence 2: Fannie Flono就在这里，她将与我们分享她在奥古斯塔成长的童年故事。
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,zh,

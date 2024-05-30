@@ -1,5 +1,3 @@
-from datasets import load_dataset
+a = {"aaa": [123, 234], "bbb": [345, 456]}
 
-xnli_dataset = load_dataset("xnli", "all_languages")
-
-print(xnli_dataset)
+print(a[0])

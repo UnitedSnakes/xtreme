@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Pekala, bunu hiç düşünmemiştim ancak kafam çok karıştı ve onunla tekrar konuşmadım.
+Sentence 2: Onunla bir daha konuşmadım.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,tr,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Pekala, bunu hiç düşünmemiştim ancak kafam çok karıştı ve onunla tekrar konuşmadım.
+Sentence 2: O kadar çok üzgündüm ki onunla tekrar konuşmaya başladım.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,tr,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Pekala, bunu hiç düşünmemiştim ancak kafam çok karıştı ve onunla tekrar konuşmadım.
+Sentence 2: Harika bir konuşma yaptık.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,tr,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Ve bunun bir ayrıcalık olduğunu sanıyordum, ve hala, hala benim, AFFC Hava Kuvvetleri Kariyer alanım olan dokuz tane iki iki X-O'ydu.
+Sentence 2: O gün tarladaki tek kişi olmadığımın farkında değildim.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,tr,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Ve bunun bir ayrıcalık olduğunu sanıyordum, ve hala, hala benim, AFFC Hava Kuvvetleri Kariyer alanım olan dokuz tane iki iki X-O'ydu.
+Sentence 2: AFFC Hava Kuvvetleri Kariyer alanında o numaraya sahip olan tek kişi olduğum izlenimindeydim.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,tr,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Ve bunun bir ayrıcalık olduğunu sanıyordum, ve hala, hala benim, AFFC Hava Kuvvetleri Kariyer alanım olan dokuz tane iki iki X-O'ydu.
+Sentence 2: Her ne kadar ayrıcalık tanınacağına söz verilmiş olsak da, hepimize tıpa tıp aynı numara verildi, hepsi bir yalanmış.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,tr,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Sonunda tanışmam için bir adam tarafından çağrılmamı söylediler.
+Sentence 2: Bana herhangi birisiyle görüşme konusunda hiç bir şey söylenmedi.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,tr,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Sonunda tanışmam için bir adam tarafından çağrılmamı söylediler.
+Sentence 2: Tanışmam için bana bir adamın çağrılıcağı söylendi.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,tr,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Sonunda tanışmam için bir adam tarafından çağrılmamı söylediler.
+Sentence 2: Adam biraz geç teşrif etti.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,tr,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bu konu hakkında söyleyebileceğin çok şey var pas geçiyorum.
+Sentence 2: O konuda bildiğim her şeyi sana anlatmak istiyorum.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,tr,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bu konu hakkında söyleyebileceğin çok şey var pas geçiyorum.
+Sentence 2: Kapsanacak çok şey olmasına rağmen bundan bahsetmeyeceğim.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,tr,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bu konu hakkında söyleyebileceğin çok şey var pas geçiyorum.
+Sentence 2: Şehrin tarihinden bahsetmeyeceğim çünkü söylenecek çok bir şey yok.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,tr,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 20 megatonluk H-bombasını 30 tane C124'ün üzerinden  atmanın bir yolu olmadığından, o kurtarmak istediğimiz ilk şeydi.
+Sentence 2: Hiçbir şeyi kaydetmeyi umursamadık.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,tr,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 20 megatonluk H-bombasını 30 tane C124'ün üzerinden  atmanın bir yolu olmadığından, o kurtarmak istediğimiz ilk şeydi.
+Sentence 2: Bir şeyi geri kalanlardan daha çok kurtarmak istedik.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",4,0,tr,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: 20 megatonluk H-bombasını 30 tane C124'ün üzerinden  atmanın bir yolu olmadığından, o kurtarmak istediğimiz ilk şeydi.
+Sentence 2: H bombasını kurtarmak istedik çünkü onu ele almak çok zordu.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,tr,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Neden olduğunu gerçekten bilmiyorum.
+Sentence 2: Sebebinden eminim.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,tr,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Neden olduğunu gerçekten bilmiyorum.
+Sentence 2: Okullardan neden nakil olduğunu bilmiyorum.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,tr,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Neden olduğunu gerçekten bilmiyorum.
+Sentence 2: Bunun neden olduğunu bilmiyorum.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,tr,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bu Fannie Flono, Augusta, GA da büyümüş ve çocukluğundan kalma birkaç hikaye anlatacak.
+Sentence 2: Fannie Flono programını yenilemek durumunda kaldı ve bugün bize hiçbir hikaye anlatamıyor.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,tr,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Bu Fannie Flono, Augusta, GA da büyümüş ve çocukluğundan kalma birkaç hikaye anlatacak.
+Sentence 2: Fannie Flono burada ve bize Augusta, GA'da büyürken başından geçen çocukluk hikayelerini anlatacak.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,tr,

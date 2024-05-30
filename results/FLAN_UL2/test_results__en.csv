@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+Sentence 2: I havent spoken to him again.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+Sentence 2: I was so upset that I just started talking to him again.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,en,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Well, I wasn't even thinking about that, but I was so frustrated, and, I ended up talking to him again.
+Sentence 2: We had a great talk.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,en,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+Sentence 2: I was not aware that I was not the only person to be at the field that day.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,en,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+Sentence 2: I was under the impression that I was the only one with that number at the AFFC Air Force Career field.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,en,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: And I thought that was a privilege, and it's still, it's still, I was the only nine two-two Ex-O which was my AFFC Air Force Career field.
+Sentence 2: We all were given the same exact number no matter what privileges we were promised to be granted, it was all a lie.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+Sentence 2: I was never told anything about meeting anyone.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+Sentence 2: I was told a guy would be called in for me to meet.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,en,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: They told me that, uh, that I would be called in a guy at the end for me to meet.
+Sentence 2: The guy showed up a bit late.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,en,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: There's so much you could talk about on that I'll just skip that.
+Sentence 2: I want to tell you everything I know about that!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: There's so much you could talk about on that I'll just skip that.
+Sentence 2: I won't talk about that, even though there's a lot to cover.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,en,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: There's so much you could talk about on that I'll just skip that.
+Sentence 2: I wont talk about the history of the city because there's too much to say.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,en,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: That was the primary thing we wanted to save since there wasn't any way to dump a 20-megaton H-bomb off a 30, a C124.
+Sentence 2: We didn't care about saving anything.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: That was the primary thing we wanted to save since there wasn't any way to dump a 20-megaton H-bomb off a 30, a C124.
+Sentence 2: We wanted to save one thing more than the rest.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,en,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: That was the primary thing we wanted to save since there wasn't any way to dump a 20-megaton H-bomb off a 30, a C124.
+Sentence 2: We wanted to save the h-bomb because it was so hard to deal with.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,en,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: So I'm not really sure why.
+Sentence 2: I am certain as to the reason why.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: So I'm not really sure why.
+Sentence 2: I don't know why he transferred schools.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,en,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: So I'm not really sure why.
+Sentence 2: I don't know why that happened.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,en,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: This is Fannie Flono, and she grew up in Ag-- Augusta, GA, and she is going to talk about some stories from her childhood.
+Sentence 2: Fannie Flono had to reschedule and is unable to tell us any stories today.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,en,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: This is Fannie Flono, and she grew up in Ag-- Augusta, GA, and she is going to talk about some stories from her childhood.
+Sentence 2: Fannie Flono is here and she is going to speak to us about her childhood stories from growing up in Augusta, GA.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,en,

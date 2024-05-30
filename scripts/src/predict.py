@@ -2,6 +2,7 @@
 # Author: Shanglin Yang
 # Contact: syang662@wisc.edu
 
+import json
 import os
 import time
 import random
@@ -22,16 +23,17 @@ import argparse
 import torch as th
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import matplotlib.pyplot as plt
+from accelerate import Accelerator
 
 from parameters import Config
 from utils import Color, request_user_confirmation, ensure_directory_exists_for_file
 
 os.environ["HF_DATASETS_CACHE"] = "./cache"
 
-
 class ModelLoader:
     _model = None
     _tokenizer = None
+    _max_input_length = None
 
     @classmethod
     def get_model(cls, model_name, inference_only):
@@ -73,24 +75,32 @@ class ModelLoader:
             cls._tokenizer = AutoTokenizer.from_pretrained(output_dir)
         return cls._model, cls._tokenizer
 
+    @classmethod
+    def get_max_input_length(cls, model_name):
+        if "flan-ul2" in model_name:
+            return 2048
+        elif "bert" in model_name:
+            return 512
+        else:
+            raise NotImplementedError(f"Model {model_name} not supported.")
 
-def generate_prompt(examples, dataset_name: str):
+
+def generate_prompt(example, dataset_name: str):
+    # idx = example["index"]
     if dataset_name == "xnli":
         prompts = [
-            (
-                "- 'Entailment' means that Sentence2 logically follows from Sentence1.\n"
-                "- 'Contradiction' means that Sentence2 logically conflicts with Sentence1.\n"
-                "- 'Neutral' means that Sentence2 and Sentence1 are neither entailed nor contradictory.\n"
-                "What is the relationship between Sentence1 and Sentence2? "
-                f"Sentence1: {premise}\n\n"
-                f"Sentence2: {hypothesis}\n\n"
-                "Please answer with an exact label from the following: "
-                "'entailment', 'contradiction', 'neutral'.\n\n"
-            )
-            for premise, hypothesis in zip(examples["premise"], examples["hypothesis"])
+            "You are a multilinguist. Given two sentences, determine the relationship between them:\n\n"
+            f"Sentence 1: {premise}\n"
+            f"Sentence 2: {hypothesis}\n\n"
+            "Options:\n"
+            "0. 'Entailment' - Sentence 2 logically follows from Sentence 1.\n"
+            "1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.\n\n"
+            "2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.\n"
+            "What is the relationship? Please answer with '0', '1', or '2'.\n"
+            for premise, hypothesis in zip(example["premise"], example["hypothesis"])
         ]
+        # prompts = [f"I am {idx}. Please tell me which number I am:\n"]
         return prompts
-    # Add more cases for different datasets
     raise ValueError(f"Unsupported dataset: {dataset_name}")
 
 
@@ -103,23 +113,19 @@ def load_dataset_by_name(
 
 
 def preprocess_dataset(
-    dataset: DatasetDict, task_name: str, tokenizer, max_length: int
+    dataset: DatasetDict, task_name: str
 ) -> DatasetDict:
-    def preprocess_function(examples):
-        prompts = generate_prompt(examples, task_name)
-        inputs = tokenizer(
-            prompts,
-            padding=True,
-            truncation=True,
-            max_length=max_length,
-            return_tensors="pt",
-        )
+    def preprocess_function(example):
+        prompts = generate_prompt(example, task_name)
+        
+        return {"prompt": prompts}
+    
+    # def add_index(example, idx):
+    #     example["index"] = idx
+    #     return example
 
-        inputs["too_long"] = [
-            len(input_ids) > max_length for input_ids in inputs["input_ids"]
-        ]
-        inputs["prompt"] = prompts
-        return inputs
+    # # Add index to each example
+    # dataset = dataset.map(add_index, with_indices=True, num_proc=Config.preprocess_threads)
 
     return dataset.map(
         preprocess_function,
@@ -134,12 +140,11 @@ def load_and_preprocess_dataset(
 ) -> DatasetDict:
     split = "train" if train else "test"
     dataset = load_dataset_by_name(task_name, language, split=split)
-    tokenizer = ModelLoader.get_tokenizer(Config.model)
 
     if Config.is_test_run:
         dataset = dataset.select(range(Config.test_size))
 
-    return preprocess_dataset(dataset, task_name, tokenizer, Config.model_max_length)
+    return preprocess_dataset(dataset, task_name)
 
 
 def compute_metrics(eval_pred: Tuple[np.ndarray, np.ndarray]) -> Dict[str, float]:
@@ -151,67 +156,103 @@ def compute_metrics(eval_pred: Tuple[np.ndarray, np.ndarray]) -> Dict[str, float
     acc = accuracy_score(labels, predictions)
     return {"accuracy": acc, "f1": f1, "precision": precision, "recall": recall}
 
+@th.no_grad()
+def run_inference_batch(model, tokenizer, input_ids):
+    if "bert" in Config.model:
+        outputs = model(**inputs)
+        predictions = th.argmax(outputs.logits, dim=-1)
+    elif "flan-ul2" in Config.model:
+        outputs = model.generate(
+            input_ids=input_ids,
+            max_length=Config.max_output_length,
+            do_sample=True,
+            temperature=Config.temperature,
+        )
+        predictions = tokenizer.batch_decode(outputs, skip_special_tokens=True)
+        
+    print(predictions)
+    return predictions
 
-def run_inference_batch(model, tokenizer, inputs):
-    with th.no_grad():
-        if "bert" in Config.model:
-            outputs = model(**inputs)
-            predictions = th.argmax(outputs.logits, dim=-1)
-        elif "flan-ul2" in Config.model:
-            outputs = model.generate(
-                input_ids=inputs["input_ids"],
-                attention_mask=inputs["attention_mask"],
-                max_length=Config.max_output_tokens,
-                do_sample=True,
-                temperature=Config.temperature,
-            )
-            predictions = tokenizer.batch_decode(outputs, skip_special_tokens=True)
-    return predictions, None
+
+def batch_inference(model, tokenizer, input_ids):
+    # inputs = {
+    #     "input_ids": th.stack([th.tensor(ex) for ex in batch["input_ids"]]),
+    #     "attention_mask": th.stack([th.tensor(ex) for ex in batch["attention_mask"]])
+    # }
+
+    predictions = run_inference_batch(model, tokenizer, input_ids)
+    return predictions
 
 
-def run_model_inference(model_name, dataset):
-    # Filter out examples that are too long
-    valid_indices = [
-        i for i, example in enumerate(dataset["test"]) if not example["too_long"]
-    ]
-    test_dataset = dataset["test"].select(valid_indices)
+def process_batch_recursively(prompts, model, tokenizer):
+    if len(prompts) == 1:
+        # Base case: only one input in the batch
+        input_ids = ModelLoader.get_tokenizer(Config.model)(
+            prompts, return_tensors="pt"
+        ).input_ids.to(Config.device)
+        input_length = input_ids.shape[1]
+        if input_length > ModelLoader.get_max_input_length():
+            return [f"not inferenced: input exceeded {Config.model}'s input token limits ({input_length} > {ModelLoader.get_max_input_length()})"]
+        else:
+            return batch_inference(model, tokenizer, input_ids)
+    
+    input_ids = ModelLoader.get_tokenizer(Config.model)(
+        prompts, padding=True,return_tensors="pt"
+    ).input_ids.to(Config.device)
+    
+    input_length = input_ids.shape[0] * input_ids.shape[1]
+    if input_length > ModelLoader.get_max_input_length(Config.model):
+        # Recursive case: split the batch into two halves
+        
+        mid = len(prompts) // 2
+        prompts1 = prompts[:mid]
+        prompts2 = prompts[mid:]
+
+        predictions1 = process_batch_recursively(prompts1, model, tokenizer)
+        predictions2 = process_batch_recursively(prompts2, model, tokenizer)
+        
+        return predictions1 + predictions2
+    else:
+        # Process the batch as is
+        return batch_inference(model, tokenizer, input_ids)
+
+
+def run_model_inference(model_name, dataset, batch_size):
+    # Initialize the accelerator
+    accelerator = Accelerator()
 
     model = ModelLoader.get_model(model_name, inference_only=True)
     tokenizer = ModelLoader.get_tokenizer(model_name)
 
+    # Prepare the model and tokenizer for inference
+    model, tokenizer = accelerator.prepare(model, tokenizer)
+
     results = []
     errors = []
 
+    def process_batch(batch):
+        return process_batch_recursively(batch["prompt"], model, tokenizer)
+
+    batches = [dataset[i:i + batch_size] for i in range(0, len(dataset), batch_size)]
+
     with ThreadPoolExecutor(max_workers=Config.inference_threads) as executor:
-        futures = [
-            executor.submit(
-                run_inference_batch,
-                model,
-                tokenizer,
-                {
-                    "input_ids": th.tensor(test_dataset[i]["input_ids"])
-                    .unsqueeze(0)
-                    .to(Config.device),
-                    "attention_mask": th.tensor(test_dataset[i]["attention_mask"])
-                    .unsqueeze(0)
-                    .to(Config.device),
-                },
-            )
-            for i in range(len(test_dataset))
-        ]
+        futures = {executor.submit(process_batch, batch): batch for batch in batches}
 
         for future in as_completed(futures):
-            prediction, error = future.result()
-            if error:
-                results.append("not inferenced: error: " + error)
-                errors.append(error)
-            else:
-                results.append(prediction)
-                errors.append(None)
+            batch = futures[future]
+            # print(batch)
+            # print(type(batch))
+            # try:
+            predictions = future.result()
+            results.extend(predictions)
+            errors.extend([None] * len(batch["prompt"]))
+            # except Exception as e:
+            #     results.extend([f"not inferenced: error: {str(e)}"] * len(batch["prompt"]))
+            #     errors.extend([str(e)] * len(batch["prompt"]))
 
     metrics = {}  # Replace with appropriate metrics calculation if needed
 
-    return results, metrics, valid_indices, errors
+    return results, metrics, errors
 
 
 class PrinterCallback(TrainerCallback):
@@ -242,16 +283,10 @@ def finetune_model(model_name, train_dataset):
         distributed_strategy=Config.distributed_strategy,
     )
 
-    # Filter out examples that are too long
-    valid_indices = [
-        i for i, example in enumerate(train_dataset) if not example["too_long"]
-    ]
-    filtered_train_dataset = train_dataset.select(valid_indices)
-
     trainer = Trainer(
         model=ModelLoader.get_model(model_name, inference_only=False),
         args=training_args,
-        train_dataset=filtered_train_dataset,
+        train_dataset=train_dataset,
         tokenizer=ModelLoader.get_tokenizer(model_name),
         compute_metrics=compute_metrics,
         callbacks=[PrinterCallback],
@@ -293,12 +328,35 @@ def select_few_shot_samples(dataset: Dataset, size: int, seed: int) -> Dataset:
     selected_indices = np.random.choice(len(dataset), size, replace=False)
     return dataset.select(selected_indices)
 
+def save_running_logs(df_with_errors, time_, language):
+    config_instance = Config()
+
+    report_dict = {
+        attr: getattr(config_instance, attr)
+        for attr in dir(config_instance)
+        if not attr.startswith("__") and not callable(getattr(config_instance, attr))
+    }
+
+    report_dict["device"] = str(report_dict["device"])
+
+    errors_list_dict = df_with_errors.to_dict("records")
+
+    report_dict["df_with_errors"] = errors_list_dict
+    report_dict["time"] = time_
+
+    with open(Config.execution_report_file.replace(".json", f"_{language}.json"), "w") as json_file:
+        json.dump(report_dict, json_file, indent=4)
+
+    print("\n-------------------error messages-------------------")
+    print(df_with_errors, end="\n\n")
+
+    print("-----------------time-----------------")
+    print(f"time: {time_:.2f}s")
+    
 
 def main(start_from_cp_file, overwrite):
-    model_name = Config.model
-
     # Few-shot fine-tuning
-    if Config.fine_tune:
+    if Config.is_fine_tune:
         seed = int(time.time())
 
         train_dataset = load_and_preprocess_dataset(
@@ -314,58 +372,67 @@ def main(start_from_cp_file, overwrite):
 
         if not os.path.exists(Config.finetuned_model_dir):
             print("Fine-tuned model not found. Starting fine-tuning.")
-            finetune_model(model_name, few_shot_train_dataset)
+            finetune_model(Config.model, few_shot_train_dataset)
         else:
             print("Fine-tuned model found. Loading the fine-tuned model.")
-            ModelLoader.load_finetuned_model(Config.finetuned_model_dir, model_name)
+            ModelLoader.load_finetuned_model(Config.finetuned_model_dir, Config.model)
 
-    test_dataset = load_and_preprocess_dataset(
-        Config.dataset_name, Config.evaluate_language, train=False
-    )
-
-    if overwrite is False and os.path.exists(Config.results_file):
-        print(
-            f"{Config.results_file} already exists. Not allowed to overwrite. Skipping inference."
+    for language in Config.evaluate_languages:
+        t1 = time.time()
+        
+        test_dataset = load_and_preprocess_dataset(
+            Config.dataset_name, language, train=False
         )
-        exit(0)
-    elif overwrite is None and os.path.exists(Config.results_file):
-        print(f"{Config.results_file} already exists.\n")
-        if not request_user_confirmation(
-            f"{Color.YELLOW}Overwrite?{Color.END} [Y/n]: ",
-            "Overwriting...",
-            f"{Config.results_file} is skipped.",
-            auto_confirm="y" if overwrite else None,
-        ):
-            exit(0)
 
-    results, metrics, valid_indices, errors = run_model_inference(
-        model_name, test_dataset
-    )
-
-    data = {
-        "id": [i for i in range(len(test_dataset["test"]))],
-        "prompt": [example["prompt"] for example in test_dataset["test"]],
-        "prediction": [
-            (
-                "not inferenced: exceeding model input tokens limit"
-                if i not in valid_indices
-                else results[valid_indices.index(i)]
+        if overwrite is False and os.path.exists(Config.results_file):
+            print(
+                f"{Config.results_file} already exists. Not allowed to overwrite. Skipping inference."
             )
-            for i in range(len(test_dataset["test"]))
-        ],
-        "label": [example["label"] for example in test_dataset["test"]],
-        "language": [Config.evaluate_language for example in test_dataset["test"]],
-        "error": [
-            "" if error is None else f"not inferenced: error: {error}"
-            for error in errors
-        ],
-    }
+            exit(0)
+        elif overwrite is None and os.path.exists(Config.results_file):
+            print(f"{Config.results_file} already exists.\n")
+            if not request_user_confirmation(
+                f"{Color.YELLOW}Overwrite?{Color.END} [Y/n]: ",
+                "Overwriting...",
+                f"{Config.results_file} is skipped.",
+                auto_confirm="y" if overwrite else None,
+            ):
+                exit(0)
 
-    df = pd.DataFrame(data)
+        results, metrics, errors = run_model_inference(
+            Config.model, test_dataset, batch_size=Config.batch_size
+        )
+        
 
-    ensure_directory_exists_for_file(Config.results_file)
-    df.to_csv(Config.results_file, index=False)
-    print(f"Results stored in {Config.results_file}.")
+        data = {
+            "id": [i for i in range(len(test_dataset))],
+            "prompt": [example["prompt"] for example in test_dataset],
+            "prediction": results,
+            "label": [example["label"] for example in test_dataset],
+            "language": [language for example in test_dataset],
+            "error": errors,
+        }
+        
+        df = pd.DataFrame(data)
+
+        ensure_directory_exists_for_file(Config.results_file)
+        df.to_csv(Config.results_file.replace('.csv', f'_{language}.csv'), index=False)
+        print(f"Results stored in {Config.results_file.replace('.csv', f'_{language}')}.")
+        
+        df_with_errors = df[df["error"].notna()]
+        
+        if not df_with_errors.empty:
+            ensure_directory_exists_for_file(Config.warnings_file)
+            df_with_errors.to_csv(Config.warnings_file, index=False)
+            print(f"WARNING: Rows with not empty 'notes' column saved to {Config.warnings_file}")
+        else:
+            print("Good news! No rows with not empty 'notes' column found.")
+        
+        t2 = time.time()
+        print(f"Time taken: {t2 - t1:.2f}s")
+        
+        save_running_logs(df_with_errors, t2 - t1, language)
+
 
 
 if __name__ == "__main__":
@@ -397,7 +464,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    t1 = time.time()
     main(args.start_from_cp_file, args.overwrite)
-    t2 = time.time()
-    print(f"Time taken: {t2 - t1:.2f}s")
+
+    

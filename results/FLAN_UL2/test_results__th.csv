@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ดี, ฉันไม่ได้คิดอะไรเกี่ยวกับเรื่องนี้, แต่ฉันก็ผิดหวัง, และ, ฉันก็กลับไปคุยกับเขาอีกครั้ง
+Sentence 2: ฉันไม่ได้คุยกับเขาอีกเลย
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,th,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ดี, ฉันไม่ได้คิดอะไรเกี่ยวกับเรื่องนี้, แต่ฉันก็ผิดหวัง, และ, ฉันก็กลับไปคุยกับเขาอีกครั้ง
+Sentence 2: ฉันรู้สึกเเย่มากที่ฉันกำลังเริ่มที่จะคุยกับเขาอีกเเล้ว
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,th,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ดี, ฉันไม่ได้คิดอะไรเกี่ยวกับเรื่องนี้, แต่ฉันก็ผิดหวัง, และ, ฉันก็กลับไปคุยกับเขาอีกครั้ง
+Sentence 2: พวกเราคุยกันได้ถูกคอจริงๆ
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,th,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: และฉันนึกว่านั้นเป็นสิทธิพิเศษและมันยังคงเป็น ฉันเป็นเก้า สอง-สอง เอ็กซ์-โอ ซึ่งเป็นสาขาอาชีพ AFFC Air Force ของฉัน
+Sentence 2: ฉันไม่รู้เลยว่าฉันไม่ใช่เเค่คนเดียวที่อยู่ที่ไร่ในวันนั้น
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,th,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: และฉันนึกว่านั้นเป็นสิทธิพิเศษและมันยังคงเป็น ฉันเป็นเก้า สอง-สอง เอ็กซ์-โอ ซึ่งเป็นสาขาอาชีพ AFFC Air Force ของฉัน
+Sentence 2: ฉันเข้าใจว่าฉันคือคนเดียวที่มีเลขที่ AFFC สาขาอาชีพของกอพทัพอากาศ
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,th,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: และฉันนึกว่านั้นเป็นสิทธิพิเศษและมันยังคงเป็น ฉันเป็นเก้า สอง-สอง เอ็กซ์-โอ ซึ่งเป็นสาขาอาชีพ AFFC Air Force ของฉัน
+Sentence 2: พวกเราได้รับการปฎิบัติอย่างเท่าๆกัน ไม่ว่าเราจะได้รับคำสัญญาว่าเราจะได้สิทธิพิเศษอะไรบ้าง ทุกๆอย่างเป็นเรื่องโกหก
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,th,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: พวกเขาบอกฉันว่าเขาจะเรียกคน ๆ หนึ่งเข้ามาในตอนท้ายให้ฉันพบ
+Sentence 2: ฉันไม่เคยพูดเรื่องประชุมกับใคร
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,th,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: พวกเขาบอกฉันว่าเขาจะเรียกคน ๆ หนึ่งเข้ามาในตอนท้ายให้ฉันพบ
+Sentence 2: ฉันได้รับข้อมูลมาว่าเขาจะมาที่นี้เพื่อพบฉัน
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,th,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: พวกเขาบอกฉันว่าเขาจะเรียกคน ๆ หนึ่งเข้ามาในตอนท้ายให้ฉันพบ
+Sentence 2: เขามาช้านิดหน่อย
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,th,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: มันมีอีกมากที่คุณสามารถพูดคุยเกี่ยวกับสิ่งนั้น ฉันจะข้ามไปละกัน
+Sentence 2: ฉันต้องการจะบอกคุณทุกอย่างที่ฉันรู้เกี่ยวกับเรื่องนี้!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,th,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: มันมีอีกมากที่คุณสามารถพูดคุยเกี่ยวกับสิ่งนั้น ฉันจะข้ามไปละกัน
+Sentence 2: ฉันจะไม่พูดถึงมัน ถึงแม้ว่ามันจะมีอะไรมากมายที่ต้องปิดบัง
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,th,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: มันมีอีกมากที่คุณสามารถพูดคุยเกี่ยวกับสิ่งนั้น ฉันจะข้ามไปละกัน
+Sentence 2: ฉันจะไม่พูดถึงเกี่ยวกับประวัติของเมื่อง เพราะว่ามันเยอะเกินไป
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,th,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: มันคือสิ่งแรกที่เราอยากจะเก็บไว้เพราะไม่มีวิธีที่จะทิ้งระเบิดไฮโดรเจน 20 ล้านตันลง 30, a C124 ได้
+Sentence 2: พวกเราไม่ได้สนใจที่จะปกป้องอะไรเลย
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,th,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: มันคือสิ่งแรกที่เราอยากจะเก็บไว้เพราะไม่มีวิธีที่จะทิ้งระเบิดไฮโดรเจน 20 ล้านตันลง 30, a C124 ได้
+Sentence 2: พวกเราอยากจะปกป้องสิ่งหนึ่งมากกว่าสิ่งอื่นๆ
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,th,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: มันคือสิ่งแรกที่เราอยากจะเก็บไว้เพราะไม่มีวิธีที่จะทิ้งระเบิดไฮโดรเจน 20 ล้านตันลง 30, a C124 ได้
+Sentence 2: เราต้องการที่จะหลีกเลี่ยงระเบิดไฮโดรเจนเพราะมันจัดการยากมาก
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,1,th,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ฉันก็เลยไม่แน่ใจจริงๆ ว่าทำไม
+Sentence 2: ฉันมั่นใจถึงเหตุผล
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,th,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ฉันก็เลยไม่แน่ใจจริงๆ ว่าทำไม
+Sentence 2: ฉันไม่รู้ว่าเขาย้ายโรงเรียนทำไหม
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,th,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ฉันก็เลยไม่แน่ใจจริงๆ ว่าทำไม
+Sentence 2: ฉันไม่เข้าใจว่าทำไหมมันถึงเกิดขึ้น
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,th,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: นี่คือ Fannie Flono และเธอเติบโตขึ้นมาใน in Ag-- Augusta, GA และเธอกำลังจะพูดถึงเรื่องราวบางอย่างจากวัยเด็กของเธอ
+Sentence 2: Fannie Flono ได้จัดตารางเวลาใหม่ดดลพไม่สามารถพูดคุยเรื่องราวกับพวกเราได้ในวันนี้
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,th,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: นี่คือ Fannie Flono และเธอเติบโตขึ้นมาใน in Ag-- Augusta, GA และเธอกำลังจะพูดถึงเรื่องราวบางอย่างจากวัยเด็กของเธอ
+Sentence 2: Fannie Flono อยู่ที่นี้ เเละ ตอนนี้เธอกำลังจะเล่าเรื่องวัยเด็กของเธอตอนที่อยู่ที่ เมือง อูกัสตา, รัฐจอร์เจีย ให้พวกเราฟัง
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,th,

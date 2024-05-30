@@ -7,32 +7,52 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-IS_TEST_RUN = True
-DATASET_NAME = "xnli"
+IS_TEST_RUN = False
 IS_FINE_TUNE = False
 SAVE_LOGITS = False
 
-# MODEL_ABBR = "FLAN_UL2"
-# MODEL = "google/flan-ul2"
+MODEL_ABBR = "FLAN_UL2"
+MODEL = "google/flan-ul2"
 
-MODEL_ABBR = "MBERT"
-MODEL = "bert-base-multilingual-cased"
+# MODEL_ABBR = "MBERT"
+# MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 1
-MAX_OUTPUT_TOKENS = 200
+BATCH_SIZE = 8
+MAX_OUTPUT_LENGTH = 200
 
 # flan-ul2 = 40GB, so run 2 instances
-INFERENCE_THREADS = 1
+INFERENCE_THREADS = 2
 TRAIN_THREADS = 1
-PREPROCESS_THREADS = 32
+PREPROCESS_THREADS = 64
 
-FINETUNE_LANGUAGE = "en"
-EVALUATE_LANGUAGE = "en"
-
-DATE = ""
+# https://huggingface.co/datasets/xnli
+DATASET_NAME = "xnli"
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
+
+if DATASET_NAME == "xnli":
+    FINETUNE_LANGUAGE = "en"
+    EVALUATE_LANGUAGES = [
+        "en",
+        "fr",
+        "es",
+        "de",
+        "el",
+        "bg",
+        "ru",
+        "tr",
+        "ar",
+        "vi",
+        "th",
+        "zh",
+        "hi",
+        "sw",
+        "ur",
+    ]
+
+DATE = ""
+
 
 COMPLETE_RESULTS_FILENAME = f"all_results_{DATE}.csv"
 TEST_RESULTS_FILENAME = f"test_results_{DATE}.csv"
@@ -46,8 +66,8 @@ EXECUTION_REPORT_FILENAME = f"execution_report_{DATE}.json"
 FORMAT_WARNINGS_FILENAME = f"format_warnings_{DATE}.csv"
 ANNOTATED_RESULTS_FILENAME = f"annotated_results_{DATE}.csv"
 
-CM_PARENT_PATH = f"cm_{DATE}" # folder for classification matrices
-CR_PARENT_PATH = f"cr_{DATE}" # folder for classification reports
+CM_PARENT_PATH = f"cm_{DATE}"  # folder for classification matrices
+CR_PARENT_PATH = f"cr_{DATE}"  # folder for classification reports
 
 RESULTS_PARENT_PATH = "results"
 METRICS_PARENT_PATH = "metrics"
@@ -55,9 +75,7 @@ METRICS_PARENT_PATH = "metrics"
 COMPLETE_RESULTS_FILE = os.path.join(
     RESULTS_PARENT_PATH, MODEL_ABBR, COMPLETE_RESULTS_FILENAME
 )
-TEST_RESULTS_FILE = os.path.join(
-    RESULTS_PARENT_PATH, MODEL_ABBR, TEST_RESULTS_FILENAME
-)
+TEST_RESULTS_FILE = os.path.join(RESULTS_PARENT_PATH, MODEL_ABBR, TEST_RESULTS_FILENAME)
 
 COMPLETE_WARNINGS_FILE = os.path.join(
     RESULTS_PARENT_PATH, MODEL_ABBR, COMPLETE_WARNINGS_FILENAME
@@ -99,6 +117,7 @@ FINETUNED_MODEL_DIR = os.path.join(FINETUNED_MODELS, MODEL_ABBR)
 
 LOGGING_DIR = os.path.join("logs", MODEL_ABBR)
 
+
 class Config:
     is_test_run = IS_TEST_RUN
     dataset_name = DATASET_NAME
@@ -118,10 +137,10 @@ class Config:
     logging_dir = LOGGING_DIR
     save_logits = SAVE_LOGITS
     random_seed_path = os.path.join("random_seed.txt")
-    
+
     batch_size = BATCH_SIZE
     learning_rate = 2e-5
-    temperature = 1e-5
+    temperature = 1
     top_p = 1
     num_train_epochs = 3
     weight_decay = 0.01
@@ -130,28 +149,29 @@ class Config:
     save_total_limit = 2
     evaluation_strategy = "epoch"
     inference_threads = INFERENCE_THREADS
-    max_output_tokens = MAX_OUTPUT_TOKENS
-    test_size = 10
+    max_output_length = MAX_OUTPUT_LENGTH
+    test_size = 20
     device = th.device("cuda" if th.cuda.is_available() else "cpu")
     distributed_strategy = "ddp"
     train_threads = TRAIN_THREADS
     finetune_language = FINETUNE_LANGUAGE
-    evaluate_language = EVALUATE_LANGUAGE
+    evaluate_languages = EVALUATE_LANGUAGES
     preprocess_threads = PREPROCESS_THREADS
 
-    pattern_xnli = ("entailment", "contradiction", "neutral", "not inferenced")
-    re_pattern_xnli = r"\b(" + "|".join(pattern_xnli) + r")\b"
+    # pattern_xnli = ("entailment", "contradiction", "neutral", "not inferenced")
+    # re_pattern_xnli = r"\b(" + "|".join(pattern_xnli) + r")\b"
 
 
 if __name__ == "__main__":
     import sys
+
     if len(sys.argv) != 2:
         print("Usage: python parameters.py <config_attribute>")
         sys.exit(1)
-    
+
     attribute = sys.argv[1]
     config = Config()
-    
+
     if hasattr(config, attribute):
         print(getattr(config, attribute))
     else:

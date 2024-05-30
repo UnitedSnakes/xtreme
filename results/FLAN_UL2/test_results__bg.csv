@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Е, аз дори не мислех за това, но бях толкова разочарована, а в крайна сметка отново разговарях с него.
+Sentence 2: Повече не съм говорил с него.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,bg,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Е, аз дори не мислех за това, но бях толкова разочарована, а в крайна сметка отново разговарях с него.
+Sentence 2: Бях толкова разстроена, че просто започнах да говоря отново с него.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,bg,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Е, аз дори не мислех за това, но бях толкова разочарована, а в крайна сметка отново разговарях с него.
+Sentence 2: Страхотно си поговорихме.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,bg,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: И аз мислех, че това е привилегия, и тя все още е, аз бях единственият бивш на 922, което беше моето поприще във въздушните сили AFFC.
+Sentence 2: Не знаех, че не съм единственият човек, който е бил на полето в онзи ден.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,bg,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: И аз мислех, че това е привилегия, и тя все още е, аз бях единственият бивш на 922, което беше моето поприще във въздушните сили AFFC.
+Sentence 2: Имах впечатлението, че бях единственият с това число в областта на кариерата във Военновъздушните сили на AFFC.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,bg,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: И аз мислех, че това е привилегия, и тя все още е, аз бях единственият бивш на 922, което беше моето поприще във въздушните сили AFFC.
+Sentence 2: Всички ние получихме точно един и същи брой, независимо от това какви привилегии ни бяха обещани да получим, всичко беше лъжа.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,bg,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Казаха ми, че накрая ще ми се обади човек, за да се срещнем.
+Sentence 2: Никога не ми бяха казвали да се срещам с някой.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,bg,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Казаха ми, че накрая ще ми се обади човек, за да се срещнем.
+Sentence 2: Казаха ми, че ще извикат един човек, с когото да се срещна.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,bg,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Казаха ми, че накрая ще ми се обади човек, за да се срещнем.
+Sentence 2: Човекът се появи малко късно.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,bg,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Има толкова много, което може да се разкаже за това, че просто ще го пропусна.
+Sentence 2: Искам да ти разкажа всичко, което знам по този въпрос.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,2,bg,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Има толкова много, което може да се разкаже за това, че просто ще го пропусна.
+Sentence 2: Няма да говоря за това, въпреки че има много за разказване.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,bg,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Има толкова много, което може да се разкаже за това, че просто ще го пропусна.
+Sentence 2: Няма да говоря за историята на града, защото има твърде много да се разказва.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,bg,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Това беше основното нещо, което искахме да спасим, тъй като нямаше начин да хвърлим 20-мегатонна водородна бомба от 30, C124.
+Sentence 2: Не ни е грижа дали ще спасим нещо.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,bg,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Това беше основното нещо, което искахме да спасим, тъй като нямаше начин да хвърлим 20-мегатонна водородна бомба от 30, C124.
+Sentence 2: Искахме да спасим едно нещо повече от всичко друго.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,bg,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Това беше основното нещо, което искахме да спасим, тъй като нямаше начин да хвърлим 20-мегатонна водородна бомба от 30, C124.
+Sentence 2: Искахме да спестим водородната бомба, защото беше много трудно да се понесе.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,bg,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Така че не съм много сигурен защо.
+Sentence 2: Сигурен съм за причината.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,bg,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Така че не съм много сигурен защо.
+Sentence 2: Не знам защо той смени училищата.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,bg,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Така че не съм много сигурен защо.
+Sentence 2: Не знам защо се е случило това.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,bg,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Това е Фани Флоно, а тя е израснала в Огъста, Джорджия, и ще разкаже някои истории от детството си.
+Sentence 2: Фани Флоно трябваше да промени графика си и не може да ни разказва истории днес.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,bg,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Това е Фани Флоно, а тя е израснала в Огъста, Джорджия, и ще разкаже някои истории от детството си.
+Sentence 2: Фани Флоно е тук и тя ще ни разкаже за детските си истории от израстването си в Огъста, Джорджия.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,bg,

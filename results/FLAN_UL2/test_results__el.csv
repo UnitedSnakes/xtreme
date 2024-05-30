@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Λοιπόν, δεν το σκέφτηκα καν, αλλά ήμουν τόσο απογοητευμένος, και κατέληξα να του μιλάω και πάλι.
+Sentence 2: Δεν του μίλησα ξανά.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,el,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Λοιπόν, δεν το σκέφτηκα καν, αλλά ήμουν τόσο απογοητευμένος, και κατέληξα να του μιλάω και πάλι.
+Sentence 2: Ήμουν τόσο αναστατωμένος που άρχισα να του μιλάω ξανά.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,el,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Λοιπόν, δεν το σκέφτηκα καν, αλλά ήμουν τόσο απογοητευμένος, και κατέληξα να του μιλάω και πάλι.
+Sentence 2: Είχαμε μια ωραία συζηση.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,el,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Και σκέφτηκα ότι ήταν ένα προνόμιο, και είναι ακόμα, ήμουν ο μόνος 922 Ex-O που ήταν το πεδίο μου για Καριέρα στην Αεροπορία.
+Sentence 2: Δεν ήξερα ότι δεν ήμουν ο μόνος που βρίσκονταν στο χωράφι εκείνη την ημέρα.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,el,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Και σκέφτηκα ότι ήταν ένα προνόμιο, και είναι ακόμα, ήμουν ο μόνος 922 Ex-O που ήταν το πεδίο μου για Καριέρα στην Αεροπορία.
+Sentence 2: Είχα την εντύπωση ότι ήμουν ο μόνος με αυτόν τον αριθμό στο τομέα καριέρας των αεροπορικών δυνάμεων του AFFC.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,el,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Και σκέφτηκα ότι ήταν ένα προνόμιο, και είναι ακόμα, ήμουν ο μόνος 922 Ex-O που ήταν το πεδίο μου για Καριέρα στην Αεροπορία.
+Sentence 2: Όλοι μας δόθηκε ο ίδιος ακριβής αριθμός, ανεξάρτητα από τα προνόμια που υποσχέθηκαν να χορηγηθούν, ήταν ένα ψέμα.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,el,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Μου είπαν ότι, θα έπρεπε να καλέσω έναν άντρα στο τέλος για να συναντηθούμε.
+Sentence 2: Δεν μου είπαν ποτέ τίποτα σχετικά με το να συναντήσω κανέναν.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,el,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Μου είπαν ότι, θα έπρεπε να καλέσω έναν άντρα στο τέλος για να συναντηθούμε.
+Sentence 2: Μου είπαν πως θα καλούσαν έναν τύπο για να τον συναντήσω.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,el,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Μου είπαν ότι, θα έπρεπε να καλέσω έναν άντρα στο τέλος για να συναντηθούμε.
+Sentence 2: Ο τύπος εμφανίστηκε λίγο αργά.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,el,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Υπάρχουν τόσα πολλά που θα μπορούσες να μιλήσεις γι 'αυτό απλά θα τα παραλείψω.
+Sentence 2: Θέλω να σου πω όλα όσα γνωρίζω γι 'αυτό!
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,el,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Υπάρχουν τόσα πολλά που θα μπορούσες να μιλήσεις γι 'αυτό απλά θα τα παραλείψω.
+Sentence 2: Δεν θα μιλήσω γι 'αυτό, αν και υπάρχουν πολλά να καλύψουμε.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,el,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Υπάρχουν τόσα πολλά που θα μπορούσες να μιλήσεις γι 'αυτό απλά θα τα παραλείψω.
+Sentence 2: Δεν θα μιλήσω για την ιστορία της πόλης γιατί υπάρχουν πάρα πολλά να πω.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,el,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Αυτό ήταν το κύριο πράγμα που θέλαμε να σώσουμε αφού δεν υπήρχε κανένας τρόπος να ρίξουμε μια 20 τόνων βόμβα υδρογόνου από ένα 30, ένα C124.
+Sentence 2: Δεν μας ένοιαζε να σώσουμε τίποτα.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,el,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Αυτό ήταν το κύριο πράγμα που θέλαμε να σώσουμε αφού δεν υπήρχε κανένας τρόπος να ρίξουμε μια 20 τόνων βόμβα υδρογόνου από ένα 30, ένα C124.
+Sentence 2: Θέλαμε να σώσουμε ένα πράγμα περισσότερο από τα υπόλοιπα.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,el,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Αυτό ήταν το κύριο πράγμα που θέλαμε να σώσουμε αφού δεν υπήρχε κανένας τρόπος να ρίξουμε μια 20 τόνων βόμβα υδρογόνου από ένα 30, ένα C124.
+Sentence 2: Θέλαμε να γλιτώσουμε τη βόμβα υδρογόνου γιατί ήταν πολύ δύσκολο να αντιμετωπιστεί.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,el,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Έτσι δεν είμαι σίγουρος γιατί.
+Sentence 2: Είμαι σίγουρος καθώς και για τον λόγο.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,el,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Έτσι δεν είμαι σίγουρος γιατί.
+Sentence 2: Δεν ξέρω γιατί άλλαξεσχολείο.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,el,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Έτσι δεν είμαι σίγουρος γιατί.
+Sentence 2: Δεν ξέρω γιατί συνέβη αυτό.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",2,0,el,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Αυτή είναι η Fannie Flono, και μεγάλωσε στην Αγκούστα, στην Γεωργία, και πρόκειται να μιλήσει για μερικές ιστορίες από την παιδική της ηλικία.
+Sentence 2: Η Fannie Flono αναγκάστηκε να επαναπρογραμματίσει και δεν είναι σε θέση να μας πει ιστορίες σήμερα.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,el,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: Αυτή είναι η Fannie Flono, και μεγάλωσε στην Αγκούστα, στην Γεωργία, και πρόκειται να μιλήσει για μερικές ιστορίες από την παιδική της ηλικία.
+Sentence 2: Η Fannie Flono είναι εδώ και θα μας μιλάει για τις παιδικές της ιστορίες όταν μεγάλωνε στην Augusta, GA.
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,el,

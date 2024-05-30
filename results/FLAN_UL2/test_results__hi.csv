@@ -1,0 +1,241 @@
+id,prompt,prediction,label,language,error
+0,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: हालांकि मैं इसके बारे में सोच भी नहीं रहा था लेकिन मैं इतना परेशान था कि मुझे वापस उससे बात करनी ही पड़ेगी
+Sentence 2: मैंने उससे दोबारा बात नहीं की है।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,hi,
+1,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: हालांकि मैं इसके बारे में सोच भी नहीं रहा था लेकिन मैं इतना परेशान था कि मुझे वापस उससे बात करनी ही पड़ेगी
+Sentence 2: मैं बहुत परेशान था कि मैंने उससे फिर से बात करना शुरू कर दिया।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,hi,
+2,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: हालांकि मैं इसके बारे में सोच भी नहीं रहा था लेकिन मैं इतना परेशान था कि मुझे वापस उससे बात करनी ही पड़ेगी
+Sentence 2: हमने बहुत बढ़िया बात की थी।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,1,hi,
+3,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: और मैंने सोचा कि यह एक विशेषाधिकार था, और यह अभी भी है, यह अभी भी है, मैं केवल नौ दो-दो Ex-O जो मेरे AFFC एयर फोर्स कैरियर फील्ड थे।
+Sentence 2: Mujhe nahi pata tha ki uss din maidan me mai akele nahi tha
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,hi,
+4,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: और मैंने सोचा कि यह एक विशेषाधिकार था, और यह अभी भी है, यह अभी भी है, मैं केवल नौ दो-दो Ex-O जो मेरे AFFC एयर फोर्स कैरियर फील्ड थे।
+Sentence 2: मैं इस धारणा के तहत था कि एएफएफसी वायु सेना करियर क्षेत्र में उस नंबर के साथ मैं अकेला था।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,hi,
+5,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: और मैंने सोचा कि यह एक विशेषाधिकार था, और यह अभी भी है, यह अभी भी है, मैं केवल नौ दो-दो Ex-O जो मेरे AFFC एयर फोर्स कैरियर फील्ड थे।
+Sentence 2: हम सभी को एक ही सटीक संख्या दी गई थी, इससे कोई फर्क नहीं पड़ता कि हमें कौन से विशेषाधिकार दिए जाने का वादा किया गया था, यह सब झूठ था।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,hi,
+6,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: उन्होंने मुझसे कहा की अंत में एक व्यक्ति से मीटिंग करनी होगी ।
+Sentence 2: मुझे किसी से मिलने के बारे में कुछ भी नहीं बताया गया था।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,hi,
+7,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: उन्होंने मुझसे कहा की अंत में एक व्यक्ति से मीटिंग करनी होगी ।
+Sentence 2: Mujhse bola gaya tha ki ek ladka mujse milne ke liye bulaya jayega
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,hi,
+8,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: उन्होंने मुझसे कहा की अंत में एक व्यक्ति से मीटिंग करनी होगी ।
+Sentence 2: Wo thoda deri se aaya
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,hi,
+9,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: इतना है कि आप इसके बारे में बात कर सकते हैं कि मैं इसे छोड़ूँगा|
+Sentence 2: मैं आपको वह सबकुछ बताना चाहता हूं जिसके बारे में मैं जानता हूँ !
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",Contradiction,2,hi,
+10,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: इतना है कि आप इसके बारे में बात कर सकते हैं कि मैं इसे छोड़ूँगा|
+Sentence 2: मैं इसके बारे में बात नहीं करूंगा, भले ही कवर करने के लिए बहुत कुछ है ।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,hi,
+11,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: इतना है कि आप इसके बारे में बात कर सकते हैं कि मैं इसे छोड़ूँगा|
+Sentence 2: मैं शहर के इतिहास के बारे में बात नहीं करता क्योंकि कहने के लिए बहुत कुछ है।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,hi,
+12,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: यही प्राथमिक चीज थी जिसे हम बचाना चाहते थे क्युकी एक २०-मेगाटन हाइड्रोजन बम एक ३०  एक सी १२४ को फेकने का कोई और उपाय नहीं था |
+Sentence 2: हमें कुछ भी बचाने की परवाह नहीं थी।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,hi,
+13,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: यही प्राथमिक चीज थी जिसे हम बचाना चाहते थे क्युकी एक २०-मेगाटन हाइड्रोजन बम एक ३०  एक सी १२४ को फेकने का कोई और उपाय नहीं था |
+Sentence 2: हम एक चीज को बचाने में अन्य चीजों से अधिक उत्सुक थे।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,hi,
+14,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: यही प्राथमिक चीज थी जिसे हम बचाना चाहते थे क्युकी एक २०-मेगाटन हाइड्रोजन बम एक ३०  एक सी १२४ को फेकने का कोई और उपाय नहीं था |
+Sentence 2: Hum h-bomb nahi upyog karna chahte the kyuki uska niyantran bahut kathin hai
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,hi,
+15,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: इसलिए मुझे वाकई यकीन नहीं है कि क्यों ।
+Sentence 2: मैं निश्चित कारण के कारण निश्चित हूं।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,2,hi,
+16,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: इसलिए मुझे वाकई यकीन नहीं है कि क्यों ।
+Sentence 2: मुझे नहीं पता कि उसने स्कूलों को क्यों स्थानांतरित कर दिया।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,1,hi,
+17,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: इसलिए मुझे वाकई यकीन नहीं है कि क्यों ।
+Sentence 2: मुझे नहीं पता कि ऐसा क्यों हुआ।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",0,0,hi,
+18,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ये है फन्नी फ्लोनो, और ये पली बढ़ी हुई है आग- ऑगस्टा , जी ए में , और वह अपने बचपन के बारे में कुछ कहानिया बताने वाली है ।
+Sentence 2: फैनी फ़्लोनो को पुनर्निर्धारित करना पड़ा और आज हमें कोई कहानियां बताने में असमर्थ रहेंगी।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,2,hi,
+19,"You are a multilinguist. Given two sentences, determine the relationship between them:
+
+Sentence 1: ये है फन्नी फ्लोनो, और ये पली बढ़ी हुई है आग- ऑगस्टा , जी ए में , और वह अपने बचपन के बारे में कुछ कहानिया बताने वाली है ।
+Sentence 2: फेनी फ्लोनो यहाँ उपस्थित हैं और वे ऑगस्टा, जॉर्जिया में बड़े होने के दौरान अपनी बचपन की कहानियों के बारे में हमें बताने वाली हैं।
+
+Options:
+0. 'Entailment' - Sentence 2 logically follows from Sentence 1.
+1. 'Neutral' - Sentence 2 is neither entailed nor contradictory to Sentence 1.
+
+2. 'Contradiction' - Sentence 2 logically conflicts with Sentence 1.
+What is the relationship? Please answer with '0', '1', or '2'.
+",1,0,hi,
