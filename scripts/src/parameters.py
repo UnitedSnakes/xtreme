@@ -7,33 +7,81 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
+# IS_TEST_RUN = True
 IS_TEST_RUN = False
 IS_FINE_TUNE = False
 SAVE_LOGITS = False
 
-MODEL_ABBR = "FLAN_UL2"
-MODEL = "google/flan-ul2"
+# MODEL_ABBR = "FLAN_UL2"
+# MODEL = "google/flan-ul2"
 
-# MODEL_ABBR = "MBERT"
-# MODEL = "bert-base-multilingual-cased"
+MODEL_ABBR = "MBERT"
+MODEL = "bert-base-multilingual-cased"
 
 BATCH_SIZE = 8
 MAX_OUTPUT_LENGTH = 200
 
 # flan-ul2 = 40GB, so run 2 instances
-INFERENCE_THREADS = 2
+INFERENCE_THREADS = 128
 TRAIN_THREADS = 1
-PREPROCESS_THREADS = 64
+PREPROCESS_THREADS = 20
+TEST_SIZE = 5
 
 # https://huggingface.co/datasets/xnli
-DATASET_NAME = "xnli"
+# DATASET_NAME = "xnli"
+DATASET_NAME = "tatoeba"
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
 
+LANG2_DICT = {
+    "af": "afr",
+    "ar": "ara",
+    "bg": "bul",
+    "bn": "ben",
+    "de": "deu",
+    "el": "ell",
+    "es": "spa",
+    "et": "est",
+    "eu": "eus",
+    "fa": "pes",
+    "fi": "fin",
+    "fr": "fra",
+    "he": "heb",
+    "hi": "hin",
+    "hu": "hun",
+    "id": "ind",
+    "it": "ita",
+    "ja": "jpn",
+    "jv": "jav",
+    "ka": "kat",
+    "kk": "kaz",
+    "ko": "kor",
+    "ml": "mal",
+    "mr": "mar",
+    "nl": "nld",
+    "pt": "por",
+    "ru": "rus",
+    "sw": "swh",
+    "ta": "tam",
+    "te": "tel",
+    "th": "tha",
+    "tl": "tgl",
+    "tr": "tur",
+    "ur": "urd",
+    "vi": "vie",
+    "zh": "cmn",
+    "en": "eng",
+    "az": "aze",
+    "lt": "lit",
+    "pl": "pol",
+    "uk": "ukr",
+    "ro": "ron",
+}
+
 if DATASET_NAME == "xnli":
     FINETUNE_LANGUAGE = "en"
-    EVALUATE_LANGUAGES = [
+    EVALUATE_LANGUAGES = (
         "en",
         "fr",
         "es",
@@ -49,13 +97,50 @@ if DATASET_NAME == "xnli":
         "hi",
         "sw",
         "ur",
-    ]
+    )
     PATTERNS = (
         ("0", "zero", "entailment"),
         ("1", "one", "neutral"),
         ("2", "two", "contradiction"),
         ("not inferenced"),
     )
+
+elif DATASET_NAME == "tatoeba":
+    FINETUNE_LANGUAGE = ""
+    EVALUATE_LANGUAGES = (
+        "ar",
+        "he",
+        "vi",
+        "id",
+        "tl",
+        "eu",
+        "af",
+        "nl",
+        "de",
+        "el",
+        "bn",
+        "hi",
+        "mr",
+        "ur",
+        "fa",
+        "fr",
+        "it",
+        "pt",
+        "es",
+        "bg",
+        "ru",
+        "ja",
+        "ka",
+        "ko",
+        "th",
+        "zh",
+        "tr",
+        "et",
+        "fi",
+        "hu",
+    )  # 30 in total, ignored jv, ml, ta, te, sw, kk
+    PATTERNS = ()
+
 
 DATE = ""
 
@@ -114,6 +199,8 @@ ANNOTATED_RESULTS_FILE = os.path.join(
     RESULTS, MODEL_ABBR, DATASET_NAME, ANNOTATED, ANNOTATED_RESULTS_FILENAME
 )
 
+METRICS_DIR = os.path.join(RESULTS, MODEL_ABBR, DATASET_NAME, METRICS)
+
 CM_DIR = os.path.join(RESULTS, MODEL_ABBR, DATASET_NAME, METRICS, CM)
 
 CR_DIR = os.path.join(RESULTS, MODEL_ABBR, DATASET_NAME, METRICS, CR)
@@ -136,6 +223,7 @@ class Config:
     execution_report_file = EXECUTION_REPORT_FILE
     # format_warnings_file = FORMAT_WARNINGS_FILE
     annotated_results_file = ANNOTATED_RESULTS_FILE
+    metrics_dir = METRICS_DIR
     cm_dir = CM_DIR
     cr_dir = CR_DIR
     model = MODEL
@@ -157,7 +245,7 @@ class Config:
     evaluation_strategy = "epoch"
     inference_threads = INFERENCE_THREADS
     max_output_length = MAX_OUTPUT_LENGTH
-    test_size = 20
+    test_size = TEST_SIZE
     device = th.device("cuda" if th.cuda.is_available() else "cpu")
     distributed_strategy = "ddp"
     train_threads = TRAIN_THREADS
@@ -167,6 +255,7 @@ class Config:
 
     # 0 for entailment, 1 for neutral, 2 for contradiction
     patterns = PATTERNS
+    lang2_dict = LANG2_DICT
     # re_pattern = RE_PATTERN
 
 
