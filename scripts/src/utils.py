@@ -216,8 +216,8 @@ def split_dict_in_half(original_dict):
 
 def add_index_column(dataset: DatasetDict) -> DatasetDict:
     def add_index(example, idx):
-        if "index" not in example:
-            example["index"] = idx
+        if "id" not in example:
+            example["id"] = idx
         return example
 
     return dataset.map(
@@ -227,124 +227,32 @@ def add_index_column(dataset: DatasetDict) -> DatasetDict:
         num_proc=Config.preprocess_threads,
     )
 
-
-def rename_column(example, lang2, lang3):
-    new_example = {
-        key if key == lang2 else lang3: value for key, value in example.items()
-    }
-    assert lang3 in example
-    example[lang2] = example.pop(lang3)
-    example = new_example
-    # print(example.keys())
+def swap_sentences(example):
+    example["source_sentence"], example["target_sentence"] = example["target_sentence"], example["source_sentence"]
     return example
 
 
-def restructure_dataset(example):
-    language = list(example["translation"][0].keys())[1]
-    new_example = {
-        "index": example["index"],
-        "en": [ex["en"] for ex in example["translation"]],
-        language: [ex[language] for ex in example["translation"]],
-    }
-    return new_example
-
-
 def load_dataset_by_name(
-    language: str, split: str = "test", add_index: bool = True
+    language: str,
+    split: str = "test",
+    add_index: bool = True,
+    switch_source_and_target: bool = False,
 ) -> DatasetDict:
     if Config.dataset_name == "xnli":
         dataset = load_dataset(Config.dataset_name, language, split=split)
     elif Config.dataset_name == "tatoeba":
-        combinations = [
-            {"lang1": "en", "lang2": language},
-            {"lang1": language, "lang2": "en"},
+        dataset = load_dataset("xtreme", f"tatoeba.{Config.lang2_dict[language]}")[
+            "validation"
         ]
-        if language in Config.lang2_dict:
-            combinations.append({"lang1": Config.lang2_dict[language], "lang2": "en"})
-            combinations.append({"lang1": "en", "lang2": Config.lang2_dict[language]})
 
-        dataset = None
-        for combo in combinations:
-            try:
-                dataset = load_dataset(
-                    "tatoeba",
-                    lang1=combo["lang1"],
-                    lang2=combo["lang2"],
-                    trust_remote_code=True,
-                )["train"]
+        if len(dataset) != 1000:
+            raise ValueError("Tatoeba dataset should have 1000 examples.")
 
-                # pick 1000 random examples for each language
-                assert len(dataset) >= 1000, f"Not enough examples in dataset. Expected at least 1000. Obtained: {len(dataset)}"
-                
-                with open(Config.random_seed_path, "r") as f:
-                    seed = int(f.read().strip())
-
-                random.seed(seed)
-
-                sampled_dataset = random.sample(list(dataset), 1000)
-                
-                for ex in sampled_dataset:
-                    ex["index"] = int(ex.pop("id"))
-                    
-                # # fo
-                # # print(sampled_dataset)
-                    
-                # for ex 
-                # # sampled_dataset = [ex for ex in sampled_dataset]
-                    
-                dataset = Dataset.from_dict(
-                    {key: [d[key] for d in sampled_dataset] for key in sampled_dataset[0]}
-                )
-
-                break
-            except Exception as e:
-                print(e)
-                continue
-
-        if dataset is None:
-            raise ValueError(
-                f"Dataset {Config.dataset_name} not found for language {language}."
-            )
-
-        # make sure en is first in the translation dict
-        features = Features({
-            'index': Value('int64'),
-            'translation': {
-                'en': Value('string'),
-                combo["lang1"]: Value('string')
-            }
-        })
-                    
-        if combo["lang1"] != "en":
-            data_dict = dataset.to_dict()
-            reordered_data_dict = {
-                "index": data_dict["index"],
-                "translation": [
-                    {"en": ex["en"], combo["lang1"]: ex[combo["lang1"]]}
-                    for ex in data_dict["translation"]
-                ],
-            }
-
-            dataset = Dataset.from_dict(reordered_data_dict, features=features)
-
-        # defactor translation column
-        dataset = dataset.map(
-            restructure_dataset,
-            remove_columns=["translation"],
-            batched=True,
-            num_proc=Config.preprocess_threads,
-        )
-
-        # rename the second language using 2 letters if necessary
-        keys = list(dataset[0].keys())
-        if language in Config.lang2_dict and len(keys[2]) == 3:
-            dataset = dataset.map(
-                rename_column,
-                fn_kwargs={"lang2": language, "lang3": Config.lang2_dict[language]},
-                batched=True,
-                num_proc=Config.preprocess_threads,
-            )
-
+        # switch source and target if necessary
+        if switch_source_and_target:
+            dataset = dataset.map(swap_sentences)
+    elif Config.dataset_name == "multi_nli":
+        dataset = load_dataset(Config.dataset_name, split=split)
     else:
         raise NotImplementedError(f"Dataset {Config.dataset_name} not supported.")
 

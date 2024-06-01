@@ -30,6 +30,7 @@ TEST_SIZE = 5
 # https://huggingface.co/datasets/xnli
 # DATASET_NAME = "xnli"
 DATASET_NAME = "tatoeba"
+SWAP_SENTENCES = False
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
@@ -107,38 +108,9 @@ if DATASET_NAME == "xnli":
 
 elif DATASET_NAME == "tatoeba":
     FINETUNE_LANGUAGE = ""
-    EVALUATE_LANGUAGES = (
-        "ar",
-        "he",
-        "vi",
-        "id",
-        "tl",
-        "eu",
-        "af",
-        "nl",
-        "de",
-        "el",
-        "bn",
-        "hi",
-        "mr",
-        "ur",
-        "fa",
-        "fr",
-        "it",
-        "pt",
-        "es",
-        "bg",
-        "ru",
-        "ja",
-        "ka",
-        "ko",
-        "th",
-        "zh",
-        "tr",
-        "et",
-        "fi",
-        "hu",
-    )  # 30 in total, ignored jv, ml, ta, te, sw, kk
+    EVALUATE_LANGUAGES = "ar,he,vi,id,jv,tl,eu,ml,ta,te,af,nl,de,el,bn,hi,mr,ur,fa,fr,it,pt,es,bg,ru,ja,ka,ko,th,sw,zh,kk,tr,et,fi,hu".split(
+        ","
+    )
     PATTERNS = ()
 
 
@@ -232,6 +204,7 @@ class Config:
     logging_dir = LOGGING_DIR
     save_logits = SAVE_LOGITS
     random_seed_path = os.path.join("random_seed.txt")
+    swap_sentences = SWAP_SENTENCES
 
     batch_size = BATCH_SIZE
     learning_rate = 2e-5

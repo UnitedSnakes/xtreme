@@ -40,10 +40,10 @@ def evaluate_predictions(language):
         df = pd.read_csv(file_, dtype={'prediction': 'str'})
     except Exception as e:
         print(e)
-        return
+        return None
     print(f"Reading from {file_}\n")
 
-    test_dataset = load_dataset_by_name(language)
+    test_dataset = load_dataset_by_name(language, switch_source_and_target=Config.swap_sentences)
     
     assert df.shape[0] == len(test_dataset), f"Row numbers mismatch: {df.shape[0]} vs {len(test_dataset)}"
     
@@ -98,10 +98,10 @@ def evaluate_predictions(language):
         return None
         
     elif Config.dataset_name == "tatoeba":
-        # print(df["index"])
-        # print([example["index"] for example in test_dataset])
+        # print(df["id"])
+        # print([example["id"] for example in test_dataset])
         # input()
-        assert all(df["index"] == [example["index"] for example in test_dataset]), "index columns mismatch"
+        assert all(df["id"] == [example["id"] for example in test_dataset]), "id columns mismatch"
         
         df["prediction"] = df["prediction"].astype("int64")
         
@@ -131,11 +131,12 @@ def main():
         
     for language in Config.evaluate_languages:
         result = evaluate_predictions(language)
-        results.append(result)
+        if result:
+            results.append(result)
         
     if Config.dataset_name == "tatoeba":
         accuracy_avg = sum(results) / len(results)
-        support = len(Config.evaluate_languages)
+        support = len(results)
         df_accuracy_avg = pd.DataFrame({"accuracy_avg": [accuracy_avg], "support": [support]}, index=[0])
         df_accuracy_avg_file = os.path.join(Config.metrics_dir, "accuracy_avg.csv")
         ensure_directory_exists_for_file(df_accuracy_avg_file)

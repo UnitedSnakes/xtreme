@@ -101,7 +101,7 @@ class ModelLoader:
 
 def generate_prompt(example):
     # for flan-ul2, not for mbert
-    # idx = example["index"]
+    # idx = example["id"]
     if Config.dataset_name == "xnli":
         prompts = [
             "You are a multilinguist. Given two sentences, determine the relationship between them:\n\n"
@@ -153,11 +153,17 @@ def preprocess_dataset(dataset: DatasetDict, max_length: int = 0) -> DatasetDict
 
 def load_and_preprocess_dataset(language: str, train: bool = False) -> DatasetDict:
     split = "train" if train else "test"
-    dataset = load_dataset_by_name(language, split=split)
+    dataset = load_dataset_by_name(
+        language, split=split, switch_source_and_target=Config.swap_sentences
+    )
 
     if Config.dataset_name == "tatoeba":
         tokenizer = ModelLoader.get_tokenizer(Config.model)
-        all_sentences = [sentence for example in dataset for sentence in [example["en"], example[language]]]
+        all_sentences = [
+            sentence
+            for example in dataset
+            for sentence in [example["source_sentence"], example["target_sentence"]]
+        ]
 
         max_length = max(
             len(tokenizer(sentence, truncation=True).input_ids)
@@ -188,23 +194,33 @@ def run_inference_batch(inputs, tokenize_only=False, **kwargs):
     if "bert" in Config.model:
         if Config.dataset_name == "tatoeba":
             assert tokenize_only
-            
+
             max_length = kwargs.get("max_length")
-                
-            if inputs.input_ids.shape[0] * inputs.input_ids.shape[1] > ModelLoader.get_max_input_length(Config.model) and inputs.input_ids.shape[0] == 1:
+
+            if (
+                inputs.input_ids.shape[0] * inputs.input_ids.shape[1]
+                > ModelLoader.get_max_input_length(Config.model)
+                and inputs.input_ids.shape[0] == 1
+            ):
                 sentence_embedding = th.zeros(1, 768, device=Config.device)
             else:
                 sentence_outputs = model(**inputs)
+                # sentence_embedding = sentence_outputs.last_hidden_state[:, 0, :]
                 sentence_embedding = sentence_outputs.last_hidden_state.mean(dim=1)
 
             targets = kwargs.get("targets")
-            
-            if targets.input_ids.shape[0] * targets.input_ids.shape[1] > ModelLoader.get_max_input_length(Config.model) and targets.input_ids.shape[0] == 1:
+
+            if (
+                targets.input_ids.shape[0] * targets.input_ids.shape[1]
+                > ModelLoader.get_max_input_length(Config.model)
+                and targets.input_ids.shape[0] == 1
+            ):
                 target_embedding = th.zeros(1, 768, device=Config.device)
             else:
                 target_outputs = model(**targets)
+                # target_embedding = target_outputs.last_hidden_state[:, 0, :]
                 target_embedding = target_outputs.last_hidden_state.mean(dim=1)
-            
+
             return sentence_embedding, target_embedding
         else:
             raise NotImplementedError(f"Dataset {Config.dataset_name} not supported.")
@@ -226,7 +242,6 @@ def run_inference_batch(inputs, tokenize_only=False, **kwargs):
         raise NotImplementedError(f"Model {Config.model} not supported.")
 
 
-# def process_batch_recursively(batch, **kwargs):
 def process_batch_recursively(batch, language, max_length):
     tokenizer = ModelLoader.get_tokenizer(Config.model)
 
@@ -240,36 +255,43 @@ def process_batch_recursively(batch, language, max_length):
         input_length = inputs.input_ids.shape[0] * inputs.input_ids.shape[1]
 
     elif "bert" in Config.model:
-        try:
-            inputs = tokenizer(
-                batch["en"],
-                padding="max_length",
-                max_length=max_length,
-                truncation=False,
-                return_tensors="pt",
-            ).to(Config.device)
-            targets = tokenizer(
-                batch[language],
-                padding="max_length",
-                max_length=max_length,
-                truncation=False,
-                return_tensors="pt",
-            ).to(Config.device)
-        except Exception as e:
-            # errorneous dataset
-            return th.zeros(1, max_length, device=Config.device), th.zeros(1, max_length, device=Config.device)
-        # tokenized_targets = kwargs.get("tokenized_targets")
-        input_length = max(
-            inputs.input_ids.shape[0] * inputs.input_ids.shape[1], targets.input_ids.shape[0] * targets.input_ids.shape[1]
-        )
+        if Config.dataset_name == "tatoeba":
+            try:
+                inputs = tokenizer(
+                    batch["source_sentence"],
+                    padding="max_length",
+                    max_length=max_length,
+                    truncation=False,
+                    return_tensors="pt",
+                ).to(Config.device)
+                targets = tokenizer(
+                    batch["target_sentence"],
+                    padding="max_length",
+                    max_length=max_length,
+                    truncation=False,
+                    return_tensors="pt",
+                ).to(Config.device)
+            except Exception as e:
+                # errorneous dataset
+                return th.zeros(1, max_length, device=Config.device), th.zeros(
+                    1, max_length, device=Config.device
+                )
+            input_length = max(
+                inputs.input_ids.shape[0] * inputs.input_ids.shape[1],
+                targets.input_ids.shape[0] * targets.input_ids.shape[1],
+            )
+        else:
+            raise NotImplementedError(f"Dataset {Config.dataset_name} not supported.")
     else:
         raise NotImplementedError(f"Model {Config.model} not supported.")
 
     if input_length > ModelLoader.get_max_input_length(Config.model):
         # base case
-        if len(batch["index"]) == 1:
-            if Config.dataset_name == "tatoeba":                    
-                return run_inference_batch(inputs, tokenize_only=True, targets=targets, max_length=max_length)
+        if len(batch["id"]) == 1:
+            if Config.dataset_name == "tatoeba":
+                return run_inference_batch(
+                    inputs, tokenize_only=True, targets=targets, max_length=max_length
+                )
             elif Config.dataset_name == "xnli":
                 return [
                     f"not inferenced: input exceeded {Config.model}'s input token limits ({input_length} > {ModelLoader.get_max_input_length(Config.model)})"
@@ -301,7 +323,9 @@ def process_batch_recursively(batch, language, max_length):
             return run_inference_batch(inputs, max_length=max_length)
         elif "bert" in Config.model:
             if Config.dataset_name == "tatoeba":
-                return run_inference_batch(inputs, tokenize_only=True, targets=targets, max_length=max_length)
+                return run_inference_batch(
+                    inputs, tokenize_only=True, targets=targets, max_length=max_length
+                )
             else:
                 raise NotImplementedError(
                     f"Dataset {Config.dataset_name} not supported."
@@ -326,27 +350,17 @@ def run_model_inference(dataset, language, max_length):
         for i in range(0, len(dataset), Config.batch_size)
     ]
 
-    # if "bert" in Config.model:
-    #     tokenized_targets = dataset["tokenized_target"]
     if Config.dataset_name == "tatoeba":
         sentence_embeddings = []
         target_embeddings = []
 
     with ThreadPoolExecutor(max_workers=Config.inference_threads) as executor:
-        # if "flan" in Config.model:
         futures = {
-            executor.submit(process_batch_recursively, batch, language, max_length): batch
+            executor.submit(
+                process_batch_recursively, batch, language, max_length
+            ): batch
             for batch in batches
         }
-
-        # elif "bert" in Config.model:
-        #     futures = {
-        #         executor.submit(process_batch_recursively, batch, tokenized_targets=tokenized_targets): batch
-        #         for batch in batches
-        #     }
-
-        # else:
-        #     raise NotImplementedError(f"Model {Config.model} not supported.")
 
         for future in as_completed(futures):
             batch = futures[future]
@@ -354,7 +368,7 @@ def run_model_inference(dataset, language, max_length):
             if Config.dataset_name == "xnli":
                 predictions = future.result()
                 results.extend(predictions)
-                errors.extend([None] * len(batch["index"]))
+                errors.extend([None] * len(batch["id"]))
             # except Exception as e:
             #     results.extend([f"not inferenced: error: {str(e)}"] * len(batch["prompt"]))
             #     errors.extend([str(e)] * len(batch["prompt"]))
@@ -363,12 +377,12 @@ def run_model_inference(dataset, language, max_length):
                 sentence_embeddings.append(sentence_embedding)
                 target_embeddings.append(target_embedding)
 
-                errors.extend([None] * len(batch["index"]))
+                errors.extend([None] * len(batch["id"]))
 
     if Config.dataset_name == "tatoeba":
         sentence_embeddings = th.cat(sentence_embeddings, dim=0).to(Config.device)
         target_embeddings = th.cat(target_embeddings, dim=0).to(Config.device)
-        
+
         sentence_embeddings = F.normalize(sentence_embeddings, p=2, dim=1)
         target_embeddings = F.normalize(target_embeddings, p=2, dim=1)
 
@@ -378,13 +392,15 @@ def run_model_inference(dataset, language, max_length):
         max_indices = th.argmax(similarity_matrix, dim=1)
         true_indices = range(len(max_indices))
         results = [int((x == y).item()) for x, y in zip(max_indices, true_indices)]
-        
+
         sentence_zero_rows = list((sentence_embeddings == 0).all(dim=1))
         target_zero_rows = list((target_embeddings == 0).all(dim=1))
-        
-        results = [-1 if flag else val for val, flag in zip(results, sentence_zero_rows)]
+
+        results = [
+            -1 if flag else val for val, flag in zip(results, sentence_zero_rows)
+        ]
         results = [-1 if flag else val for val, flag in zip(results, target_zero_rows)]
-        
+
         print(results)
 
     return results, errors
@@ -497,7 +513,8 @@ def save_running_logs(df_with_errors, time_, language):
 def main(start_from_cp_file, overwrite):
     # Few-shot fine-tuning
     if Config.is_fine_tune:
-        seed = int(time.time())
+        with open(Config.random_seed_path, "r") as f:
+            seed = int(f.read())
 
         train_dataset, _ = load_and_preprocess_dataset(
             Config.finetune_language, train=True
@@ -525,9 +542,9 @@ def main(start_from_cp_file, overwrite):
         #     i += 1
         #     continue
         # if language != "tr" and flag:
-            # continue
+        # continue
         # else:
-            # flag = False
+        # flag = False
         print(f"Processing {language}...")
         t1 = time.time()
 
@@ -558,7 +575,7 @@ def main(start_from_cp_file, overwrite):
 
         if "flan" in Config.model:
             data = {
-                "index": test_dataset["index"],
+                "id": test_dataset["id"],
                 "prompt": [example["prompt"] for example in test_dataset],
                 "prediction": results,
                 "label": [example["label"] for example in test_dataset],
@@ -569,7 +586,7 @@ def main(start_from_cp_file, overwrite):
         elif "bert" in Config.model:
             if Config.dataset_name == "xnli":
                 data = {
-                    "index": test_dataset["index"],
+                    "id": test_dataset["id"],
                     "prompt": [example["prompt"] for example in test_dataset],
                     "prediction": results,
                     "label": [example["label"] for example in test_dataset],
@@ -578,7 +595,7 @@ def main(start_from_cp_file, overwrite):
                 }  # TODO
             elif Config.dataset_name == "tatoeba":
                 data = {
-                    "index": test_dataset["index"],
+                    "id": test_dataset["id"],
                     "prediction": results,
                     "language": [language for example in test_dataset],
                     "error": errors,
