@@ -2,13 +2,14 @@
 # Author: Shanglin Yang
 # Contact: syang662@wisc.edu
 
-import random
+from datetime import datetime
+import logging
 import pandas as pd
 import re
 import numpy as np
 import os
 from typing import Any
-from datasets import DatasetDict, Dataset, load_dataset, Features, Value
+from datasets import DatasetDict, load_dataset
 
 from parameters import Config
 
@@ -90,13 +91,7 @@ def check_prediction_format(df, extract=False, verbose=True):
         return df_warnings
 
     for index, (id, prediction) in enumerate(zip(df["index"], df["prediction"])):
-        # if index == 57:
-        #     print("hereeee")
-        # if prediction == "N":
-        #     print("hey")
         try:
-            # if type(prediction) != float: # not nan
-            #     # print("hey")
             matches = [
                 re.findall(r"\b(" + "|".join(pattern) + r")\b", prediction.lower())
                 for pattern in Config.patterns
@@ -201,9 +196,6 @@ def split_dict_in_half(original_dict):
     keys = list(original_dict.keys())
     half_size = len(keys) // 2
 
-    first_half_keys = keys[:half_size]
-    second_half_keys = keys[half_size:]
-
     first_half_dict = {
         key: original_dict[key][: len(original_dict[key]) // 2] for key in keys
     }
@@ -235,7 +227,6 @@ def swap_sentences(example):
 def load_dataset_by_name(
     language: str,
     split: str = "test",
-    add_index: bool = True,
     switch_source_and_target: bool = False,
 ) -> DatasetDict:
     if Config.dataset_name == "xnli":
@@ -259,7 +250,45 @@ def load_dataset_by_name(
     if Config.is_test_run:
         dataset = dataset.select(range(Config.test_size))
 
-    if add_index:
-        dataset = add_index_column(dataset)
-
     return dataset
+
+def get_latest_checkpoint_dir(base_dir):
+    sub_dirs = [os.path.join(base_dir, d) for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    sub_dirs = [d for d in sub_dirs if d.split(os.sep)[-1].replace("_", "").isdigit()]
+    
+    # Add handling for the full timestamp
+    latest_sub_dir = max(sub_dirs, key=lambda d: datetime.strptime(d.split(os.sep)[-1], "%Y%m%d_%H%M%S"))
+    return latest_sub_dir
+
+class LoggingFormatter(logging.Formatter):
+    def format(self, record):
+        msg = super().format(record)
+        return msg.replace('|', '\n')
+
+class ColorFormatter(logging.Formatter):
+    def format(self, record):
+        if record.levelno == logging.INFO:
+            record.msg = f"\033[92m{record.msg}\033[0m"  # Green
+        elif record.levelno == logging.WARNING:
+            record.msg = f"\033[93m{record.msg}\033[0m"  # Yellow
+        elif record.levelno == logging.ERROR:
+            record.msg = f"\033[91m{record.msg}\033[0m"  # Red
+        return super().format(record)
+    
+class MultilineFormatter(LoggingFormatter):
+    def format(self, record):
+        message = super().format(record)
+        return '\n'.join([line.strip() for line in message.splitlines()])
+    
+# Redirect print to logging while keeping terminal output
+class PrintLogger:
+    def __init__(self, terminal, log_func):
+        self.terminal = terminal
+        self.log_func = log_func
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log_func(message.strip())
+
+    def flush(self):
+        self.terminal.flush()

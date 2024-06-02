@@ -2,14 +2,15 @@
 # Author: Shanglin Yang
 # Contact: syang662@wisc.edu
 
+from datetime import datetime
 import os
 import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-# IS_TEST_RUN = True
-IS_TEST_RUN = False
-IS_FINE_TUNE = False
+IS_TEST_RUN = True
+# IS_TEST_RUN = False
+IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
 # MODEL_ABBR = "FLAN_UL2"
@@ -19,21 +20,32 @@ MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
 BATCH_SIZE = 8
-MAX_OUTPUT_LENGTH = 200
+MAX_INPUT_LENGTH = 128
+MAX_OUTPUT_LENGTH = 128
+# steps_per_epoch = 392702 / 8 = 49088
 
 # flan-ul2 = 40GB, so run 2 instances
 INFERENCE_THREADS = 128
-TRAIN_THREADS = 1
 PREPROCESS_THREADS = 20
-TEST_SIZE = 5
+TRAIN_THREADS = 4
+TEST_SIZE = 100
 
 # https://huggingface.co/datasets/xnli
 # DATASET_NAME = "xnli"
-DATASET_NAME = "tatoeba"
+DATASET_NAME = "multi_nli"
+# DATASET_NAME = "tatoeba"
 SWAP_SENTENCES = False
+
+# training hyperparameters
+LEARNING_RATE = 2e-5
+NUM_TRAIN_EPOCHS = 5
+EVAL_STEPS = 10
+SAVE_STEPS = 10
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
+
+TIMESTAMP = datetime.now().strftime('%Y%m%d_%H%M%S')
 
 LANG2_DICT = {
     "af": "afr",
@@ -112,10 +124,13 @@ elif DATASET_NAME == "tatoeba":
         ","
     )
     PATTERNS = ()
-
-
+    
+elif DATASET_NAME == "multi_nli":
+    FINETUNE_LANGUAGE = "en"
+    EVALUATE_LANGUAGES = "en"
+    PATTERNS = ()
+    
 DATE = ""
-
 
 COMPLETE_RESULTS_FILENAME = f"all_results_{DATE}.csv"
 TEST_RESULTS_FILENAME = f"test_results_{DATE}.csv"
@@ -179,10 +194,11 @@ CR_DIR = os.path.join(RESULTS, MODEL_ABBR, DATASET_NAME, METRICS, CR)
 
 FINETUNED_MODELS = "fine_tuned_models"
 
-FINETUNED_MODEL_DIR = os.path.join(FINETUNED_MODELS, MODEL_ABBR)
+FINETUNED_MODEL_DIR = os.path.join(FINETUNED_MODELS, MODEL_ABBR, TIMESTAMP)
 
 LOGGING_DIR = os.path.join("logs", MODEL_ABBR)
 
+DEVICE = th.device("cuda" if th.cuda.is_available() else "cpu")
 
 class Config:
     is_test_run = IS_TEST_RUN
@@ -207,30 +223,35 @@ class Config:
     swap_sentences = SWAP_SENTENCES
 
     batch_size = BATCH_SIZE
-    learning_rate = 2e-5
+    learning_rate = LEARNING_RATE
     temperature = 1
     top_p = 1
-    num_train_epochs = 3
+    num_train_epochs = NUM_TRAIN_EPOCHS
     weight_decay = 0.01
-    logging_steps = 10
-    save_steps = 500
-    save_total_limit = 2
-    evaluation_strategy = "epoch"
+    logging_steps = 5
+    save_steps = SAVE_STEPS
+    save_total_limit = 3
+    eval_strategy = "steps"
+    save_strategy = "steps"
     inference_threads = INFERENCE_THREADS
     max_output_length = MAX_OUTPUT_LENGTH
+    max_input_length = MAX_INPUT_LENGTH
     test_size = TEST_SIZE
-    device = th.device("cuda" if th.cuda.is_available() else "cpu")
+    device = DEVICE
     distributed_strategy = "ddp"
     train_threads = TRAIN_THREADS
     finetune_language = FINETUNE_LANGUAGE
     evaluate_languages = EVALUATE_LANGUAGES
     preprocess_threads = PREPROCESS_THREADS
+    # early_stopping_patience = 3
+    eval_steps = EVAL_STEPS
 
     # 0 for entailment, 1 for neutral, 2 for contradiction
     patterns = PATTERNS
     lang2_dict = LANG2_DICT
     # re_pattern = RE_PATTERN
-
+    
+    timestamp = TIMESTAMP
 
 if __name__ == "__main__":
     import sys
