@@ -39,8 +39,8 @@ SWAP_SENTENCES = False
 # training hyperparameters
 LEARNING_RATE = 2e-5
 NUM_TRAIN_EPOCHS = 5
-EVAL_STEPS = 2
-SAVE_STEPS = 4
+EVAL_STEPS = 200
+SAVE_STEPS = 400
 LOGGING_STEPS = EVAL_STEPS
 
 # --------------------modify above------------------------
