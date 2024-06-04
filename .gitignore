@@ -123,3 +123,4 @@ cython_debug/
 
 fine_tuned_models/
 xtreme.tar.gz
+scripts.tar.gz
