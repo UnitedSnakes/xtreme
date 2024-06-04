@@ -15,7 +15,7 @@ export ENVDIR=$ENVNAME
 export PATH
 mkdir -p $ENVDIR
 # Set the PYTHONTZPATH to use absolute paths
-export PYTHONTZPATH="$ENVDIR/share/zoneinfo:$ENVDIR/share/tzinfo"
+export PYTHONTZPATH="$HOME/$ENVDIR/share/zoneinfo:$ENVDIR/share/tzinfo"
 
 # First, copy the tar.gz file from /staging into the working directory,
 # and untar it to reveal your large input file(s) or directories:

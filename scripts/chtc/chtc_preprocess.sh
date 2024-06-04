@@ -8,12 +8,13 @@ get_config_attribute() {
     python3 scripts/src/parameters.py $1
 }
 
+RANDOM_SEED_FILE=$(get_config_attribute random_seed_path)
+
 # scripts.tar.gz
 SCRIPTS_TAR="scripts.tar.gz"
 # if [ ! -f "$SCRIPTS_TAR" ]; then
 if true; then
-    DATASET_FILE=$(get_config_attribute dataset_file)
-    tar -czvf $SCRIPTS_TAR $DATASET_FILE scripts/src/parameters.py scripts/src/predict.py scripts/src/utils.py
+    tar -czvf $SCRIPTS_TAR $RANDOM_SEED_FILE scripts/src/parameters.py scripts/src/predict.py scripts/src/utils.py
 else
     echo "$SCRIPTS_TAR already exists. Skipping compression."
 fi
@@ -29,7 +30,7 @@ if [ ! -f "$ENV_TAR_GZ" ]; then
     chmod 644 $ENVNAME.tar.gz
     ls -sh $ENVNAME.tar.gz
 else
-    echo "$LLM_TAR_GZ already exists. Skipping compression."
+    echo "$ENV_TAR_GZ already exists. Skipping compression."
 fi
 
 # models--google--flan-ul2.tar.gz
@@ -42,5 +43,5 @@ fi
 
 # transmit files to chtc
 scp scripts.tar.gz syang662@ap2002.chtc.wisc.edu:/staging/syang662
-scp $ENVNAME.tar.gz syang662@ap2002.chtc.wisc.edu:/staging/syang662
+# scp $ENVNAME.tar.gz syang662@ap2002.chtc.wisc.edu:/staging/syang662
 # scp models--google--flan-ul2.tar.gz syang662@ap2002.chtc.wisc.edu:/staging/syang662
