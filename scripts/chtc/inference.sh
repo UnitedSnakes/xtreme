@@ -4,6 +4,14 @@
 # have job exit if any command returns with non-zero exit status (aka failure)
 set -e
 
+# Adding trap to catch errors and debug
+trap 'catchError' ERR
+
+catchError() {
+  echo "An error occurred. Exiting..."
+  exit 1
+}
+
 export HOME=$(pwd)
 
 # replace env-name on the right hand side of this line with the name of your conda environment
@@ -15,7 +23,7 @@ export ENVDIR=$ENVNAME
 export PATH
 mkdir -p $ENVDIR
 # Set the PYTHONTZPATH to use absolute paths
-export PYTHONTZPATH="$ENVDIR/share/zoneinfo:$HOME/$ENVDIR/share/tzinfo"
+export PYTHONTZPATH="$HOME/$ENVDIR/share/zoneinfo:$HOME/$ENVDIR/share/tzinfo"
 
 # First, copy the tar.gz file from /staging into the working directory,
 # and untar it to reveal your large input file(s) or directories:
@@ -36,8 +44,8 @@ if [ ! -d "$ENVNAME" ]; then
   echo "Untarring $ENVNAME.tar.gz..."
   tar -xzvf $ENVNAME.tar.gz -C $ENVDIR
   echo "Untarring $ENVNAME.tar.gz done."
-  . $ENVDIR/bin/activate
 fi
+. $ENVDIR/bin/activate
 
 # mkdir -p ~/.cache/huggingface/hub/
 # echo "Copying models--google--flan-ul2.tar.gz from /staging ..."
