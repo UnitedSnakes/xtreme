@@ -669,7 +669,8 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         resume_from_checkpoint=resume_from_checkpoint,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
-        greater_is_better=False
+        greater_is_better=False,
+        gradient_accumulation_steps=Config.grad_accum_steps,
     )
     
     

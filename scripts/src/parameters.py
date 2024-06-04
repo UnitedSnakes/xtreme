@@ -19,7 +19,8 @@ SAVE_LOGITS = False
 MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 32
+BATCH_SIZE = 8
+GRAD_ACCUM_STEPS = 4
 MAX_INPUT_LENGTH = 128
 MAX_OUTPUT_LENGTH = 128
 # steps_per_epoch = 392702 / 8 = 49088
@@ -224,6 +225,7 @@ class Config:
     swap_sentences = SWAP_SENTENCES
 
     batch_size = BATCH_SIZE
+    grad_accum_steps = GRAD_ACCUM_STEPS
     learning_rate = LEARNING_RATE
     temperature = 1
     top_p = 1
