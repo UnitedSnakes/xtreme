@@ -3,7 +3,7 @@
 # Files for the below lines MUST all be somewhere within /home/username,
 # and not within /staging/username
 
-executable = scripts/Shanglin/Varsha/chtc/inference.sh
+executable = scripts/chtc/inference.sh
 #log = scripts/Shanglin/Varsha/inference.log
 #output = scripts/Shanglin/Varsha/inference.out
 #error = scripts/Shanglin/Varsha/inference.err
@@ -35,8 +35,8 @@ Requirements = (Target.HasCHTCStaging == true)
 request_cpus = 1
 request_gpus = 1
 #require_gpus = Capability >= 8.0
-request_memory = 45GB
-request_disk = 25GB
+request_memory = 50GB
+request_disk = 50GB
 
 # Submit 1 job
 queue 1
