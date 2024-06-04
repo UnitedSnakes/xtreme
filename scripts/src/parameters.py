@@ -19,7 +19,7 @@ SAVE_LOGITS = False
 MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 8
+BATCH_SIZE = 32
 MAX_INPUT_LENGTH = 128
 MAX_OUTPUT_LENGTH = 128
 # steps_per_epoch = 392702 / 8 = 49088
