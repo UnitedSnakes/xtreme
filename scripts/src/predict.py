@@ -635,6 +635,11 @@ class CustomTrainer(Trainer):
 
         model.train()
         return correct / total
+    
+    def train(self, resume_from_checkpoint=None):
+        print("Starting training...")
+        super().train(resume_from_checkpoint)
+        print("Training completed.")
             
 
 def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_checkpoint=None):
@@ -685,7 +690,7 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         tokenizer=ModelLoader.get_tokenizer(model_name),
         compute_metrics=compute_metrics,
         callbacks=[
-            EarlyStoppingCallback(early_stopping_patience=15 * Config.eval_steps),
+            # EarlyStoppingCallback(early_stopping_patience=15 * Config.eval_steps),
         ],
     )
     
@@ -705,7 +710,7 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
     
     # Log training summary
     print(f"{Color.YELLOW}Training summary{Color.END}:")
-    print(trainer.state.log_history)
+    print(trainer.state.log_history[-3:])
 
 def plot_and_save_metrics(trainer, output_dir, step):
     # Get training log history
@@ -826,10 +831,12 @@ def main(overwrite, resume_from_checkpoint: bool = None):
         train_dataset = load_and_preprocess_dataset(
             Config.finetune_language, split="train"
         )
+        print(train_dataset)
         print("Loading and preprocessing validation dataset...")
         val_matched_dataset = load_and_preprocess_dataset(
             Config.finetune_language, split="validation_matched"
         )
+        print(val_matched_dataset)
 
         # few_shot_train_dataset = select_few_shot_samples(
         #     train_dataset["train"], Config.finetune_size, seed

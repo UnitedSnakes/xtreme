@@ -19,8 +19,8 @@ SAVE_LOGITS = False
 MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 8
-GRAD_ACCUM_STEPS = 4
+BATCH_SIZE = 1
+GRAD_ACCUM_STEPS = 1
 MAX_INPUT_LENGTH = 128
 MAX_OUTPUT_LENGTH = 128
 # steps_per_epoch = 392702 / 8 = 49088
@@ -29,7 +29,7 @@ MAX_OUTPUT_LENGTH = 128
 INFERENCE_THREADS = 128
 PREPROCESS_THREADS = 20
 TRAIN_THREADS = 4
-TEST_SIZE = 12
+TEST_SIZE = 2
 
 # https://huggingface.co/datasets/xnli
 # DATASET_NAME = "xnli"
@@ -39,9 +39,9 @@ SWAP_SENTENCES = False
 
 # training hyperparameters
 LEARNING_RATE = 2e-5
-NUM_TRAIN_EPOCHS = 5
-EVAL_STEPS = 200
-SAVE_STEPS = 400
+NUM_TRAIN_EPOCHS = 1
+EVAL_STEPS = 1
+SAVE_STEPS = 1
 LOGGING_STEPS = EVAL_STEPS
 
 # --------------------modify above------------------------
