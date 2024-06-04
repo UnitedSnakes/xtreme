@@ -9,7 +9,7 @@ export HOME=$(pwd)
 # replace env-name on the right hand side of this line with the name of your conda environment
 ENVNAME="xtreme"
 # if you need the environment directory to be named something other than the environment name, change this line
-export ENVDIR=$(ENVNAME)
+export ENVDIR=$ENVNAME
 
 # these lines handle setting up the environment; you shouldn't have to modify them
 export PATH
