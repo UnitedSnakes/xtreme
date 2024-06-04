@@ -63,23 +63,19 @@ FORMAT_WARNINGS_FILE=$(get_config_attribute format_warnings_file)
 CHECKPOINT_RESULTS_FILE=$(get_config_attribute checkpoint_results_file)
 CHECKPOINT_WARNINGS_FILE=$(get_config_attribute checkpoint_warnings_file)
 
-files_to_tar=("$PREDICT_OUT" "$RESULTS_FILE" "$EXECUTION_REPORT_FILE")
+WEIGHTS_DIR=$(get_config_attribute finetuned_model_dir)
+LOGS_DIR=$(get_config_attribute logging_dir)
+RANDOM_SEED_FILE=$(get_config_attribute random_seed_path)
 
-if [ -f "$WARNINGS_FILE" ]; then
-  files_to_tar+=("$WARNINGS_FILE")
-fi
+files_to_check=("$PREDICT_OUT" "$RESULTS_FILE" "$EXECUTION_REPORT_FILE" "$WARNINGS_FILE" "$FORMAT_WARNINGS_FILE" "$CHECKPOINT_RESULTS_FILE" "$CHECKPOINT_WARNINGS_FILE" "$WEIGHTS_DIR" "$LOGS_DIR" "$RANDOM_SEED_FILE")
 
-if [ -f "$FORMAT_WARNINGS_FILE" ]; then
-  files_to_tar+=("$FORMAT_WARNINGS_FILE")
-fi
+files_to_tar=()
 
-if [ -f "$CHECKPOINT_RESULTS_FILE" ]; then
-  files_to_tar+=("$CHECKPOINT_RESULTS_FILE")
-fi
-
-if [ -f "$CHECKPOINT_WARNINGS_FILE" ]; then
-  files_to_tar+=("$CHECKPOINT_WARNINGS_FILE")
-fi
+for file in "${files_to_check[@]}"; do
+  if [ -e "$file" ]; then
+    files_to_tar+=("$file")
+  fi
+done
 
 # tar and move large output files to staging so they're not copied to the submit server:
 echo "Tarring output files..."
