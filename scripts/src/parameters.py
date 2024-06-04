@@ -8,8 +8,8 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-# IS_TEST_RUN = True
-IS_TEST_RUN = False
+IS_TEST_RUN = True
+# IS_TEST_RUN = False
 IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
