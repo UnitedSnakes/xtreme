@@ -7,15 +7,15 @@ set -e
 export HOME=$(pwd)
 
 # replace env-name on the right hand side of this line with the name of your conda environment
-ENVNAME=xtreme
+ENVNAME="xtreme"
 # if you need the environment directory to be named something other than the environment name, change this line
-export ENVDIR=$ENVNAME
+export ENVDIR=$(ENVNAME)
 
 # these lines handle setting up the environment; you shouldn't have to modify them
 export PATH
 mkdir -p $ENVDIR
 # Set the PYTHONTZPATH to use absolute paths
-export PYTHONTZPATH="$HOME/$ENVDIR/share/zoneinfo:$ENVDIR/share/tzinfo"
+export PYTHONTZPATH="$ENVDIR/share/zoneinfo:$HOME/$ENVDIR/share/tzinfo"
 
 # First, copy the tar.gz file from /staging into the working directory,
 # and untar it to reveal your large input file(s) or directories:
@@ -28,14 +28,16 @@ echo "Untarring scripts.tar.gz..."
 tar -xzvf scripts.tar.gz
 echo "Untarring scripts.tar.gz done."
 
-echo "Copying $ENVNAME.tar.gz from /staging ..."
-cp /staging/syang662/$ENVNAME.tar.gz ./
-echo "Copying $ENVNAME.tar.gz from /staging done."
+if [ ! -d "$ENVNAME" ]; then
+  echo "Copying $ENVNAME.tar.gz from /staging ..."
+  cp /staging/syang662/$ENVNAME.tar.gz ./
+  echo "Copying $ENVNAME.tar.gz from /staging done."
 
-echo "Untarring $ENVNAME.tar.gz..."
-tar -xzvf $ENVNAME.tar.gz -C $ENVDIR
-echo "Untarring $ENVNAME.tar.gz done."
-. $ENVDIR/bin/activate
+  echo "Untarring $ENVNAME.tar.gz..."
+  tar -xzvf $ENVNAME.tar.gz -C $ENVDIR
+  echo "Untarring $ENVNAME.tar.gz done."
+  . $ENVDIR/bin/activate
+fi
 
 # mkdir -p ~/.cache/huggingface/hub/
 # echo "Copying models--google--flan-ul2.tar.gz from /staging ..."

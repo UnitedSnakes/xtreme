@@ -1,1 +1,11 @@
 Starting fine-tune script
+Loading and preprocessing training dataset...
+Loading and preprocessing validation dataset...
+No checkpoints found. Starting fine-tuning from scratch.
+CUDA cache emptied.
+{'loss': 0.954, 'grad_norm': 9.100576400756836, 'learning_rate': 1.9935136897001305e-05, 'train_accuracy': 0.6370453931989142, 'epoch': 0.016297262059973925}
+
+Step [93m200[0m: 
+Train - [91mLoss[0m: 0.954
+Train - [92mAccuracy[0m: 0.6370453931989142
+
