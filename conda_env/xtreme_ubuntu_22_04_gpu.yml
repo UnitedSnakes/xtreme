@@ -7,6 +7,7 @@ channels:
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
   - _openmp_mutex=4.5=2_gnu
+  - accelerate=0.30.1=pyhd8ed1ab_0
   - aiohttp=3.9.5=py312h98912ed_0
   - aiosignal=1.3.1=pyhd8ed1ab_0
   - alsa-lib=1.2.11=hd590300_1
@@ -26,15 +27,17 @@ dependencies:
   - aws-crt-cpp=0.26.9=he3a8b3b_0
   - aws-sdk-cpp=1.11.329=hba8bd5f_3
   - blas=1.0=mkl
+  - blessed=1.20.0=py312h06a4308_0
   - brotli=1.0.9=he6710b0_2
   - brotli-python=1.1.0=py312h30efb56_1
   - bzip2=1.0.8=h5eee18b_6
   - c-ares=1.28.1=hd590300_0
-  - ca-certificates=2024.3.11=h06a4308_0
+  - ca-certificates=2024.6.2=hbcca054_0
   - cairo=1.18.0=h3faef2a_0
-  - certifi=2024.2.2=py312h06a4308_0
+  - certifi=2024.2.2=pyhd8ed1ab_0
   - charset-normalizer=3.3.2=pyhd8ed1ab_0
   - colorama=0.4.6=pyhd8ed1ab_0
+  - conda-pack=0.7.1=pyhd8ed1ab_0
   - contourpy=1.2.0=py312hdb19cb5_0
   - cuda-cudart=12.1.105=0
   - cuda-cupti=12.1.105=0
@@ -67,6 +70,7 @@ dependencies:
   - glib=2.80.2=hf974151_0
   - glib-tools=2.80.2=hb6ce0ca_0
   - glog=0.7.0=hed5481d_0
+  - gpustat=1.1.1=py312h06a4308_0
   - graphite2=1.3.14=h295c915_1
   - gst-plugins-base=1.24.3=h9ad1361_0
   - gstreamer=1.24.3=haf2f30d_0
@@ -178,6 +182,7 @@ dependencies:
   - nspr=4.35=h6a678d5_0
   - nss=3.100=hca3bf56_0
   - numpy=1.26.4=py312heda63a1_0
+  - nvidia-ml-py=12.535.133=py312h06a4308_0
   - openjpeg=2.5.2=h488ebb8_0
   - openssl=3.3.0=h4ab18f5_3
   - orc=2.0.1=h17fec99_0
@@ -188,6 +193,7 @@ dependencies:
   - pip=24.0=py312h06a4308_0
   - pixman=0.43.2=h59595ed_0
   - ply=3.11=py312h06a4308_1
+  - psutil=5.9.0=py312h5eee18b_0
   - pulseaudio-client=17.0=hb77b528_0
   - pyarrow=16.1.0=py312h8da182e_1
   - pyarrow-core=16.1.0=py312h5429d62_1_cpu
@@ -234,6 +240,7 @@ dependencies:
   - tzdata=2024a=h04d1e81_0
   - unicodedata2=15.1.0=py312h5eee18b_0
   - urllib3=2.2.1=pyhd8ed1ab_0
+  - wcwidth=0.2.5=pyhd3eb1b0_0
   - wheel=0.43.0=py312h06a4308_0
   - xcb-util=0.4.0=hd590300_1
   - xcb-util-image=0.4.0=h8ee46fc_1

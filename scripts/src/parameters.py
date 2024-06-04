@@ -8,8 +8,8 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-IS_TEST_RUN = True
-# IS_TEST_RUN = False
+# IS_TEST_RUN = True
+IS_TEST_RUN = False
 IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
@@ -28,7 +28,7 @@ MAX_OUTPUT_LENGTH = 128
 INFERENCE_THREADS = 128
 PREPROCESS_THREADS = 20
 TRAIN_THREADS = 4
-TEST_SIZE = 100
+TEST_SIZE = 12
 
 # https://huggingface.co/datasets/xnli
 # DATASET_NAME = "xnli"
@@ -39,8 +39,9 @@ SWAP_SENTENCES = False
 # training hyperparameters
 LEARNING_RATE = 2e-5
 NUM_TRAIN_EPOCHS = 5
-EVAL_STEPS = 10
-SAVE_STEPS = 10
+EVAL_STEPS = 2
+SAVE_STEPS = 4
+LOGGING_STEPS = EVAL_STEPS
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
@@ -228,7 +229,7 @@ class Config:
     top_p = 1
     num_train_epochs = NUM_TRAIN_EPOCHS
     weight_decay = 0.01
-    logging_steps = 5
+    logging_steps = LOGGING_STEPS
     save_steps = SAVE_STEPS
     save_total_limit = 3
     eval_strategy = "steps"

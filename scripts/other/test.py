@@ -20,9 +20,13 @@
 
 # predictions = np.argmax(logits, axis=-1)
 # print(predictions)
-import os
+# import os
 
 
-a = 'fine_tuned_models/MBERT'
-b = os.path.isdir(os.path.join(a, '20240602_022155'))
-print(b)
+# a = 'fine_tuned_models/MBERT'
+# b = os.path.isdir(os.path.join(a, '20240602_022155'))
+# print(b)
+
+
+for i in range(3001):
+    print(i, end=", ")

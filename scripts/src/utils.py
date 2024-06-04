@@ -256,6 +256,9 @@ def get_latest_checkpoint_dir(base_dir):
     sub_dirs = [os.path.join(base_dir, d) for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
     sub_dirs = [d for d in sub_dirs if d.split(os.sep)[-1].replace("_", "").isdigit()]
     
+    if not sub_dirs:
+        return None
+    
     # Add handling for the full timestamp
     latest_sub_dir = max(sub_dirs, key=lambda d: datetime.strptime(d.split(os.sep)[-1], "%Y%m%d_%H%M%S"))
     return latest_sub_dir

@@ -7,7 +7,7 @@ import json
 import os
 import sys
 import time
-from typing import Tuple, Dict
+from typing import Optional, Tuple, Dict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from transformers import (
     T5ForConditionalGeneration,
@@ -19,7 +19,8 @@ from transformers import (
     TrainingArguments,
     TrainerCallback,
     DataCollatorWithPadding,
-    EarlyStoppingCallback
+    EarlyStoppingCallback,
+    logging as transformers_logging,
 )
 import numpy as np
 import pandas as pd
@@ -35,6 +36,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import warnings
 import logging
+from joblib import Memory
 
 from parameters import Config
 from utils import (
@@ -49,6 +51,9 @@ from utils import (
     split_dict_in_half,
     # ColorFormatter
 )
+
+cache_dir = './cache'
+memory = Memory(cache_dir, verbose=0)
 
 
 class ModelLoader:
@@ -188,7 +193,7 @@ def preprocess_dataset(dataset: DatasetDict, max_length: int) -> DatasetDict:
             preprocess_function,
             # batched=True,
             # num_proc=Config.preprocess_threads,
-            load_from_cache_file=False,
+            load_from_cache_file=True,
             remove_columns=[
                 "promptID",
                 "premise",
@@ -207,6 +212,7 @@ def preprocess_dataset(dataset: DatasetDict, max_length: int) -> DatasetDict:
     return dataset  # for mbert
 
 
+@memory.cache
 def load_and_preprocess_dataset(
     language: str,
     split: str,
@@ -471,44 +477,174 @@ def run_model_inference(dataset, language, max_length):
     return results, errors
 
 
-class PrinterCallback(TrainerCallback):
-    def __init__(self, logging_steps):
-        self.logging_steps = logging_steps
-        
+class LoggingCallback(TrainerCallback):        
     def on_log(self, args, state, control, logs=None, **kwargs):
-        log_msg = f"\n\nStep {Color.YELLOW}{state.global_step}{Color.END}: "
+        # self._append_train_accuracy()
+        self._log_metrics(logs, state.global_step)
+        
+    # def _append_train_accuracy(self):
+    #     train_accuracy = self._calculate_train_accuracy()
+    #     existing_entry = next((entry for entry in self.trainer.state.log_history if entry.get("step") == self.trainer.state.global_step), None)
+    #     if existing_entry:
+    #         existing_entry['train_accuracy'] = train_accuracy
+    #         print(existing_entry)
+    #         print(self.trainer.state.log_history)
+    #     else:
+    #         self.trainer.state.log_history.append({'train_accuracy': train_accuracy, 'step': self.trainer.state.global_step})
+
+    # def _calculate_train_accuracy(self):
+    #     dataloader = self.trainer.get_train_dataloader()
+    #     model = self.trainer.model
+    #     model.eval()
+
+    #     correct = 0
+    #     total = 0
+
+    #     for batch in dataloader:
+    #         inputs = {key: value.to(self.trainer.args.device) for key, value in batch.items()}
+    #         with th.no_grad():
+    #             outputs = model(**inputs)
+    #         predictions = th.argmax(outputs.logits, dim=-1)
+    #         labels = inputs['labels']
+    #         correct += (predictions == labels).sum().item()
+    #         total += labels.size(0)
+
+    #     model.train()
+    #     return correct / total
+        
+    def _log_metrics(self, logs, step):
+        log_msg = f"\nStep {Color.YELLOW}{step}{Color.END}: \n"
+        log_required = False
         if 'eval_loss' in logs:
-            log_msg += f"Eval - {Color.RED}Loss{Color.END}: {logs['eval_loss']}, {Color.GREEN}Accuracy{Color.END}: {logs['eval_accuracy']}\n"
+            log_msg += f"Eval - {Color.RED}Loss{Color.END}: {logs['eval_loss']}\n"
+            log_msg += f"Eval - {Color.GREEN}Accuracy{Color.END}: {logs['eval_accuracy']}\n"
+            log_required = True
+            # print(log_msg)
+        if 'loss' in logs:
+            # self._append_train_accuracy()
+            log_msg += f"Train - {Color.RED}Loss{Color.END}: {logs['loss']}\n"
+            # log_required = True
+        # if 'train_accuracy' in logs:
+            log_msg += f"Train - {Color.GREEN}Accuracy{Color.END}: {logs['train_accuracy']}\n"
+            # log_required = True
+        # if 'eval_accuracy' in logs:
+            # log_msg += f"Eval - {Color.GREEN}Accuracy{Color.END}: {logs['eval_accuracy']}\n"
+            log_required = True
+        if log_required:
             print(log_msg)
-        elif 'train_loss' in logs:
-            log_msg += f"Train - {Color.RED}Loss{Color.END}: {logs['train_loss']}\n"
-            print(log_msg)
-            
+
+
 class SavePlotCallback(TrainerCallback):
-    def __init__(self, logging_steps, trainer):
-        self.logging_steps = logging_steps
+    def __init__(self, trainer):
         self.trainer = trainer
         self.previous_loss_plot_path = None
         self.previous_accuracy_plot_path = None
-
-    def on_step_end(self, args, state, control, **kwargs):
-        if state.global_step % self.logging_steps == 0:
-            loss_plot_path, accuracy_plot_path = plot_and_save_metrics(self.trainer, Config.logging_dir, state.global_step)
+        
+    # def on_step_end(self, args, state, control, **kwargs):
+    #     if state.global_step % self.logging_steps == 0:
+    #         loss_plot_path, accuracy_plot_path = plot_and_save_metrics(self.trainer, Config.logging_dir, state.global_step)
             
-            if self.previous_loss_plot_path is not None:
-                os.remove(self.previous_loss_plot_path)
-            self.previous_loss_plot_path = loss_plot_path
+    #         if self.previous_loss_plot_path is not None:
+    #             os.remove(self.previous_loss_plot_path)
+    #         self.previous_loss_plot_path = loss_plot_path
             
-            if self.previous_accuracy_plot_path is not None:
-                os.remove(self.previous_accuracy_plot_path)
-            self.previous_accuracy_plot_path = accuracy_plot_path
+    #         if self.previous_accuracy_plot_path is not None:
+    #             os.remove(self.previous_accuracy_plot_path)
+    #         self.previous_accuracy_plot_path = accuracy_plot_path
 
+    def on_evaluate(self, args, state, control, **kwargs):
+        # self._append_train_accuracy()
+        
+        loss_plot_path, accuracy_plot_path = plot_and_save_metrics(self.trainer, Config.logging_dir, state.global_step)
+        
+        if self.previous_loss_plot_path is not None:
+            os.remove(self.previous_loss_plot_path)
+        self.previous_loss_plot_path = loss_plot_path
+        
+        if self.previous_accuracy_plot_path is not None:
+            os.remove(self.previous_accuracy_plot_path)
+        self.previous_accuracy_plot_path = accuracy_plot_path
+
+    # def _append_train_accuracy(self):
+    #     train_accuracy = self._calculate_train_accuracy()
+    #     existing_entry = next((entry for entry in self.trainer.state.log_history if entry.get("step") == self.trainer.state.global_step), None)
+    #     if existing_entry:
+    #         existing_entry['train_accuracy'] = train_accuracy
+    #         print(existing_entry)
+    #         print(self.trainer.state.log_history)
+    #     else:
+    #         self.trainer.state.log_history.append({'train_accuracy': train_accuracy, 'step': self.trainer.state.global_step})
+
+    # def _calculate_train_accuracy(self):
+    #     dataloader = self.trainer.get_train_dataloader()
+    #     model = self.trainer.model
+    #     model.eval()
+
+    #     correct = 0
+    #     total = 0
+
+    #     for batch in dataloader:
+    #         inputs = {key: value.to(self.trainer.args.device) for key, value in batch.items()}
+    #         with th.no_grad():
+    #             outputs = model(**inputs)
+    #         predictions = th.argmax(outputs.logits, dim=-1)
+    #         labels = inputs['labels']
+    #         correct += (predictions == labels).sum().item()
+    #         total += labels.size(0)
+
+    #     model.train()
+    #     return correct / total
+    
+class CustomTrainer(Trainer):
+    # def log(self, logs: Dict[str, float]):
+    #     print(f"Logging at step {self.state.global_step}: {logs}")
+    #     super().log(logs)
+        
+    def log(self, logs: Dict[str, float]) -> None:
+        # Calculate train_accuracy and add it to logs if it's not an evaluation step
+        if not any(key.startswith('eval') for key in logs.keys()):
+            train_accuracy = self._calculate_train_accuracy()
+            logs['train_accuracy'] = train_accuracy
+        
+        # Log the metrics
+        # print(f"Logging at step {self.state.global_step}: {logs}")
+        super().log(logs)
+        # if self.state.epoch is not None:
+        #     logs["epoch"] = self.state.epoch
+
+        # output = {**logs, **{"step": self.state.global_step}}
+        # self.state.log_history.append(output)
+        # self.control = self.callback_handler.on_log(self.args, self.state, self.control, logs)
+        
+    def _calculate_train_accuracy(self):
+        dataloader = self.get_train_dataloader()
+        model = self.model
+        model.eval()
+
+        correct = 0
+        total = 0
+
+        for batch in dataloader:
+            inputs = {key: value.to(self.args.device) for key, value in batch.items()}
+            with th.no_grad():
+                outputs = model(**inputs)
+            predictions = th.argmax(outputs.logits, dim=-1)
+            labels = inputs['labels']
+            correct += (predictions == labels).sum().item()
+            total += labels.size(0)
+
+        model.train()
+        return correct / total
+            
 
 def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_checkpoint=None):
     if not os.path.exists(Config.logging_dir):
         os.makedirs(Config.logging_dir)
     if not os.path.exists(Config.finetuned_model_dir):
         os.makedirs(Config.finetuned_model_dir)
+        
+    # if resume_from_checkpoint:
+    #     print(f"From finetune: Resuming from checkpoint: {resume_from_checkpoint}")
         
     training_args = TrainingArguments(
         output_dir=os.path.join(Config.finetuned_model_dir),
@@ -536,9 +672,11 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         greater_is_better=False
     )
     
+    
     th.cuda.empty_cache()
+    print("CUDA cache emptied.")
 
-    trainer = Trainer(
+    trainer = CustomTrainer(
         model=ModelLoader.get_model(model_name, inference_only=False),
         args=training_args,
         train_dataset=train_dataloader.dataset,
@@ -546,39 +684,56 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         tokenizer=ModelLoader.get_tokenizer(model_name),
         compute_metrics=compute_metrics,
         callbacks=[
-            PrinterCallback(logging_steps=Config.logging_steps),
             EarlyStoppingCallback(early_stopping_patience=15 * Config.eval_steps),
         ],
     )
     
-    trainer.add_callback(SavePlotCallback(logging_steps=Config.logging_steps, trainer=trainer))
+    trainer.add_callback(SavePlotCallback(trainer=trainer))
+    trainer.add_callback(LoggingCallback)
 
-    trainer.train()
+    if resume_from_checkpoint:
+        print(f"From finetune: Resuming from checkpoint: {resume_from_checkpoint}")
+        trainer.train(resume_from_checkpoint=resume_from_checkpoint)
+    else:
+        trainer.train()
+        
     ModelLoader.save_model(Config.finetuned_model_dir)
 
     # Save training loss plot
     plot_and_save_metrics(trainer, Config.logging_dir, "final")
     
     # Log training summary
-    # print(f"{Color.YELLOW}Training summary{Color.END}:")
-    # print(trainer.state.log_history)
+    print(f"{Color.YELLOW}Training summary{Color.END}:")
+    print(trainer.state.log_history)
 
 def plot_and_save_metrics(trainer, output_dir, step):
     # Get training log history
     history = trainer.state.log_history
 
-    # Extract loss values
-    train_loss = [entry["loss"] for entry in history if "loss" in entry]
-    eval_loss = [entry["eval_loss"] for entry in history if "eval_loss" in entry]
+    # print(history)
+        
+    # Extract loss and accuracy values along with their steps
+    train_dict = {"train_step": [], "train_loss": [], "train_accuracy": []}
+    eval_dict = {"eval_step": [], "eval_loss": [], "eval_accuracy": []}
 
-    # Extract accuracy values
-    train_accuracy = [entry["train_accuracy"] for entry in history if "train_accuracy" in entry]
-    eval_accuracy = [entry["eval_accuracy"] for entry in history if "eval_accuracy" in entry]
+    for entry in history:
+        # if "step" in entry:
+        #     steps.append(entry["step"])
+        if "loss" in entry:
+            train_dict["train_step"].append(entry["step"])
+            train_dict["train_loss"].append(entry["loss"])
+            train_dict["train_accuracy"].append(entry["train_accuracy"])
+        if "eval_loss" in entry:
+            eval_dict["eval_step"].append(entry["step"])
+            eval_dict["eval_loss"].append(entry["eval_loss"])
+            eval_dict["eval_accuracy"].append(entry["eval_accuracy"])
+
 
     # Plot training and evaluation loss
     plt.figure(figsize=(10, 5))
-    plt.plot(train_loss, label="Training Loss")
-    plt.plot(eval_loss, label="Evaluation Loss")
+    plt.plot(train_dict["train_step"], train_dict["train_loss"], label="Training Loss")
+    plt.plot(eval_dict["eval_step"], eval_dict["eval_loss"], label="Evaluation Loss")
+    # plt.plot(steps, eval_loss, label="Evaluation Loss")
     plt.xlabel("Steps")
     plt.ylabel("Loss")
     plt.legend()
@@ -588,12 +743,14 @@ def plot_and_save_metrics(trainer, output_dir, step):
     loss_plot_path = os.path.join(output_dir, f"training_loss_step_{step}_{Config.timestamp}.png")
     plt.savefig(loss_plot_path)
     plt.close()
-    print(f"\nTraining loss plot saved at {loss_plot_path}")
+    print(f"Step {Color.YELLOW}{step}{Color.END}: Training loss plot saved at {loss_plot_path}")
 
     # Plot training and evaluation accuracy
     plt.figure(figsize=(10, 5))
-    plt.plot(train_accuracy, label="Training Accuracy")
-    plt.plot(eval_accuracy, label="Evaluation Accuracy")
+    # plt.plot(steps, train_accuracy, label="Training Accuracy")
+    # plt.plot(steps, eval_accuracy, label="Evaluation Accuracy")
+    plt.plot(train_dict["train_step"], train_dict["train_accuracy"], label="Training Accuracy")
+    plt.plot(eval_dict["eval_step"], eval_dict["eval_accuracy"], label="Evaluation Accuracy")
     plt.xlabel("Steps")
     plt.ylabel("Accuracy")
     plt.legend()
@@ -603,7 +760,7 @@ def plot_and_save_metrics(trainer, output_dir, step):
     accuracy_plot_path = os.path.join(output_dir, f"training_accuracy_step_{step}_{Config.timestamp}.png")
     plt.savefig(accuracy_plot_path)
     plt.close()
-    print(f"\nTraining accuracy plot saved at {accuracy_plot_path}")
+    print(f"Step {Color.YELLOW}{step}{Color.END}: Training accuracy plot saved at {accuracy_plot_path}")
 
     return loss_plot_path, accuracy_plot_path
 
@@ -664,11 +821,11 @@ def main(overwrite, resume_from_checkpoint: bool = None):
         with open(Config.random_seed_path, "r") as f:
             seed = int(f.read())
 
-        print("Loading and preprocessing training dataset")
+        print("Loading and preprocessing training dataset...")
         train_dataset = load_and_preprocess_dataset(
             Config.finetune_language, split="train"
         )
-        print("Loading and preprocessing validation dataset")
+        print("Loading and preprocessing validation dataset...")
         val_matched_dataset = load_and_preprocess_dataset(
             Config.finetune_language, split="validation_matched"
         )
@@ -686,23 +843,29 @@ def main(overwrite, resume_from_checkpoint: bool = None):
         # checkpoint_dir = Config.finetuned_model_dir
         base_dir = os.path.dirname(Config.finetuned_model_dir)
         checkpoint_dir = get_latest_checkpoint_dir(base_dir)
-        checkpoints = [os.path.join(checkpoint_dir, ckpt) for ckpt in os.listdir(checkpoint_dir) if ckpt.startswith("checkpoint-")]
+        
+        if checkpoint_dir:
+            checkpoints = [os.path.join(checkpoint_dir, ckpt) for ckpt in os.listdir(checkpoint_dir) if ckpt.startswith("checkpoint-")]
+        else:
+            checkpoints = []
         
         latest_checkpoint = None
         
+        # checkpoints = ["fine_tuned_models/MBERT/initial/checkpoint-12000"]
+        
         if checkpoints:
+            latest_checkpoint = max(checkpoints, key=os.path.getctime)
+            # latest_checkpoint = "fine_tuned_models/MBERT/initial/checkpoint-12000"
+            
             use_checkpoint = resume_from_checkpoint or request_user_confirmation(
-                f"Fined-tuned model found at {os.path.join(Config.finetuned_model_dir, "model.safetensors")}. Continue from checkpoints? {Color.YELLOW}[Y/n]{Color.END}",
+                f"Fined-tuned model found at {latest_checkpoint}. Continue from checkpoints? {Color.YELLOW}[Y/n]{Color.END}",
                 "Continuing...\n",
                 "Skipping checkpoints.\n",
             )
             if use_checkpoint:
-                latest_checkpoint = max(checkpoints, key=os.path.getctime)
                 print(f"Resuming from checkpoint: {latest_checkpoint}")
-                # latest_checkpoint = "fine_tuned_models/MBERT/initial/checkpoint-12000"
             else:
                 print("Starting fine-tuning from scratch.")
-                
         else:
             print("No checkpoints found. Starting fine-tuning from scratch.")
             
@@ -820,9 +983,12 @@ if __name__ == "__main__":
     # os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
     tqdm.monitor_interval = 0
     warnings.filterwarnings("ignore", category=UserWarning, module="torch.nn.parallel._functions")
+    warnings.filterwarnings("ignore", category=UserWarning, module="transformers.modeling_utils")
+    transformers_logging.set_verbosity_error()
 
     
     log_filename = os.path.join(Config.logging_dir, f"{'fine-tune' if Config.is_fine_tune else 'evaluate'}_{Config.timestamp}.log")
+    ensure_directory_exists_for_file(log_filename)
     logging.basicConfig(
         filename=log_filename,
         level=logging.INFO,
