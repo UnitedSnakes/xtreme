@@ -1,11 +1,93 @@
 Starting fine-tune script
 Loading and preprocessing training dataset...
+Dataset({
+    features: ['input_ids', 'attention_mask', 'labels'],
+    num_rows: 2
+})
 Loading and preprocessing validation dataset...
+Dataset({
+    features: ['input_ids', 'attention_mask', 'labels'],
+    num_rows: 2
+})
 No checkpoints found. Starting fine-tuning from scratch.
 CUDA cache emptied.
-{'loss': 0.954, 'grad_norm': 9.100576400756836, 'learning_rate': 1.9935136897001305e-05, 'train_accuracy': 0.6370453931989142, 'epoch': 0.016297262059973925}
+Starting training...
+{'loss': 1.1846, 'grad_norm': nan, 'learning_rate': 2e-05, 'train_accuracy': 1.0, 'epoch': 0.5}
 
-Step [93m200[0m: 
-Train - [91mLoss[0m: 0.954
-Train - [92mAccuracy[0m: 0.6370453931989142
+Step [93m1[0m: 
+Train - [91mLoss[0m: 1.1846
+Train - [92mAccuracy[0m: 1.0
 
+{'eval_loss': 1.0888671875, 'eval_accuracy': 0.0, 'eval_f1': 0.0, 'eval_precision': 0.0, 'eval_recall': 0.0, 'eval_runtime': 12.5049, 'eval_samples_per_second': 0.16, 'eval_steps_per_second': 0.16, 'epoch': 0.5}
+
+Step [93m1[0m: 
+Eval - [91mLoss[0m: 1.0888671875
+Eval - [92mAccuracy[0m: 0.0
+
+Step [93m1[0m: Training loss plot saved at logs/MBERT/training_loss_step_1_20240605_032515.png
+Step [93m1[0m: Training accuracy plot saved at logs/MBERT/training_accuracy_step_1_20240605_032515.png
+{'loss': 0.9863, 'grad_norm': 13.140904426574707, 'learning_rate': 1e-05, 'train_accuracy': 0.5, 'epoch': 1.0}
+
+Step [93m2[0m: 
+Train - [91mLoss[0m: 0.9863
+Train - [92mAccuracy[0m: 0.5
+
+{'eval_loss': 1.185546875, 'eval_accuracy': 0.0, 'eval_f1': 0.0, 'eval_precision': 0.0, 'eval_recall': 0.0, 'eval_runtime': 12.9852, 'eval_samples_per_second': 0.154, 'eval_steps_per_second': 0.154, 'epoch': 1.0}
+
+Step [93m2[0m: 
+Eval - [91mLoss[0m: 1.185546875
+Eval - [92mAccuracy[0m: 0.0
+
+Step [93m2[0m: Training loss plot saved at logs/MBERT/training_loss_step_2_20240605_032515.png
+Step [93m2[0m: Training accuracy plot saved at logs/MBERT/training_accuracy_step_2_20240605_032515.png
+{'train_runtime': 68.7192, 'train_samples_per_second': 0.029, 'train_steps_per_second': 0.029, 'train_loss': 1.08544921875, 'train_accuracy': 1.0, 'epoch': 1.0}
+Training completed.
+Step [93mfinal[0m: Training loss plot saved at logs/MBERT/training_loss_step_final_20240605_032515.png
+Step [93mfinal[0m: Training accuracy plot saved at logs/MBERT/training_accuracy_step_final_20240605_032515.png
+[93mTraining summary[0m:
+[{'loss': 0.9863, 'grad_norm': 13.140904426574707, 'learning_rate': 1e-05, 'train_accuracy': 0.5, 'epoch': 1.0, 'step': 2}, {'eval_loss': 1.185546875, 'eval_accuracy': 0.0, 'eval_f1': 0.0, 'eval_precision': 0.0, 'eval_recall': 0.0, 'eval_runtime': 12.9852, 'eval_samples_per_second': 0.154, 'eval_steps_per_second': 0.154, 'epoch': 1.0, 'step': 2}, {'train_runtime': 68.7192, 'train_samples_per_second': 0.029, 'train_steps_per_second': 0.029, 'total_flos': 131556708864.0, 'train_loss': 1.08544921875, 'train_accuracy': 1.0, 'epoch': 1.0, 'step': 2}]
+Execution report saved to results/MBERT/multi_nli/raw/execution_report_.json
+Execution report content: {
+    "annotated_results_file": "results/MBERT/multi_nli/annotated/annotated_results_.csv",
+    "batch_size": 1,
+    "cm_dir": "results/MBERT/multi_nli/metrics/cm_",
+    "cr_dir": "results/MBERT/multi_nli/metrics/cr_",
+    "dataset_name": "multi_nli",
+    "device": "cuda",
+    "distributed_strategy": "ddp",
+    "eval_steps": 1,
+    "eval_strategy": "steps",
+    "evaluate_languages": "en",
+    "execution_report_file": "results/MBERT/multi_nli/raw/execution_report_.json",
+    "finetune_language": "en",
+    "finetuned_model_dir": "fine_tuned_models/MBERT/20240605_032515",
+    "grad_accum_steps": 1,
+    "inference_threads": 128,
+    "is_fine_tune": true,
+    "is_test_run": true,
+    "learning_rate": 2e-05,
+    "logging_dir": "logs/MBERT",
+    "logging_steps": 1,
+    "max_input_length": 128,
+    "max_output_length": 128,
+    "metrics_dir": "results/MBERT/multi_nli/metrics",
+    "model": "bert-base-multilingual-cased",
+    "model_abbr": "MBERT",
+    "num_train_epochs": 1,
+    "patterns": [],
+    "preprocess_threads": 20,
+    "random_seed_path": "random_seed.txt",
+    "results_file": "results/MBERT/multi_nli/raw/test_results_.csv",
+    "save_logits": false,
+    "save_steps": 1,
+    "save_strategy": "steps",
+    "save_total_limit": 3,
+    "swap_sentences": false,
+    "temperature": 1,
+    "test_size": 2,
+    "timestamp": "20240605_032515",
+    "top_p": 1,
+    "train_threads": 4,
+    "warnings_file": "results/MBERT/multi_nli/raw/test_warnings_.csv",
+    "weight_decay": 0.01
+}

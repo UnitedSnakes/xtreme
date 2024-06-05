@@ -8,8 +8,8 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-# IS_TEST_RUN = True
-IS_TEST_RUN = False
+IS_TEST_RUN = True
+# IS_TEST_RUN = False
 IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
@@ -26,10 +26,10 @@ MAX_OUTPUT_LENGTH = 128
 # steps_per_epoch = 392702 / 8 = 49088
 
 # flan-ul2 = 40GB, so run 2 instances
-INFERENCE_THREADS = 128
+INFERENCE_THREADS = 16
 PREPROCESS_THREADS = 20
 TRAIN_THREADS = 16
-TEST_SIZE = 2
+TEST_SIZE = 35
 
 # https://huggingface.co/datasets/xnli
 # DATASET_NAME = "xnli"
@@ -40,8 +40,8 @@ SWAP_SENTENCES = False
 # training hyperparameters
 LEARNING_RATE = 2e-5
 NUM_TRAIN_EPOCHS = 3
-EVAL_STEPS = 100
-SAVE_STEPS = 1000
+EVAL_STEPS = 1
+SAVE_STEPS = 1
 LOGGING_STEPS = EVAL_STEPS
 WARMUP_STEPS = 200
 

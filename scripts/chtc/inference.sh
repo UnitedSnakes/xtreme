@@ -76,8 +76,9 @@ EXECUTION_REPORT_FILE=$(get_config_attribute execution_report_file)
 WEIGHTS_DIR=$(get_config_attribute finetuned_model_dir)
 LOGS_DIR=$(get_config_attribute logging_dir)
 RANDOM_SEED_FILE=$(get_config_attribute random_seed_path)
+FINETUNED_MODEL_DIR=$(get_config_attribute fine_tuned_models)
 
-files_to_check=("$PREDICT_OUT" "$RESULTS_FILE" "$EXECUTION_REPORT_FILE" "$WARNINGS_FILE" "$FORMAT_WARNINGS_FILE" "$CHECKPOINT_RESULTS_FILE" "$CHECKPOINT_WARNINGS_FILE" "$WEIGHTS_DIR" "$LOGS_DIR" "$RANDOM_SEED_FILE")
+files_to_check=("$PREDICT_OUT" "$RESULTS_FILE" "$EXECUTION_REPORT_FILE" "$WARNINGS_FILE" "$FORMAT_WARNINGS_FILE" "$CHECKPOINT_RESULTS_FILE" "$CHECKPOINT_WARNINGS_FILE" "$WEIGHTS_DIR" "$LOGS_DIR" "$RANDOM_SEED_FILE" "$FINETUNED_MODEL_DIR")
 
 files_to_tar=()
 
