@@ -36,7 +36,7 @@ echo "Untarring scripts.tar.gz..."
 tar -xzvf scripts.tar.gz
 echo "Untarring scripts.tar.gz done."
 
-if [ ! -d "$ENVNAME" ]; then
+if [ ! -d "$ENVNAME/bin" ]; then
   echo "Copying $ENVNAME.tar.gz from /staging ..."
   cp /staging/syang662/$ENVNAME.tar.gz ./
   echo "Copying $ENVNAME.tar.gz from /staging done."
@@ -69,7 +69,7 @@ get_config_attribute() {
 RESULTS_FILE=$(get_config_attribute results_file)
 WARNINGS_FILE=$(get_config_attribute warnings_file)
 EXECUTION_REPORT_FILE=$(get_config_attribute execution_report_file)
-FORMAT_WARNINGS_FILE=$(get_config_attribute format_warnings_file)
+# FORMAT_WARNINGS_FILE=$(get_config_attribute format_warnings_file)
 # CHECKPOINT_RESULTS_FILE=$(get_config_attribute checkpoint_results_file)
 # CHECKPOINT_WARNINGS_FILE=$(get_config_attribute checkpoint_warnings_file)
 
