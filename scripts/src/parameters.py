@@ -8,8 +8,8 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-IS_TEST_RUN = True
-# IS_TEST_RUN = False
+# IS_TEST_RUN = True
+IS_TEST_RUN = False
 IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
@@ -19,7 +19,7 @@ SAVE_LOGITS = False
 MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 32
+BATCH_SIZE = 16
 # GRAD_ACCUM_STEPS = 4
 MAX_INPUT_LENGTH = 128
 MAX_OUTPUT_LENGTH = 128
@@ -28,7 +28,7 @@ MAX_OUTPUT_LENGTH = 128
 # flan-ul2 = 40GB, so run 2 instances
 INFERENCE_THREADS = 16
 PREPROCESS_THREADS = 20
-TRAIN_THREADS = 128
+TRAIN_THREADS = 16
 TEST_SIZE = 35
 
 # https://huggingface.co/datasets/xnli
@@ -39,9 +39,9 @@ SWAP_SENTENCES = False
 
 # training hyperparameters
 LEARNING_RATE = 2e-5
-NUM_TRAIN_EPOCHS = 1
-EVAL_STEPS = 1
-SAVE_STEPS = 1
+NUM_TRAIN_EPOCHS = 3
+EVAL_STEPS = 1000
+SAVE_STEPS = 1000
 LOGGING_STEPS = EVAL_STEPS
 WARMUP_STEPS = 200
 
