@@ -28,7 +28,7 @@ MAX_OUTPUT_LENGTH = 128
 # flan-ul2 = 40GB, so run 2 instances
 INFERENCE_THREADS = 16
 PREPROCESS_THREADS = 20
-TRAIN_THREADS = 16
+TRAIN_THREADS = 128
 TEST_SIZE = 35
 
 # https://huggingface.co/datasets/xnli
@@ -39,7 +39,7 @@ SWAP_SENTENCES = False
 
 # training hyperparameters
 LEARNING_RATE = 2e-5
-NUM_TRAIN_EPOCHS = 3
+NUM_TRAIN_EPOCHS = 1
 EVAL_STEPS = 1
 SAVE_STEPS = 1
 LOGGING_STEPS = EVAL_STEPS
