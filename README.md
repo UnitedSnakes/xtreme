@@ -2,7 +2,6 @@
 
 ## scripts
 
-Shanglin the sleepy mafia, 
 
 tmux new -s my_session
 
