@@ -8,8 +8,8 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-IS_TEST_RUN = True
-# IS_TEST_RUN = False
+# IS_TEST_RUN = True
+IS_TEST_RUN = False
 IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
@@ -19,8 +19,8 @@ SAVE_LOGITS = False
 MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 1
-GRAD_ACCUM_STEPS = 1
+BATCH_SIZE = 32
+# GRAD_ACCUM_STEPS = 4
 MAX_INPUT_LENGTH = 128
 MAX_OUTPUT_LENGTH = 128
 # steps_per_epoch = 392702 / 8 = 49088
@@ -28,7 +28,7 @@ MAX_OUTPUT_LENGTH = 128
 # flan-ul2 = 40GB, so run 2 instances
 INFERENCE_THREADS = 128
 PREPROCESS_THREADS = 20
-TRAIN_THREADS = 4
+TRAIN_THREADS = 16
 TEST_SIZE = 2
 
 # https://huggingface.co/datasets/xnli
@@ -39,10 +39,11 @@ SWAP_SENTENCES = False
 
 # training hyperparameters
 LEARNING_RATE = 2e-5
-NUM_TRAIN_EPOCHS = 1
-EVAL_STEPS = 1
-SAVE_STEPS = 1
+NUM_TRAIN_EPOCHS = 3
+EVAL_STEPS = 100
+SAVE_STEPS = 1000
 LOGGING_STEPS = EVAL_STEPS
+WARMUP_STEPS = 200
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
@@ -225,7 +226,7 @@ class Config:
     swap_sentences = SWAP_SENTENCES
 
     batch_size = BATCH_SIZE
-    grad_accum_steps = GRAD_ACCUM_STEPS
+    # grad_accum_steps = GRAD_ACCUM_STEPS
     learning_rate = LEARNING_RATE
     temperature = 1
     top_p = 1
@@ -248,6 +249,7 @@ class Config:
     preprocess_threads = PREPROCESS_THREADS
     # early_stopping_patience = 3
     eval_steps = EVAL_STEPS
+    warmup_steps = WARMUP_STEPS
 
     # 0 for entailment, 1 for neutral, 2 for contradiction
     patterns = PATTERNS

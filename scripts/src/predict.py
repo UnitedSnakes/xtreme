@@ -77,6 +77,7 @@ class ModelLoader:
                 raise NotImplementedError(f"Model {model_name} not supported.")
             if inference_only:
                 cls._model.eval()
+
             # cls._model = th.nn.DataParallel(cls._model)
         return cls._model  # TODO: reset model after fine-tuning
 
@@ -617,6 +618,7 @@ class CustomTrainer(Trainer):
         # self.control = self.callback_handler.on_log(self.args, self.state, self.control, logs)
         
     def _calculate_train_accuracy(self):
+        return 0
         dataloader = self.get_train_dataloader()
         model = self.model
         model.eval()
@@ -624,22 +626,22 @@ class CustomTrainer(Trainer):
         correct = 0
         total = 0
 
-        for batch in dataloader:
-            inputs = {key: value.to(self.args.device) for key, value in batch.items()}
-            with th.no_grad():
+        with th.no_grad():
+            for batch in dataloader:
+                inputs = {key: value.to(self.args.device) for key, value in batch.items()}
                 outputs = model(**inputs)
-            predictions = th.argmax(outputs.logits, dim=-1)
-            labels = inputs['labels']
-            correct += (predictions == labels).sum().item()
-            total += labels.size(0)
+                predictions = th.argmax(outputs.logits, dim=-1)
+                labels = inputs['labels']
+                correct += (predictions == labels).sum().item()
+                total += labels.size(0)
 
         model.train()
         return correct / total
     
-    def train(self, resume_from_checkpoint=None):
-        print("Starting training...")
-        super().train(resume_from_checkpoint)
-        print("Training completed.")
+    # def train(self, resume_from_checkpoint=None):
+    #     print("Starting training...")
+    #     super().train(resume_from_checkpoint)
+    #     print("Training completed.")
             
 
 def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_checkpoint=None):
@@ -667,7 +669,7 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         save_total_limit=Config.save_total_limit,
         # Distributed training arguments
         dataloader_num_workers=Config.train_threads,
-        ddp_find_unused_parameters=False,
+        # ddp_find_unused_parameters=False,
         # # Distributed strategy
         # distributed_strategy=Config.distributed_strategy,
         fp16=True,
@@ -675,7 +677,9 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
-        gradient_accumulation_steps=Config.grad_accum_steps,
+        # gradient_accumulation_steps=Config.grad_accum_steps,
+        # warmup_steps=Config.warmup_steps,
+        # max_grad_norm=1.0
     )
     
     
@@ -844,8 +848,8 @@ def main(overwrite, resume_from_checkpoint: bool = None):
 
         data_collator = DataCollatorWithPadding(ModelLoader.get_tokenizer(Config.model))
         
-        train_dataloader = DataLoader(train_dataset, batch_size=Config.batch_size, collate_fn=data_collator)
-        eval_dataloader = DataLoader(val_matched_dataset, Config.batch_size, collate_fn=data_collator)
+        train_dataloader = DataLoader(train_dataset, batch_size=Config.batch_size, collate_fn=data_collator, num_workers=Config.preprocess_threads)
+        eval_dataloader = DataLoader(val_matched_dataset, Config.batch_size, collate_fn=data_collator, num_workers=Config.preprocess_threads)
         
         
         # checkpoint_dir = Config.finetuned_model_dir
@@ -991,10 +995,12 @@ if __name__ == "__main__":
     os.environ["HF_DATASETS_CACHE"] = "./cache"
     multiprocessing.set_start_method("spawn")
     # os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
-    tqdm.monitor_interval = 0
+    # tqdm.monitor_interval = 0
     warnings.filterwarnings("ignore", category=UserWarning, module="torch.nn.parallel._functions")
     warnings.filterwarnings("ignore", category=UserWarning, module="transformers.modeling_utils")
     transformers_logging.set_verbosity_error()
+    # logging.set_verbosity_info()
+    # logging.enable_progress_bar()
 
     
     log_filename = os.path.join(Config.logging_dir, f"{'fine-tune' if Config.is_fine_tune else 'evaluate'}_{Config.timestamp}.log")

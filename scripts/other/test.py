@@ -26,7 +26,7 @@
 # a = 'fine_tuned_models/MBERT'
 # b = os.path.isdir(os.path.join(a, '20240602_022155'))
 # print(b)
+import torch as th
+DEVICE = th.device("cuda" if th.cuda.is_available() else "cpu")
 
-
-for i in range(3001):
-    print(i, end=", ")
+print(DEVICE)
