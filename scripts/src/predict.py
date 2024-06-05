@@ -618,7 +618,7 @@ class CustomTrainer(Trainer):
         # self.control = self.callback_handler.on_log(self.args, self.state, self.control, logs)
         
     def _calculate_train_accuracy(self):
-        return 0
+        # return 0
         dataloader = self.get_train_dataloader()
         model = self.model
         model.eval()
