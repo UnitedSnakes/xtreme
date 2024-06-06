@@ -8,8 +8,8 @@ import torch as th
 
 # --------------------modify below------------------------
 # --------------------------------------------------------
-# IS_TEST_RUN = True
-IS_TEST_RUN = False
+IS_TEST_RUN = True
+# IS_TEST_RUN = False
 IS_FINE_TUNE = True
 SAVE_LOGITS = False
 
@@ -43,9 +43,9 @@ SWAP_SENTENCES = False
 
 # training hyperparameters
 LEARNING_RATE = 2e-5
-NUM_TRAIN_EPOCHS = 3
-EVAL_STEPS = 100
-SAVE_STEPS = 100
+NUM_TRAIN_EPOCHS = 1
+EVAL_STEPS = 20
+SAVE_STEPS = 20
 LOGGING_STEPS = EVAL_STEPS
 WARMUP_STEPS = 100
 
