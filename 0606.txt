@@ -114,3 +114,51 @@ To github.com:UnitedSnakes/xtreme.git
 [33mhint: to the same ref. You may want to first integrate the remote changes[m
 [33mhint: (e.g., 'git pull ...') before pushing again.[m
 [33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
+Enter commit message:
+s
+[main 33bc688] s
+ 13 files changed, 366 insertions(+), 236 deletions(-)
+ create mode 100644 0606.txt
+ rewrite cache/joblib/__main__--home-syang662-projects-xtreme-scripts-src-predict/load_and_preprocess_dataset/423f71dcbe0abf6dc72612e303626544/output.pkl (75%)
+ rewrite cache/joblib/__main__--home-syang662-projects-xtreme-scripts-src-predict/load_and_preprocess_dataset/963d71e0091f65a4ee910b82c090c9fc/output.pkl (77%)
+To github.com:UnitedSnakes/xtreme.git
+ [31m! [rejected]       [m main -> main (fetch first)
+[31merror: failed to push some refs to 'github.com:UnitedSnakes/xtreme.git'
+[m[33mhint: Updates were rejected because the remote contains work that you do[m
+[33mhint: not have locally. This is usually caused by another repository pushing[m
+[33mhint: to the same ref. You may want to first integrate the remote changes[m
+[33mhint: (e.g., 'git pull ...') before pushing again.[m
+[33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
+[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ ./git_pull.sh
+[?2004lremote: Enumerating objects: 5, done.[K
+remote: Counting objects:  20% (1/5)[Kremote: Counting objects:  40% (2/5)[Kremote: Counting objects:  60% (3/5)[Kremote: Counting objects:  80% (4/5)[Kremote: Counting objects: 100% (5/5)[Kremote: Counting objects: 100% (5/5), done.[K
+remote: Compressing objects:  33% (1/3)[Kremote: Compressing objects:  66% (2/3)[Kremote: Compressing objects: 100% (3/3)[Kremote: Compressing objects: 100% (3/3), done.[K
+remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0[K
+Unpacking objects:  33% (1/3)Unpacking objects:  66% (2/3)Unpacking objects: 100% (3/3)Unpacking objects: 100% (3/3), 939 bytes | 939.00 KiB/s, done.
+From github.com:UnitedSnakes/xtreme
+   2ebc46f..dac067a  main       -> origin/main
+hint: Waiting for your editor to close the file... [?2004h[?1049h[22;0;0t[1;15r(B[m[4l[?7h[39;49m[?1h=[?1h=[?25l[39;49m(B[m[H[2J[13;96H(B[0;7m[ Reading... ](B[m[13;95H(B[0;7m[ Read 6 lines ](B[m[H(B[0;7m  GNU nano 6.2                                                                    /home/syang662/projects/xtreme/.git/MERGE_MSG                                                                              [1;204H(B[m[14d(B[0;7m^G(B[m Help[14;18H(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut[14;69H(B[0;7m^T(B[m Execute[86G(B[0;7m^C(B[m Location[103G(B[0;7mM-U(B[m Undo[14;120H(B[0;7mM-A(B[m Set Mark     (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous     (B[0;7m^B(B[m Back[14;188H(B[0;7m^◂(B[m Prev Word[15d(B[0;7m^X(B[m Exit[15;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Paste[15;69H(B[0;7m^J(B[m Justify[86G(B[0;7m^/(B[m Go To Line    (B[0;7mM-E(B[m Redo[15;120H(B[0;7mM-6(B[m Copy[15;137H(B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[15;171H(B[0;7m^F(B[m Forward[188G(B[0;7m^▸(B[m Next Word[2dMerge branch 'main' of github.com:UnitedSnakes/xtreme[3d[36m# Please enter a commit message to explain why this merge is necessary,[4d# especially if it merges an updated upstream into a topic branch.[5d#[6d# Lines starting with '#' will be ignored, and an empty message aborts[7d# the commit.[2d[39m(B[m[?12l[?25h[?25l[13d[J[15d[?12l[?25h[15;1H[?1049l[23;0;0t[?1l>[?2004l[KMerge made by the 'ort' strategy.
+ README.md | 1 [31m-[m
+ 1 file changed, 1 deletion(-)
+
+[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ ./git_pull.shsh.sh
+[?2004lNo large CSV files found to pack.
+On branch main
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   0606.txt[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Enumerating objects: 88, done.
+Counting objects:   1% (1/62)Counting objects:   3% (2/62)Counting objects:   4% (3/62)Counting objects:   6% (4/62)Counting objects:   8% (5/62)Counting objects:   9% (6/62)Counting objects:  11% (7/62)Counting objects:  12% (8/62)Counting objects:  14% (9/62)Counting objects:  16% (10/62)Counting objects:  17% (11/62)Counting objects:  19% (12/62)Counting objects:  20% (13/62)Counting objects:  22% (14/62)Counting objects:  24% (15/62)Counting objects:  25% (16/62)Counting objects:  27% (17/62)Counting objects:  29% (18/62)Counting objects:  30% (19/62)Counting objects:  32% (20/62)Counting objects:  33% (21/62)Counting objects:  35% (22/62)Counting objects:  37% (23/62)Counting objects:  38% (24/62)Counting objects:  40% (25/62)Counting objects:  41% (26/62)Counting objects:  43% (27/62)Counting objects:  45% (28/62)Counting objects:  46% (29/62)Counting objects:  48% (30/62)Counting objects:  50% (31/62)Counting objects:  51% (32/62)Counting objects:  53% (33/62)Counting objects:  54% (34/62)Counting objects:  56% (35/62)Counting objects:  58% (36/62)Counting objects:  59% (37/62)Counting objects:  61% (38/62)Counting objects:  62% (39/62)Counting objects:  64% (40/62)Counting objects:  66% (41/62)Counting objects:  67% (42/62)Counting objects:  69% (43/62)Counting objects:  70% (44/62)Counting objects:  72% (45/62)Counting objects:  74% (46/62)Counting objects:  75% (47/62)Counting objects:  77% (48/62)Counting objects:  79% (49/62)Counting objects:  80% (50/62)Counting objects:  82% (51/62)Counting objects:  83% (52/62)Counting objects:  85% (53/62)Counting objects:  87% (54/62)Counting objects:  88% (55/62)Counting objects:  90% (56/62)Counting objects:  91% (57/62)Counting objects:  93% (58/62)Counting objects:  95% (59/62)Counting objects:  96% (60/62)Counting objects:  98% (61/62)Counting objects: 100% (62/62)Counting objects: 100% (62/62), done.
+Delta compression using up to 128 threads
+Compressing objects:   3% (1/32)Compressing objects:   6% (2/32)Compressing objects:   9% (3/32)Compressing objects:  12% (4/32)Compressing objects:  15% (5/32)Compressing objects:  18% (6/32)Compressing objects:  21% (7/32)Compressing objects:  25% (8/32)Compressing objects:  28% (9/32)Compressing objects:  31% (10/32)Compressing objects:  34% (11/32)Compressing objects:  37% (12/32)Compressing objects:  40% (13/32)Compressing objects:  43% (14/32)Compressing objects:  46% (15/32)Compressing objects:  50% (16/32)Compressing objects:  53% (17/32)Compressing objects:  56% (18/32)Compressing objects:  59% (19/32)Compressing objects:  62% (20/32)Compressing objects:  65% (21/32)Compressing objects:  68% (22/32)Compressing objects:  71% (23/32)Compressing objects:  75% (24/32)Compressing objects:  78% (25/32)Compressing objects:  81% (26/32)Compressing objects:  84% (27/32)Compressing objects:  87% (28/32)Compressing objects:  90% (29/32)Compressing objects:  93% (30/32)Compressing objects:  96% (31/32)Compressing objects: 100% (32/32)Compressing objects: 100% (32/32), done.
+Writing objects:   2% (1/34)Writing objects:   5% (2/34)Writing objects:   8% (3/34)Writing objects:  11% (4/34)Writing objects:  14% (5/34)Writing objects:  17% (6/34)Writing objects:  20% (7/34)Writing objects:  23% (8/34)Writing objects:  26% (9/34)Writing objects:  29% (10/34)Writing objects:  32% (11/34)Writing objects:  35% (12/34)Writing objects:  41% (14/34)Writing objects:  44% (15/34)Writing objects:  47% (16/34)Writing objects:  50% (17/34)Writing objects:  52% (18/34)Writing objects:  55% (19/34)Writing objects:  58% (20/34)Writing objects:  61% (21/34)Writing objects:  64% (22/34)Writing objects:  67% (23/34)Writing objects:  70% (24/34)Writing objects:  73% (25/34)Writing objects:  76% (26/34)Writing objects:  79% (27/34)Writing objects:  82% (28/34)Writing objects:  85% (29/34)Writing objects:  88% (30/34)Writing objects:  91% (31/34)Writing objects:  94% (32/34)Writing objects:  97% (33/34)Writing objects: 100% (34/34)Writing objects: 100% (34/34), 14.37 KiB | 3.59 MiB/s, done.
+Total 34 (delta 15), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas:   0% (0/15)[Kremote: Resolving deltas:   6% (1/15)[Kremote: Resolving deltas:  13% (2/15)[Kremote: Resolving deltas:  20% (3/15)[Kremote: Resolving deltas:  26% (4/15)[Kremote: Resolving deltas:  33% (5/15)[Kremote: Resolving deltas:  40% (6/15)[Kremote: Resolving deltas:  46% (7/15)[Kremote: Resolving deltas:  53% (8/15)[Kremote: Resolving deltas:  60% (9/15)[Kremote: Resolving deltas:  66% (10/15)[Kremote: Resolving deltas:  73% (11/15)[Kremote: Resolving deltas:  80% (12/15)[Kremote: Resolving deltas:  86% (13/15)[Kremote: Resolving deltas:  93% (14/15)[Kremote: Resolving deltas: 100% (15/15)[Kremote: Resolving deltas: 100% (15/15), completed with 13 local objects.[K
+To github.com:UnitedSnakes/xtreme.git
+   dac067a..0ecf393  main -> main
