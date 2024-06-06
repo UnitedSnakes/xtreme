@@ -38,6 +38,11 @@ import warnings
 import logging
 from joblib import Memory
 
+sys.path.append(
+    sys.path.pop(0)
+)  # to import transformer's evaluate package rather than evaluate.py
+import evaluate
+
 from parameters import Config
 from utils import (
     Color,
@@ -49,10 +54,9 @@ from utils import (
     request_user_confirmation,
     ensure_directory_exists_for_file,
     split_dict_in_half,
-    # ColorFormatter
 )
 
-cache_dir = './cache'
+cache_dir = "./cache"
 memory = Memory(cache_dir, verbose=0)
 
 
@@ -174,12 +178,24 @@ def preprocess_dataset(dataset: DatasetDict, max_length: int) -> DatasetDict:
                 return_tensors="pt",
             )
 
+            # print(premise)
+            # print(hypothesis)
+
+            # print(tokenized_input)
+            # input()
+
             input_ids = tokenized_input["input_ids"].squeeze(0).to(Config.device)
-            attention_mask = tokenized_input["attention_mask"].squeeze(0).to(Config.device)
+            token_type_ids = (
+                tokenized_input["token_type_ids"].squeeze(0).to(Config.device)
+            )
+            attention_mask = (
+                tokenized_input["attention_mask"].squeeze(0).to(Config.device)
+            )
 
             labels = th.tensor(example["label"]).to(Config.device)
             return {
                 "input_ids": input_ids,
+                "token_type_ids": token_type_ids,
                 "attention_mask": attention_mask,
                 "labels": labels,
             }
@@ -205,7 +221,7 @@ def preprocess_dataset(dataset: DatasetDict, max_length: int) -> DatasetDict:
                 "hypothesis_parse",
                 "genre",
                 "pairID",
-                "label"
+                "label",
             ],
         )
     else:
@@ -213,7 +229,14 @@ def preprocess_dataset(dataset: DatasetDict, max_length: int) -> DatasetDict:
     return dataset  # for mbert
 
 
-@memory.cache
+def conditional_cache(func):
+    if Config.is_test_run:
+        return func
+    else:
+        return memory.cache(func)
+
+
+@conditional_cache
 def load_and_preprocess_dataset(
     language: str,
     split: str,
@@ -243,21 +266,77 @@ def load_and_preprocess_dataset(
 
     if add_index and not Config.is_fine_tune:
         dataset = add_index_column(dataset)
-        
-    dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
+
+    dataset.set_format(
+        type="torch",
+        columns=["input_ids", "token_type_ids", "attention_mask", "labels"],
+    )
 
     return dataset
 
-def compute_metrics(eval_pred: Tuple[np.ndarray, np.ndarray]) -> Dict[str, float]:
+
+# def compute_metrics(eval_pred: Tuple[np.ndarray, np.ndarray]) -> Dict[str, float]:
+#     outputs, labels = eval_pred
+#     logits, _ = outputs
+
+#     predictions = np.argmax(logits, axis=-1)
+
+#     del logits
+
+#     precision, recall, f1, _ = precision_recall_fscore_support(
+#         labels, predictions, average="weighted", zero_division=0
+#     )
+#     acc = accuracy_score(labels, predictions)
+#     return {"accuracy": acc, "f1": f1, "precision": precision, "recall": recall}
+
+
+# def compute_metrics(
+#     eval_pred: Tuple[np.ndarray, np.ndarray], compute_result: bool = False
+# ) -> Dict[str, float]:
+#     global cumulative_predictions, cumulative_labels
+
+#     outputs, labels = eval_pred
+#     logits, _ = outputs
+
+#     predictions = np.argmax(logits, axis=-1)
+
+#     cumulative_predictions.extend(predictions)
+#     cumulative_labels.extend(labels)
+
+#     if compute_result:
+#         cumulative_predictions = th.cat(cumulative_predictions, dim=0)
+#         cumulative_labels = th.cat(cumulative_labels, dim=0)
+
+#         precision, recall, f1, _ = precision_recall_fscore_support(
+#             cumulative_labels.cpu(), cumulative_predictions.cpu(), average="weighted", zero_division=0
+#         )
+#         acc = (cumulative_predictions == cumulative_labels).sum().item() / len(cumulative_labels)
+
+#         cumulative_predictions = []
+#         cumulative_labels = []
+
+#         return {"accuracy": acc, "f1": f1, "precision": precision, "recall": recall}
+#     else:
+#         return {}
+
+
+def compute_metrics(
+    eval_pred: Tuple[th.Tensor, th.Tensor], compute_result: bool = False
+) -> Dict[str, float]:
+    accuracy_metric = evaluate.load("accuracy")
+
     outputs, labels = eval_pred
     logits, _ = outputs
-    predictions = np.argmax(logits, axis=-1)
+    predictions = th.argmax(logits, dim=-1)
+    del logits
+    accuracy = accuracy_metric.compute(predictions=predictions, references=labels)
 
-    precision, recall, f1, _ = precision_recall_fscore_support(
-        labels, predictions, average="weighted", zero_division=0
-    )
-    acc = accuracy_score(labels, predictions)
-    return {"accuracy": acc, "f1": f1, "precision": precision, "recall": recall}
+    if compute_result:
+        return {
+            "accuracy": accuracy["accuracy"],
+        }
+    else:
+        return {}
 
 
 @th.no_grad()
@@ -478,58 +557,21 @@ def run_model_inference(dataset, language, max_length):
     return results, errors
 
 
-class LoggingCallback(TrainerCallback):        
+class LoggingCallback(TrainerCallback):
     def on_log(self, args, state, control, logs=None, **kwargs):
-        # self._append_train_accuracy()
         self._log_metrics(logs, state.global_step)
-        
-    # def _append_train_accuracy(self):
-    #     train_accuracy = self._calculate_train_accuracy()
-    #     existing_entry = next((entry for entry in self.trainer.state.log_history if entry.get("step") == self.trainer.state.global_step), None)
-    #     if existing_entry:
-    #         existing_entry['train_accuracy'] = train_accuracy
-    #         print(existing_entry)
-    #         print(self.trainer.state.log_history)
-    #     else:
-    #         self.trainer.state.log_history.append({'train_accuracy': train_accuracy, 'step': self.trainer.state.global_step})
 
-    # def _calculate_train_accuracy(self):
-    #     dataloader = self.trainer.get_train_dataloader()
-    #     model = self.trainer.model
-    #     model.eval()
-
-    #     correct = 0
-    #     total = 0
-
-    #     for batch in dataloader:
-    #         inputs = {key: value.to(self.trainer.args.device) for key, value in batch.items()}
-    #         with th.no_grad():
-    #             outputs = model(**inputs)
-    #         predictions = th.argmax(outputs.logits, dim=-1)
-    #         labels = inputs['labels']
-    #         correct += (predictions == labels).sum().item()
-    #         total += labels.size(0)
-
-    #     model.train()
-    #     return correct / total
-        
     def _log_metrics(self, logs, step):
         log_msg = f"\nStep {Color.YELLOW}{step}{Color.END}: \n"
         log_required = False
-        if 'eval_loss' in logs:
+        if "eval_loss" in logs:
             log_msg += f"Eval - {Color.RED}Loss{Color.END}: {logs['eval_loss']}\n"
-            log_msg += f"Eval - {Color.GREEN}Accuracy{Color.END}: {logs['eval_accuracy']}\n"
+            log_msg += (
+                f"Eval - {Color.GREEN}Accuracy{Color.END}: {logs['eval_accuracy']}\n"
+            )
             log_required = True
-            # print(log_msg)
-        if 'loss' in logs:
-            # self._append_train_accuracy()
+        if "loss" in logs:
             log_msg += f"Train - {Color.RED}Loss{Color.END}: {logs['loss']}\n"
-            # log_required = True
-        # if 'train_accuracy' in logs:
-            log_msg += f"Train - {Color.GREEN}Accuracy{Color.END}: {logs['train_accuracy']}\n"
-            # log_required = True
-        # if 'eval_accuracy' in logs:
-            # log_msg += f"Eval - {Color.GREEN}Accuracy{Color.END}: {logs['eval_accuracy']}\n"
             log_required = True
         if log_required:
             print(log_msg)
@@ -540,85 +582,23 @@ class SavePlotCallback(TrainerCallback):
         self.trainer = trainer
         self.previous_loss_plot_path = None
         self.previous_accuracy_plot_path = None
-        
-    # def on_step_end(self, args, state, control, **kwargs):
-    #     if state.global_step % self.logging_steps == 0:
-    #         loss_plot_path, accuracy_plot_path = plot_and_save_metrics(self.trainer, Config.logging_dir, state.global_step)
-            
-    #         if self.previous_loss_plot_path is not None:
-    #             os.remove(self.previous_loss_plot_path)
-    #         self.previous_loss_plot_path = loss_plot_path
-            
-    #         if self.previous_accuracy_plot_path is not None:
-    #             os.remove(self.previous_accuracy_plot_path)
-    #         self.previous_accuracy_plot_path = accuracy_plot_path
 
     def on_evaluate(self, args, state, control, **kwargs):
-        # self._append_train_accuracy()
-        
-        loss_plot_path, accuracy_plot_path = plot_and_save_metrics(self.trainer, Config.logging_dir, state.global_step)
-        
+        loss_plot_path, accuracy_plot_path = plot_and_save_metrics(
+            self.trainer, Config.logging_dir, state.global_step
+        )
+
         if self.previous_loss_plot_path is not None:
             os.remove(self.previous_loss_plot_path)
         self.previous_loss_plot_path = loss_plot_path
-        
+
         if self.previous_accuracy_plot_path is not None:
             os.remove(self.previous_accuracy_plot_path)
         self.previous_accuracy_plot_path = accuracy_plot_path
 
-    # def _append_train_accuracy(self):
-    #     train_accuracy = self._calculate_train_accuracy()
-    #     existing_entry = next((entry for entry in self.trainer.state.log_history if entry.get("step") == self.trainer.state.global_step), None)
-    #     if existing_entry:
-    #         existing_entry['train_accuracy'] = train_accuracy
-    #         print(existing_entry)
-    #         print(self.trainer.state.log_history)
-    #     else:
-    #         self.trainer.state.log_history.append({'train_accuracy': train_accuracy, 'step': self.trainer.state.global_step})
 
-    # def _calculate_train_accuracy(self):
-    #     dataloader = self.trainer.get_train_dataloader()
-    #     model = self.trainer.model
-    #     model.eval()
-
-    #     correct = 0
-    #     total = 0
-
-    #     for batch in dataloader:
-    #         inputs = {key: value.to(self.trainer.args.device) for key, value in batch.items()}
-    #         with th.no_grad():
-    #             outputs = model(**inputs)
-    #         predictions = th.argmax(outputs.logits, dim=-1)
-    #         labels = inputs['labels']
-    #         correct += (predictions == labels).sum().item()
-    #         total += labels.size(0)
-
-    #     model.train()
-    #     return correct / total
-    
 class CustomTrainer(Trainer):
-    # def log(self, logs: Dict[str, float]):
-    #     print(f"Logging at step {self.state.global_step}: {logs}")
-    #     super().log(logs)
-        
-    def log(self, logs: Dict[str, float]) -> None:
-        # Calculate train_accuracy and add it to logs if it's not an evaluation step
-        if not any(key.startswith('eval') for key in logs.keys()):
-            train_accuracy = self._calculate_train_accuracy()
-            logs['train_accuracy'] = train_accuracy
-        
-        # Log the metrics
-        # print(f"Logging at step {self.state.global_step}: {logs}")
-        super().log(logs)
-        # if self.state.epoch is not None:
-        #     logs["epoch"] = self.state.epoch
-
-        # output = {**logs, **{"step": self.state.global_step}}
-        # self.state.log_history.append(output)
-        # self.control = self.callback_handler.on_log(self.args, self.state, self.control, logs)
-        
     def _calculate_train_accuracy(self):
-        # return 0
         dataloader = self.get_train_dataloader()
         model = self.model
         model.eval()
@@ -628,31 +608,27 @@ class CustomTrainer(Trainer):
 
         with th.no_grad():
             for batch in dataloader:
-                inputs = {key: value.to(self.args.device) for key, value in batch.items()}
+                inputs = {
+                    key: value.to(self.args.device) for key, value in batch.items()
+                }
                 outputs = model(**inputs)
                 predictions = th.argmax(outputs.logits, dim=-1)
-                labels = inputs['labels']
+                labels = inputs["labels"]
                 correct += (predictions == labels).sum().item()
                 total += labels.size(0)
 
         model.train()
         return correct / total
-    
-    # def train(self, resume_from_checkpoint=None):
-    #     print("Starting training...")
-    #     super().train(resume_from_checkpoint)
-    #     print("Training completed.")
-            
 
-def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_checkpoint=None):
+
+def finetune_model(
+    model_name, train_dataloader, eval_dataloader, resume_from_checkpoint=None
+):
     if not os.path.exists(Config.logging_dir):
         os.makedirs(Config.logging_dir)
     if not os.path.exists(Config.finetuned_model_dir):
         os.makedirs(Config.finetuned_model_dir)
-        
-    # if resume_from_checkpoint:
-    #     print(f"From finetune: Resuming from checkpoint: {resume_from_checkpoint}")
-        
+
     training_args = TrainingArguments(
         output_dir=os.path.join(Config.finetuned_model_dir),
         eval_strategy=Config.eval_strategy,
@@ -677,12 +653,12 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
-        # gradient_accumulation_steps=Config.grad_accum_steps,
-        # warmup_steps=Config.warmup_steps,
+        gradient_accumulation_steps=Config.grad_accum_steps,
+        warmup_steps=Config.warmup_steps,
+        batch_eval_metrics=True,
         # max_grad_norm=1.0
     )
-    
-    
+
     th.cuda.empty_cache()
     print("CUDA cache emptied.")
 
@@ -697,7 +673,7 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
             # EarlyStoppingCallback(early_stopping_patience=15 * Config.eval_steps),
         ],
     )
-    
+
     trainer.add_callback(SavePlotCallback(trainer=trainer))
     trainer.add_callback(LoggingCallback)
 
@@ -706,38 +682,37 @@ def finetune_model(model_name, train_dataloader, eval_dataloader, resume_from_ch
         trainer.train(resume_from_checkpoint=resume_from_checkpoint)
     else:
         trainer.train()
-        
+
     ModelLoader.save_model(Config.finetuned_model_dir)
 
     # Save training loss plot
     plot_and_save_metrics(trainer, Config.logging_dir, "final")
-    
+
     # Log training summary
     print(f"{Color.YELLOW}Training summary{Color.END}:")
     print(trainer.state.log_history[-3:])
+
+    # Calculate and log final train accuracy
+    final_train_accuracy = trainer._calculate_train_accuracy()
+    print(f"Final Train Accuracy: {final_train_accuracy}")
+
 
 def plot_and_save_metrics(trainer, output_dir, step):
     # Get training log history
     history = trainer.state.log_history
 
-    # print(history)
-        
     # Extract loss and accuracy values along with their steps
-    train_dict = {"train_step": [], "train_loss": [], "train_accuracy": []}
+    train_dict = {"train_step": [], "train_loss": []}
     eval_dict = {"eval_step": [], "eval_loss": [], "eval_accuracy": []}
 
     for entry in history:
-        # if "step" in entry:
-        #     steps.append(entry["step"])
         if "loss" in entry:
             train_dict["train_step"].append(entry["step"])
             train_dict["train_loss"].append(entry["loss"])
-            train_dict["train_accuracy"].append(entry["train_accuracy"])
         if "eval_loss" in entry:
             eval_dict["eval_step"].append(entry["step"])
             eval_dict["eval_loss"].append(entry["eval_loss"])
             eval_dict["eval_accuracy"].append(entry["eval_accuracy"])
-
 
     # Plot training and evaluation loss
     plt.figure(figsize=(10, 5))
@@ -750,27 +725,34 @@ def plot_and_save_metrics(trainer, output_dir, step):
     plt.title("Training and Evaluation Loss over Time")
 
     # Save the loss plot
-    loss_plot_path = os.path.join(output_dir, f"training_loss_step_{step}_{Config.timestamp}.png")
+    loss_plot_path = os.path.join(
+        output_dir, f"training_loss_step_{step}_{Config.timestamp}.png"
+    )
     plt.savefig(loss_plot_path)
     plt.close()
-    print(f"Step {Color.YELLOW}{step}{Color.END}: Training loss plot saved at {loss_plot_path}")
+    print(
+        f"Step {Color.YELLOW}{step}{Color.END}: Training loss plot saved at {loss_plot_path}"
+    )
 
-    # Plot training and evaluation accuracy
+    # Plot evaluation accuracy
     plt.figure(figsize=(10, 5))
-    # plt.plot(steps, train_accuracy, label="Training Accuracy")
-    # plt.plot(steps, eval_accuracy, label="Evaluation Accuracy")
-    plt.plot(train_dict["train_step"], train_dict["train_accuracy"], label="Training Accuracy")
-    plt.plot(eval_dict["eval_step"], eval_dict["eval_accuracy"], label="Evaluation Accuracy")
+    plt.plot(
+        eval_dict["eval_step"], eval_dict["eval_accuracy"], label="Evaluation Accuracy"
+    )
     plt.xlabel("Steps")
     plt.ylabel("Accuracy")
     plt.legend()
-    plt.title("Training and Evaluation Accuracy over Time")
+    plt.title("Evaluation Accuracy over Time")
 
     # Save the accuracy plot
-    accuracy_plot_path = os.path.join(output_dir, f"training_accuracy_step_{step}_{Config.timestamp}.png")
+    accuracy_plot_path = os.path.join(
+        output_dir, f"eval_accuracy_step_{step}_{Config.timestamp}.png"
+    )
     plt.savefig(accuracy_plot_path)
     plt.close()
-    print(f"Step {Color.YELLOW}{step}{Color.END}: Training accuracy plot saved at {accuracy_plot_path}")
+    print(
+        f"Step {Color.YELLOW}{step}{Color.END}: Evaluation accuracy plot saved at {accuracy_plot_path}\n"
+    )
 
     return loss_plot_path, accuracy_plot_path
 
@@ -796,28 +778,28 @@ def save_running_logs(df_with_errors=None, time_=None, language=None):
     if df_with_errors:
         errors_list_dict = df_with_errors.to_dict("records")
         report_dict["df_with_errors"] = errors_list_dict
-        
+
         print("\n-------------------error messages-------------------")
         print(df_with_errors, end="\n\n")
-        
+
     if time_:
         report_dict["time"] = time_
 
         print("-----------------time-----------------")
         print(f"time: {time_:.2f}s")
-        
+
     del report_dict["lang2_dict"]
 
     if language:
-        report_file_path = Config.execution_report_file.replace(".json", f"_{language}.json")
+        report_file_path = Config.execution_report_file.replace(
+            ".json", f"_{language}.json"
+        )
     else:
         report_file_path = Config.execution_report_file
-        
+
     ensure_directory_exists_for_file(report_file_path)
-    
-    with open(
-        report_file_path, "w"
-    ) as json_file:
+
+    with open(report_file_path, "w") as json_file:
         json.dump(report_dict, json_file, indent=4)
 
     print(f"Execution report saved to {report_file_path}")
@@ -827,7 +809,7 @@ def save_running_logs(df_with_errors=None, time_=None, language=None):
 def main(overwrite, resume_from_checkpoint: bool = None):
     if Config.is_fine_tune:
         print("Starting fine-tune script")
-    
+
         with open(Config.random_seed_path, "r") as f:
             seed = int(f.read())
 
@@ -847,30 +829,43 @@ def main(overwrite, resume_from_checkpoint: bool = None):
         # )
 
         data_collator = DataCollatorWithPadding(ModelLoader.get_tokenizer(Config.model))
-        
-        train_dataloader = DataLoader(train_dataset, batch_size=Config.batch_size, collate_fn=data_collator, num_workers=Config.preprocess_threads)
-        eval_dataloader = DataLoader(val_matched_dataset, Config.batch_size, collate_fn=data_collator, num_workers=Config.preprocess_threads)
-        
-        
+
+        train_dataloader = DataLoader(
+            train_dataset,
+            batch_size=Config.batch_size,
+            collate_fn=data_collator,
+            num_workers=Config.preprocess_threads,
+        )
+        eval_dataloader = DataLoader(
+            val_matched_dataset,
+            Config.batch_size,
+            collate_fn=data_collator,
+            num_workers=Config.preprocess_threads,
+        )
+
         # checkpoint_dir = Config.finetuned_model_dir
         if not os.path.exists(Config.finetuned_model_dir):
             os.makedirs(Config.finetuned_model_dir)
         base_dir = os.path.dirname(Config.finetuned_model_dir)
         checkpoint_dir = get_latest_checkpoint_dir(base_dir)
-        
+
         if checkpoint_dir:
-            checkpoints = [os.path.join(checkpoint_dir, ckpt) for ckpt in os.listdir(checkpoint_dir) if ckpt.startswith("checkpoint-")]
+            checkpoints = [
+                os.path.join(checkpoint_dir, ckpt)
+                for ckpt in os.listdir(checkpoint_dir)
+                if ckpt.startswith("checkpoint-")
+            ]
         else:
             checkpoints = []
-        
+
         latest_checkpoint = None
-        
+
         # checkpoints = ["fine_tuned_models/MBERT/initial/checkpoint-12000"]
-        
+
         if checkpoints:
             latest_checkpoint = max(checkpoints, key=os.path.getctime)
             # latest_checkpoint = "fine_tuned_models/MBERT/initial/checkpoint-12000"
-            
+
             use_checkpoint = resume_from_checkpoint or request_user_confirmation(
                 f"Fined-tuned model found at {latest_checkpoint}. Continue from checkpoints? {Color.YELLOW}[Y/n]{Color.END}",
                 "Continuing...\n",
@@ -882,11 +877,16 @@ def main(overwrite, resume_from_checkpoint: bool = None):
                 print("Starting fine-tuning from scratch.")
         else:
             print("No checkpoints found. Starting fine-tuning from scratch.")
-            
-        finetune_model(Config.model, train_dataloader, eval_dataloader, resume_from_checkpoint=latest_checkpoint)
-        
+
+        finetune_model(
+            Config.model,
+            train_dataloader,
+            eval_dataloader,
+            resume_from_checkpoint=latest_checkpoint,
+        )
+
         save_running_logs()
-        
+
         return
 
     # i = 0
@@ -965,13 +965,11 @@ def main(overwrite, resume_from_checkpoint: bool = None):
 
         # print(data)
         df = pd.DataFrame(data)
-        
+
         results_file_path = Config.results_file.replace(".csv", f"_{language}.csv")
         ensure_directory_exists_for_file(results_file_path)
         df.to_csv(results_file_path, index=False)
-        print(
-            f"Results stored in {results_file_path}."
-        )
+        print(f"Results stored in {results_file_path}.")
 
         df_with_errors = df[df["error"].notna()]
 
@@ -993,48 +991,57 @@ def main(overwrite, resume_from_checkpoint: bool = None):
 
 if __name__ == "__main__":
     os.environ["HF_DATASETS_CACHE"] = "./cache"
-    multiprocessing.set_start_method("spawn")
+    # multiprocessing.set_start_method("spawn")
     # os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
     # tqdm.monitor_interval = 0
-    warnings.filterwarnings("ignore", category=UserWarning, module="torch.nn.parallel._functions")
-    warnings.filterwarnings("ignore", category=UserWarning, module="transformers.modeling_utils")
+    warnings.filterwarnings(
+        "ignore", category=UserWarning, module="torch.nn.parallel._functions"
+    )
+    warnings.filterwarnings(
+        "ignore", category=UserWarning, module="transformers.modeling_utils"
+    )
     transformers_logging.set_verbosity_error()
     # logging.set_verbosity_info()
     # logging.enable_progress_bar()
 
-    
-    log_filename = os.path.join(Config.logging_dir, f"{'fine-tune' if Config.is_fine_tune else 'evaluate'}_{Config.timestamp}.log")
+    log_filename = os.path.join(
+        Config.logging_dir,
+        f"{'fine-tune' if Config.is_fine_tune else 'evaluate'}_{Config.timestamp}.log",
+    )
     ensure_directory_exists_for_file(log_filename)
     logging.basicConfig(
         filename=log_filename,
         level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(message)s',
+        format="%(asctime)s - %(levelname)s - %(message)s",
     )
-    
+
     file_handler = logging.FileHandler(log_filename)
     file_handler.setLevel(logging.INFO)
-    file_handler.setFormatter(MultilineFormatter('%(asctime)s - %(levelname)s - %(message)s'))
+    file_handler.setFormatter(
+        MultilineFormatter("%(asctime)s - %(levelname)s - %(message)s")
+    )
     logging.getLogger().addHandler(file_handler)
 
     # console_handler = logging.StreamHandler()
     # console_handler.setLevel(logging.INFO)
     # console_handler.setFormatter(ColorFormatter('%(asctime)s - %(levelname)s - %(message)s'))
     # logging.getLogger().addHandler(console_handler)
-    
+
     # Clear existing handlers
     logger = logging.getLogger()
     logger.handlers = []
-    
+
     logger.addHandler(file_handler)
     # logger.addHandler(console_handler)
-    
+
     for handler in logging.getLogger().handlers:
-        handler.setFormatter(MultilineFormatter('%(asctime)s - %(levelname)s - %(message)s'))
-        
+        handler.setFormatter(
+            MultilineFormatter("%(asctime)s - %(levelname)s - %(message)s")
+        )
+
     sys.stdout = PrintLogger(sys.stdout, logging.info)
     sys.stderr = PrintLogger(sys.stderr, logging.error)
-       
-    
+
     parser = argparse.ArgumentParser(description="Run prediction model.")
 
     parser.add_argument(

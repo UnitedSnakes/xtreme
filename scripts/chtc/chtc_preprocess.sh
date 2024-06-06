@@ -14,7 +14,7 @@ RANDOM_SEED_FILE=$(get_config_attribute random_seed_path)
 SCRIPTS_TAR="scripts.tar.gz"
 # if [ ! -f "$SCRIPTS_TAR" ]; then
 if true; then
-    tar -czvf $SCRIPTS_TAR $RANDOM_SEED_FILE scripts/src/parameters.py scripts/src/predict.py scripts/src/utils.py
+    tar -czvf $SCRIPTS_TAR $RANDOM_SEED_FILE scripts/src/parameters.py scripts/src/predict.py scripts/src/utils.py cache/
 else
     echo "$SCRIPTS_TAR already exists. Skipping compression."
 fi

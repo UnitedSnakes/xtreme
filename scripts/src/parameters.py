@@ -19,17 +19,21 @@ SAVE_LOGITS = False
 MODEL_ABBR = "MBERT"
 MODEL = "bert-base-multilingual-cased"
 
-BATCH_SIZE = 16
-# GRAD_ACCUM_STEPS = 4
+BATCH_SIZE = 8
+GRAD_ACCUM_STEPS = 4
 MAX_INPUT_LENGTH = 128
 MAX_OUTPUT_LENGTH = 128
 # steps_per_epoch = 392702 / 8 = 49088
+# steps_per_epoch = 392702 / 16 = 24544
+# steps_per_epoch = 392702 / 32 = 14428
+# steps_per_epoch = 392702 / 64 = 7214
+# steps_per_epoch = 392702 / 128 = 3607
 
 # flan-ul2 = 40GB, so run 2 instances
 INFERENCE_THREADS = 16
-PREPROCESS_THREADS = 20
-TRAIN_THREADS = 16
-TEST_SIZE = 35
+PREPROCESS_THREADS = 128
+TRAIN_THREADS = 128
+TEST_SIZE = 257
 
 # https://huggingface.co/datasets/xnli
 # DATASET_NAME = "xnli"
@@ -40,10 +44,10 @@ SWAP_SENTENCES = False
 # training hyperparameters
 LEARNING_RATE = 2e-5
 NUM_TRAIN_EPOCHS = 3
-EVAL_STEPS = 1000
-SAVE_STEPS = 1000
+EVAL_STEPS = 100
+SAVE_STEPS = 100
 LOGGING_STEPS = EVAL_STEPS
-WARMUP_STEPS = 200
+WARMUP_STEPS = 100
 
 # --------------------modify above------------------------
 # --------------------------------------------------------
@@ -226,7 +230,7 @@ class Config:
     swap_sentences = SWAP_SENTENCES
 
     batch_size = BATCH_SIZE
-    # grad_accum_steps = GRAD_ACCUM_STEPS
+    grad_accum_steps = GRAD_ACCUM_STEPS
     learning_rate = LEARNING_RATE
     temperature = 1
     top_p = 1
@@ -254,7 +258,6 @@ class Config:
     # 0 for entailment, 1 for neutral, 2 for contradiction
     patterns = PATTERNS
     lang2_dict = LANG2_DICT
-    # re_pattern = RE_PATTERN
     
     timestamp = TIMESTAMP
 

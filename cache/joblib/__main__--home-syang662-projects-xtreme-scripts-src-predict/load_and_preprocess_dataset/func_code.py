@@ -1,5 +1,5 @@
-# first line: 216
-@memory.cache
+# first line: 239
+@conditional_cache
 def load_and_preprocess_dataset(
     language: str,
     split: str,
@@ -29,7 +29,10 @@ def load_and_preprocess_dataset(
 
     if add_index and not Config.is_fine_tune:
         dataset = add_index_column(dataset)
-        
-    dataset.set_format(type='torch', columns=['input_ids', 'attention_mask', 'labels'])
+
+    dataset.set_format(
+        type="torch",
+        columns=["input_ids", "token_type_ids", "attention_mask", "labels"],
+    )
 
     return dataset

@@ -1,0 +1,116 @@
+Script started on 2024-06-06 11:36:20-05:00 [TERM="xterm-256color" TTY="/dev/pts/14" COLUMNS="205" LINES="15"]
+[?2004h]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ python3 scripts/src/predict.py[23@CUDA_LAUNCH_BLOCKING=1 [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[23P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Kconda activate xtreme
+[?2004l[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ conda activate xtremepython3 scripts/src/predict.py[23@CUDA_LAUNCH_BLOCKING=1 [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[23P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+[?2004lStarting fine-tune script
+Loading and preprocessing training dataset...
+Dataset({
+    features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+    num_rows: 392702
+})
+Loading and preprocessing validation dataset...
+Dataset({
+    features: ['input_ids', 'token_type_ids', 'attention_mask', 'lab^\Quit (core dumped)
+[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ [K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ ume_from_checkpoint)
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 881, in main
+    finetune_model(
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 684, in finetune_model
+    trainer.train()
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 1885, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 2216, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 3241, in training_step
+    torch.cuda.empty_cache()
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/torch/cuda/memory.py", line 162, in empty_cache
+    torch._C._cuda_emptyCache()
+RuntimeError: CUDA error: unspecified launch failure
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ python3 scripts/src/predict.py[K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ python3 scripts/src/predict.py
+[?2004lStarting fine-tune script
+Loading and preprocessing training dataset...
+Dataset({
+    features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+    num_rows: 392702
+})
+Loading and preprocessing validation dataset...
+Dataset({
+    features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+    num_rows: 9815
+})
+No checkpoints found. Starting fine-tuning from scratch.
+CUDA cache emptied.
+Traceback (most recent call last):
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 1073, in <module>
+    main(args.overwrite, args.resume_from_checkpoint)
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 881, in main
+    finetune_model(
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 684, in finetune_model
+    trainer.train()
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 1885, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 2216, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 3241, in training_step
+    torch.cuda.empty_cache()
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/torch/cuda/memory.py", line 162, in empty_cache
+    torch._C._cuda_emptyCache()
+RuntimeError: CUDA error: unspecified launch failure
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ [K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ [K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ python3 scripts/src/predict.py
+[?2004lStarting fine-tune script
+Loading and preprocessing training dataset...
+Dataset({
+    features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+    num_rows: 392702
+})
+Loading and preprocessing validation dataset...
+Dataset({
+    features: ['input_ids', 'token_type_ids', 'attention_mask', 'labels'],
+    num_rows: 9815
+})
+No checkpoints found. Starting fine-tuning from scratch.
+CUDA cache emptied.
+Traceback (most recent call last):
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 1073, in <module>
+    main(args.overwrite, args.resume_from_checkpoint)
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 881, in main
+    finetune_model(
+  File "/home/syang662/projects/xtreme/scripts/src/predict.py", line 684, in finetune_model
+    trainer.train()
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 1885, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 2216, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/transformers/trainer.py", line 3241, in training_step
+    torch.cuda.empty_cache()
+  File "/home/syang662/miniconda3/envs/xtreme/lib/python3.12/site-packages/torch/cuda/memory.py", line 162, in empty_cache
+    torch._C._cuda_emptyCache()
+RuntimeError: CUDA error: unspecified launch failure
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[?2004h(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ [K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ [K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ [K(xtreme) ]0;syang662@sjmc-gpu01: ~/projects/xtreme[01;32msyang662@sjmc-gpu01[00m:[01;34m~/projects/xtreme[00m$ ./git_push.sh
+[?2004lNo large CSV files found to pack.
+[main 5963bd2] Update .gitignore
+ 1 file changed, 1 insertion(+)
+To github.com:UnitedSnakes/xtreme.git
+ [31m! [rejected]       [m main -> main (fetch first)
+[31merror: failed to push some refs to 'github.com:UnitedSnakes/xtreme.git'
+[m[33mhint: Updates were rejected because the remote contains work that you do[m
+[33mhint: not have locally. This is usually caused by another repository pushing[m
+[33mhint: to the same ref. You may want to first integrate the remote changes[m
+[33mhint: (e.g., 'git pull ...') before pushing again.[m
+[33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
